@@ -26,10 +26,6 @@ You can run unit tests using [`blaze`](installing-bazel):
 bazel test tests:tests
 ```
 
-## Directory Structure
-
-<img alt="Directory Structure" src="https://github.com/ourarash/cpp-template/blob/master/tree.png?raw=true" width="200">
-
 ## Installing Bazel
 
 This repo uses `Bazel` for building C++ files.
