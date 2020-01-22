@@ -2,14 +2,12 @@
 
 > Can be used in Visual Studio Code
 
-You can use this template for most of your C++ projects without the need for changing the BUILD files.
-
 ## Installation
 
 You can copy this using this command:
 
 ```bash
-git clone https://github.com/ourarash/cpp-template.git
+git clone https://github.com/ourarash/cpp_tour.git
 ```
 
 ### Run main:
