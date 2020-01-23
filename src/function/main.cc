@@ -11,5 +11,7 @@ void PrintLine(std::string input) { std::cout << input << std::endl; }
 int main() {
   std::string text = "Hello world!";
   PrintLine(text);
+  PrintLine("Second hellow world");
+
   return 0;
 }

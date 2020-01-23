@@ -4,9 +4,14 @@
 #include <vector>
 
 int main() {
+  int color = 0;  // Red
+  int color2 = 1; // Green
+
   // Enum type in C:
   enum ColorPallet1 { Red, Green, Blue };
-  enum ColorPallet2 { Yellow, Orange, Red2};
+  enum ColorPallet2 { Yellow, Orange, Red };
+
+  ColorPallet1 color3 = Red;
 
   // Enum Class in C++
   // Declaration
@@ -16,6 +21,12 @@ int main() {
   // Assignment
   ColorPalletClass1 col1 = ColorPalletClass1::Red;
   ColorPalletClass2 col2 = ColorPalletClass2::Red;
+
+  if (col1 == ColorPalletClass1::Red) {
+    std::cout << "RED" << std::endl;
+  } else if (col1 == ColorPalletClass1::Green) {
+    std::cout << "Green" << std::endl;
+  }
 
   return 0;
 }
