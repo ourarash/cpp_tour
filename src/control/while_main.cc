@@ -4,6 +4,15 @@
 #include <vector>
 
 int main() {
+  int i, j;
+
+  int *p;
+
+  p = &i;
+
+  p = &j;
+
+  std::cout << *p << std::endl;
 
   std::vector<int> my_vector;
   int i = 0;
@@ -22,7 +31,7 @@ int main() {
 
   // Break and continue
   my_vector.clear();
-  i = 0 ;
+  i = 0;
   while (i < 10) {
     if (i == 2) {
       i++;
