@@ -28,5 +28,7 @@ int main() {
     std::cout << "Green" << std::endl;
   }
 
+  std::cout << "color3: " << color3 << std::endl;
+
   return 0;
 }

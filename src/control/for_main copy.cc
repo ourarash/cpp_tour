@@ -10,7 +10,7 @@ int main() {
   // long comment line. If this happens you probably want to wrap it around. The
   // shortcut for this is option + z on mac or Alt + z on Windows.
 
-  int my_var = 0;
+  int your_var = 0;
 
   std::vector<int> my_vector;
   for (int i = 0; i < 10; i++) {
@@ -29,7 +29,7 @@ int main() {
   }
 
   // i, j with different types
-
+  // Added one more comment here!
   my_vector.clear();
   {
     int i = 0;
@@ -57,8 +57,8 @@ int main() {
 
   std::cout << "------------------------------------------" << std::endl;
 
-  my_var++;
-  std::cout << "x: " << my_var << std::endl;
+  your_var++;
+  std::cout << "x: " << your_var << std::endl;
 
   return 0;
 }
