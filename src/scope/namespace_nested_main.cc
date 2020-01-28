@@ -10,9 +10,9 @@ void PrintSomething() { std::cout << "Printing example 0." << std::endl; }
 namespace ns1 {
   void PrintSomething1() { std::cout << "Printing example 2." << std::endl; }
 
-namespace ns2 {
-int x = 1;
-void PrintSomething1() { std::cout << "Printing example 1." << std::endl; }
+  namespace ns2 {
+  int x = 1;
+  void PrintSomething1() { std::cout << "Printing example 1." << std::endl; }
 } // namespace ns2
 }; // namespace ns1
 
