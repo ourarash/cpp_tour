@@ -8,7 +8,7 @@ struct Person {
 };
 
 int main() {
-
+  
   int i = 10;
   int *p = &i;
   std::cout << "i: " << i << std::endl;

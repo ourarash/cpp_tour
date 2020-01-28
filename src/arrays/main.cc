@@ -50,9 +50,15 @@ int main() {
   PrintArray(arr, 8);
 
   // Using a pointer instead of arr
-  int *p = &arr[0];
-  std::cout << "arr: " << arr << std::endl;
-  std::cout << "p: " << arr << std::endl;
+  int my_arr[8];
+  InitializeArray(my_arr, 8);
+  PrintArray(my_arr, 8);
+  int *p = &my_arr[0];
+  std::cout << "arr: " << my_arr << std::endl;
+  std::cout << "p: " << p << std::endl;
+  std::cout << "*(p): " << *(p) << std::endl;
+  std::cout << "*(p+1): " << *(p + 1) << std::endl;
+  std::cout << "*(p+2): " << *(p + 2) << std::endl;
 
   return 0;
 }

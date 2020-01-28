@@ -28,7 +28,7 @@ int main() {
 
   // Const object
   const Person q(/*_ssn=*/354545454);
-  // q._age = 21;
+  // q._age = 21; // Don't modify const object!
   std::cout << "q._age: " << q._age << std::endl;
 
   // Initializing

@@ -8,8 +8,8 @@ int main() {
   char name[10] = "tommy";
   std::cout << name << std::endl;
 
-  for(int i=0; i<10; i++){
-      std::cout << i << ". " << name[i] << std::endl;
+  for (int i = 0; i < 10; i++) {
+    std::cout << i << ". " << name[i] << std::endl;
   }
 
   // basic string
@@ -27,7 +27,6 @@ int main() {
 
   std::string both_digits = second_digit_str + first_digit_str;
   std::cout << "both_digits: " << both_digits << std::endl;
-
 
   // push back
   std::string a;
@@ -48,5 +47,11 @@ int main() {
   std::string str;
   getline(std::cin, str);
   std::cout << "you entered: " << str << std::endl;
+
+  // c_str
+  std::string str("This is a sample string.");
+
+  char *cstr = new char[str.length() + 1];  // dynamic array
+  std::strcpy(cstr, str.c_str());
   return 0;
 }

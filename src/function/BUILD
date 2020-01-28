@@ -4,3 +4,15 @@ cc_binary(
     srcs = ["main.cc"],
     deps = ["//src/lib:SolutionLib"],
 )
+
+cc_binary(
+    name = "lambda_main",
+    srcs = ["lambda_main.cc"],
+    deps = ["//src/lib:SolutionLib"],
+)
+
+cc_binary(
+    name = "lambda_stl_main",
+    srcs = ["lambda_stl_main.cc"],
+    deps = ["//src/lib:SolutionLib"],
+)

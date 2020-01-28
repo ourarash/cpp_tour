@@ -35,4 +35,16 @@ template <class T> void PrintVector(std::vector<T> input) {
   }
   std::cout << " }" << std::endl;
 }
+//-----------------------------------------------------
+template <class T> void Print(T input) {
+  std::cout << "{ ";
+  unsigned int count = 0;
+  for (auto n : input) {
+    count++;
+    std::cout << n;
+    if (count < input.size() )
+      std::cout << ", ";
+  }
+  std::cout << " }" << std::endl;
+}
 #endif
