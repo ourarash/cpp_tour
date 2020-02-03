@@ -21,6 +21,7 @@ int CalculateTaxConstRef(const int &income) {
 int main() {
 
   int i = 2000;
+  
   int tax = CalculateTaxConstRef(i);
   std::cout << "i: " << i << std::endl;
 

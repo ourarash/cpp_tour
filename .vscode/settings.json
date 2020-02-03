@@ -1,5 +1,7 @@
 {
   "files.associations": {
+    "string": "cpp",
+    "filesystem": "cpp",
     "iosfwd": "cpp",
     "__bit_reference": "cpp",
     "__config": "cpp",
@@ -59,15 +61,14 @@
     "stack": "cpp",
     "stdexcept": "cpp",
     "streambuf": "cpp",
-    "string": "cpp",
     "string_view": "cpp",
     "system_error": "cpp",
+    "thread": "cpp",
     "tuple": "cpp",
     "type_traits": "cpp",
     "typeinfo": "cpp",
     "unordered_map": "cpp",
     "utility": "cpp",
-    "vector": "cpp",
-    "numeric": "cpp"
+    "vector": "cpp"
   }
 }
