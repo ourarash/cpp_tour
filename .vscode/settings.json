@@ -69,6 +69,9 @@
     "typeinfo": "cpp",
     "unordered_map": "cpp",
     "utility": "cpp",
-    "vector": "cpp"
+    "vector": "cpp",
+    "list": "cpp",
+    "numeric": "cpp",
+    "queue": "cpp"
   }
 }

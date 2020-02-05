@@ -6,17 +6,20 @@
 class Point {
 public:
   Point() {
-    i_ = 5;
-    j_ = 5;
-    std::cout << "NO PARAMETERIZED constructor." << std::endl;
+    i_ = 0;
+    j_ = 0;
+    std::cout << "***NO PARAMETERIZED constructor." << std::endl;
   }
 
   // Constructor
   Point(int i, int j) {
-    std::cout << "PARAMETERIZED constructor." << std::endl;
+    std::cout << "**PARAMETERIZED constructor." << std::endl;
     i_ = i;
     j_ = j;
   }
+
+  Point(int i) : Point(i, 0) {}
+
   // Copy constructor
   Point(const Point &p2) {
     std::cout << "COPY constructor." << std::endl;
@@ -25,7 +28,7 @@ public:
     j_ = p2.GetJ();
   }
 
-  ~Point() { std::cout << "DESTROCTOR." << std::endl; }
+  ~Point() { std::cout << "DESTRUCTOR." << std::endl; }
 
   int GetI() const { return i_; };
   int GetJ() const { return j_; };
@@ -47,4 +50,5 @@ int main() {
 
   Point p2(1, 2); // Parameterized constructor is called
   Point p3 = p2;  // Copy constructor is called
+
 }

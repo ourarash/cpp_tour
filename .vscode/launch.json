@@ -12,10 +12,10 @@
       "type": "cppdbg",
       "request": "launch",
       
-      "program": "${workspaceFolder}/bazel-cpp_tour/bazel-out/darwin-fastbuild/bin/src/linked_list/main",
+      "program": "${workspaceFolder}/bazel-cpp_tour/bazel-out/darwin-dbg/bin/src/linked_list/main",
       "args": [],
       "stopAtEntry": false,
-      "cwd": "${workspaceFolder}/bazel-cpp_tour/bazel-out/darwin-fastbuild/bin/src/linked_list/main.runfiles/__main__",
+      "cwd": "${workspaceFolder}/bazel-cpp_tour/bazel-out/darwin-dbg/bin/src/linked_list/main.runfiles/__main__",
       "environment": [],
       "externalConsole": false,
       "MIMode": "lldb"
