@@ -6,25 +6,19 @@ cc_binary(
 )
 
 cc_binary(
-    name = "advanced_main",
-    srcs = ["advanced_main.cc"],
+    name = "vector_union_main",
+    srcs = ["vector_union_main.cc"],
     deps = ["//src/lib:SolutionLib"],
 )
 
 cc_binary(
-    name = "std_function",
-    srcs = ["std_function.cc"],
+    name = "tree_map_main",
+    srcs = ["tree_map_main.cc"],
     deps = ["//src/lib:SolutionLib"],
 )
 
 cc_binary(
-    name = "transform",
-    srcs = ["transform.cc"],
-    deps = ["//src/lib:SolutionLib"],
-)
-
-cc_binary(
-    name = "filter",
-    srcs = ["filter.cc"],
+    name = "std_any_main",
+    srcs = ["std_any_main.cc"],
     deps = ["//src/lib:SolutionLib"],
 )

@@ -2,6 +2,14 @@
 #define UTILITY_H
 #include <iostream>
 #include <string>
+// Swaps values of i and j
+template <class T>
+void Swap(T &i, T &j) {
+  T temp = i;
+  i = j;
+  j = temp;
+}
+
 void PrintLine(int input) { std::cout << input << std::endl; }
 void PrintLine(char input) { std::cout << input << std::endl; }
 void PrintLine(float input) { std::cout << input << std::endl; }

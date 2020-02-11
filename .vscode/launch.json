@@ -4,21 +4,35 @@
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
-
     {
       "preLaunchTask": "Build Example (Debug)",
-
       "name": "(lldb) Launch",
       "type": "cppdbg",
       "request": "launch",
-      
-      "program": "${workspaceFolder}/bazel-cpp_tour/bazel-out/darwin-dbg/bin/src/linked_list/main",
+      "program": "${workspaceFolder}/bazel-out/darwin-dbg/bin/${relativeFileDirname}/${fileBasenameNoExtension}",
       "args": [],
       "stopAtEntry": false,
-      "cwd": "${workspaceFolder}/bazel-cpp_tour/bazel-out/darwin-dbg/bin/src/linked_list/main.runfiles/__main__",
+      "cwd": "${workspaceFolder}/bazel-out/darwin-dbg/bin/${relativeFileDirname}/${fileBasenameNoExtension}.runfiles/__main__",
       "environment": [],
       "externalConsole": false,
       "MIMode": "lldb"
-    }
+    },
+    {
+      "preLaunchTask": "Build Example (Debug)",
+      "name": "CodeLLDB",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/bazel-out/darwin-dbg/bin/${relativeFileDirname}/${fileBasenameNoExtension}",
+      "args": [],
+      "env": {
+        "SOURCEMAP": "`readlink -n bazel-cpp-template`"
+      },
+      
+      // *** You need to change this part for your own system to work ***
+      // Set sourceMap from output of (readlink -n bazel-cpp-template) to ${workspaceFolder}
+      "sourceMap": {
+        "/private/var/tmp/_bazel_ari/8b6cf68db0ea2d6ea3f9c3ed5620d651/execroot/__main__": "${workspaceFolder}/"
+      }
+    },
   ]
 }

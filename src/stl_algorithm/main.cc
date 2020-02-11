@@ -6,6 +6,10 @@
 #include <vector>
 
 bool IsOdd(int i) { return ((i % 2) == 1); }
+bool IsEven(int i) { return ((i % 2) == 0); }
+bool LessThanOrEqual(int a, int b){ return a <= b;}
+bool GreaterThan(int a, int b){ return a > b;}
+
 int Multiply(int i, int j) { return i * j; }
 
 int main() {
@@ -16,6 +20,19 @@ int main() {
     Print(v);
   }
 
+// Sort
+  {
+    std::vector<int> v = {12, -2, 0, 13, 3, 5};
+    std::sort(v.begin(), v.end(), LessThanOrEqual);
+    Print(v);
+  }
+
+  // Sort
+  {
+    std::vector<int> v = {12, -2, 0, 13, 3, 5};
+    std::sort(v.begin(), v.end(), GreaterThan);
+    Print(v);
+  }
   // Find
   {
     std::vector<int> v = {12, -2, 0, 13, 3, 5};

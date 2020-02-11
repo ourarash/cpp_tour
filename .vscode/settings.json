@@ -72,6 +72,8 @@
     "vector": "cpp",
     "list": "cpp",
     "numeric": "cpp",
-    "queue": "cpp"
+    "queue": "cpp",
+    "any": "cpp",
+    "__functional_03": "cpp"
   }
 }

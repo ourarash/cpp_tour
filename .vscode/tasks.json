@@ -1,17 +1,31 @@
 // Modified to enable debugging using bazel
-
 {
   "version": "2.0.0",
   "tasks": [
     {
       "label": "Build Example (Debug)",
       "type": "shell",
-      "command": "bazel build src/main:main -c dbg",
+      "command": "bazel  build --cxxopt='-std=c++17' ${relativeFileDirname}:${fileBasenameNoExtension} -c dbg",
       "windows": {
-        "command": "bazel build src/linked_list:main --experimental_enable_runfiles -c dbg"
+        "command": "bazel build --cxxopt='-std=c++17' ${relativeFileDirname}:${fileBasenameNoExtension} --experimental_enable_runfiles -c dbg"
       },
       "osx": {
-        "command": "bazel build src/linked_list:main -c dbg --spawn_strategy=standalone",
+        "command": "bazel build --cxxopt='-std=c++17' ${relativeFileDirname}:${fileBasenameNoExtension} -c dbg --spawn_strategy=standalone",
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+    },
+    {
+      "label": "Build Example (Run)",
+      "type": "shell",
+      "command": "bazel  build --cxxopt='-std=c++11' ${relativeFileDirname}:${fileBasenameNoExtension}",
+      "windows": {
+        "command": "bazel build --cxxopt='-std=c++11' ${relativeFileDirname}:${fileBasenameNoExtension}"
+      },
+      "osx": {
+        "command": "bazel build --cxxopt='-std=c++11' ${relativeFileDirname}:${fileBasenameNoExtension}",
       },
       "group": {
         "kind": "build",
