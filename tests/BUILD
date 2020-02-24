@@ -15,3 +15,13 @@ cc_test(
         "@googletest//:gtest_main",
     ],
 )
+
+cc_test(
+    name = "sort_test",
+    srcs = glob(["sort_test.cc"]),
+    deps = [
+        "//src/lib:SolutionLib",
+        "@googletest//:gtest_main",
+    ],
+)
+

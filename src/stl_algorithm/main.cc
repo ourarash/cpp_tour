@@ -5,20 +5,42 @@
 #include <string>
 #include <vector>
 
+
+struct Person {
+  std::string first_name;
+  std::string last_name;
+  int age;
+  int ssn;
+};
+
+bool GreaterThanSSN(Person p1, Person p2){
+  return (p1.ssn <= p2.ssn);
+}
+
+bool GreaterThanAge(const Person& p1, const Person& p2){
+  return (p1.age <= p2.age);
+}
+// std::vector<Person> persons;
+// std::sort(persons.begin(), persons.end(), GreaterThanSSN);
+// std::sort(persons.begin(), persons.end(), GreaterThanAge);
+
+//TODO: make the parameres const
 bool IsOdd(int i) { return ((i % 2) == 1); }
 bool IsEven(int i) { return ((i % 2) == 0); }
 bool LessThanOrEqual(int a, int b){ return a <= b;}
 bool GreaterThan(int a, int b){ return a > b;}
 
+
+
 int Multiply(int i, int j) { return i * j; }
 
 int main() {
   // Sort
-  {
-    std::vector<int> v = {12, -2, 0, 13, 3, 5};
-    std::sort(v.begin(), v.end());
-    Print(v);
-  }
+  // {
+  //   std::vector<int> v = {12, -2, 0, 13, 3, 5};
+  //   std::sort(v.begin(), v.end());
+  //   Print(v);
+  // }
 
 // Sort
   {

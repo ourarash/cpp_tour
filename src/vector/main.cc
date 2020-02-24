@@ -35,5 +35,12 @@ int main() {
   c.erase(c.begin() + 2);
   PrintVector(c);
 
+  {
+    int n = 100;
+    std::vector<int> v;
+    for (int i = 0; i < n; i++) {
+      v.push_back(i);
+    }
+  }
   return 0;
 }

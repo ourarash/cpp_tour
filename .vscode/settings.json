@@ -74,6 +74,8 @@
     "numeric": "cpp",
     "queue": "cpp",
     "any": "cpp",
-    "__functional_03": "cpp"
+    "__functional_03": "cpp",
+    "unordered_set": "cpp",
+    "forward_list": "cpp"
   }
 }
