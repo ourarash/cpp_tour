@@ -53,13 +53,14 @@ void Sort::BubbleSortImproved(std::vector<int> &input) {
   }
 }
 
-int Sort::GetMinValueAndIncrementItsIndex(std::vector<int> &input, int l, int m,
-                                          int r, int &left_index,
-                                          int &right_index) {
-  if (left_index > m - l) {
+int Sort::GetMinValueAndIncrementItsIndex(std::vector<int> &input,
+                                          int &left_index, int &right_index,
+                                          const int left_max_index,
+                                          const int right_max_index) {
+  if (left_index > left_max_index) {
     return input[right_index++];
   }
-  if (right_index > r - l) {
+  if (right_index > right_max_index) {
     return input[left_index++];
   }
   if (input[left_index] <= input[right_index]) {
@@ -70,12 +71,16 @@ int Sort::GetMinValueAndIncrementItsIndex(std::vector<int> &input, int l, int m,
 }
 
 void Sort::Merge(std::vector<int> &input, int l, int m, int r) {
+  // We only copy from l to r (including r)
   std::vector<int> input_copy(input.begin() + l, input.begin() + r + 1);
+
   int left_index = 0;
-  int right_index = m + 1 - l;
+  int right_index = m + 1 - l;  // adjust m+1 by subtracting l from it
+  int left_max_index = m - l;   // Last index of left half
+  int right_max_index = r - l;  // Last index of right half
   for (int i = l; i <= r; i++) {
-    input[i] = GetMinValueAndIncrementItsIndex(input_copy, l, m, r, left_index,
-                                               right_index);
+    input[i] = GetMinValueAndIncrementItsIndex(
+        input_copy, left_index, right_index, left_max_index, right_max_index);
   }
 }
 

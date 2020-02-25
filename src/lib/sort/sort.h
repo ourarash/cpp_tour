@@ -16,9 +16,10 @@ class Sort {
   static void Merge(std::vector<int> &input, int l, int m, int r);
 
   static int FindMinIndex(const std::vector<int> &input, int start_index);
-  static int GetMinValueAndIncrementItsIndex(std::vector<int> &input, int l,
-                                             int m, int r, int &left_index,
-                                             int &right_index);
+  static int GetMinValueAndIncrementItsIndex(std::vector<int> &input,
+                                             int &left_index, int &right_index,
+                                             const int left_max_index,
+                                             const int right_max_index);
 };
 
 #endif
