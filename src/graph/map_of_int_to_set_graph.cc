@@ -8,6 +8,7 @@
 #include "src/lib/utility.h"
 
 int main() {
+  // DFS
   {
     std::map<int, std::set<int>> vertices{
         {0, {1, 2, 5}}, {1, {0, 2, 3}}, {2, {0, 1, 3}}, {3, {1, 2, 4, 6}},
@@ -15,32 +16,34 @@ int main() {
 
     MapSetGraph g(vertices);
     g.PrintGraph();
-    g.DFS(0);
+    // g.DFS(0);
+    g.BFS(0);
   }
 
-  {
-    std::map<int, std::set<int>> vertices{{0, {1, 2, 5}}, {1, {2, 3}}, {2, {3}},
-                                          {3, {4, 6}},    {4, {}},     {5, {2}},
-                                          {6, {}}};
+  // Topo
+  // {
+  //   std::map<int, std::set<int>> vertices{{0, {1, 2, 5}}, {1, {2, 3}}, {2, {3}},
+  //                                         {3, {4, 6}},    {4, {}},     {5, {2}},
+  //                                         {6, {}}};
 
-    MapSetGraph g(vertices);
-    g.PrintGraph();
-    g.DFS(0);
-    std::vector<int> topo_list = g.TopologicalSort(0);
-    Print(topo_list);
-  }
+  //   MapSetGraph g(vertices);
+  //   g.PrintGraph();
+  //   g.DFS(0);
+  //   std::vector<int> topo_list = g.TopologicalSort(0);
+  //   Print(topo_list);
+  // }
 
-  // Topological Sort
-  {
-    std::map<int, std::set<int>> vertices{{0, {1, 2, 5}}, {1, {2, 3}}, {2, {3}},
-                                          {3, {4, 6}},    {4, {}},     {5, {2}},
-                                          {6, {}}};
+  // // Topological Sort
+  // {
+  //   std::map<int, std::set<int>> vertices{{0, {1, 2, 5}}, {1, {2, 3}}, {2, {3}},
+  //                                         {3, {4, 6}},    {4, {}},     {5, {2}},
+  //                                         {6, {}}};
 
-    MapSetGraph g(vertices);
-    g.PrintGraph();
-    std::vector<int> topo_list = g.TopologicalSort(0);
-    Print(topo_list);
-  }
+  //   MapSetGraph g(vertices);
+  //   g.PrintGraph();
+  //   std::vector<int> topo_list = g.TopologicalSort(0);
+  //   Print(topo_list);
+  // }
 
 
   return 0;

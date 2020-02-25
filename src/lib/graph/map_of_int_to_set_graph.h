@@ -10,6 +10,7 @@ class MapSetGraph {
   MapSetGraph(std::map<int, std::set<int>> &edge_set) : edge_map_(edge_set) {}
 
   void DFS(int root);
+  void BFS(int root);
   // A helper function for DFS that carries marks in recursive calls
   void DFS_helper(int root, std::map<int, int> &marks);
 

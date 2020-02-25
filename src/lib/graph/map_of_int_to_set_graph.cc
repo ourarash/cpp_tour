@@ -1,9 +1,11 @@
 #include "map_of_int_to_set_graph.h"
 #include <iostream>
 #include <map>
+#include <queue>
 #include <set>
 #include <string>
 #include <vector>
+
 #include "src/lib/utility.h"
 
 void MapSetGraph::PrintGraph() {
@@ -50,4 +52,26 @@ std::vector<int> MapSetGraph::TopologicalSort(int root) {
 
   DFS_helper_with_topo(root, marks, topo_list);
   return topo_list;
+}
+
+void MapSetGraph::BFS(int root) {
+  std::map<int, int> marks;
+  std::queue<int> q;
+
+  q.push(root);
+  marks[root] = 1;
+  std::cout << "visited: " << root << std::endl;
+
+  while (!q.empty()) {
+    int cur = q.front();
+    q.pop();
+    for (auto &n : edge_map_[cur]) {
+      if (!marks[n]) {
+        marks[n] = 1;
+        std::cout << "visited: " << n << std::endl;
+
+        q.push(n);
+      }
+    }
+  }
 }
