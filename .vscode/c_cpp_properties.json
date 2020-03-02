@@ -6,6 +6,8 @@
         "${myDefaultIncludePath}",
         "${workspaceFolder}/src/lib",
         "${workspaceFolder}/src/lib/*"
+        "${workspaceFolder}/src/lib/graph"
+
       ]
     }
   ],

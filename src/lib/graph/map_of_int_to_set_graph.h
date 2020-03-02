@@ -11,14 +11,15 @@ class MapSetGraph {
 
   void DFS(int root);
   void BFS(int root);
+  
   // A helper function for DFS that carries marks in recursive calls
   void DFS_helper(int root, std::map<int, int> &marks);
 
   void DFS_helper_with_topo(int root, std::map<int, int> &marks,
                             std::vector<int> &topo_list);
-  
+
   // Topological sort assuming root doesn't have any incoming edges
-  std::vector<int>  TopologicalSort(int root);
+  std::vector<int> TopologicalSort(int root);
 
   void PrintGraph();
 

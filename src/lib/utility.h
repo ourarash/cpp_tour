@@ -41,12 +41,30 @@ void PrintVector(std::vector<T> input) {
 }
 //-----------------------------------------------------
 template <class T>
-void Print(T input) {
+void Print2dVector(std::vector<std::vector<T>> input) {
+  std::cout << "{ " << std::endl;
+  for (int i = 0; i < input.size(); i++) {
+    for (int j = 0; j < input[0].size(); j++) {
+      std::cout << input[i][j];
+      if (j < input[0].size() - 1) std::cout << ", ";
+    }
+    std::cout << std::endl;
+  }
+  std::cout << " }" << std::endl;
+}
+//-----------------------------------------------------
+template <class T>
+void Print(T input, long infinity = INT_MAX) {
   std::cout << "{ ";
   unsigned int count = 0;
   for (auto n : input) {
     count++;
-    std::cout << n;
+    if (n == infinity) {
+      std::cout << "∞";
+
+    } else {
+      std::cout << n;
+    }
     if (count < input.size()) std::cout << ", ";
   }
   std::cout << " }" << std::endl;
