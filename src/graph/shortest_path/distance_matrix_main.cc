@@ -59,5 +59,8 @@ int main() {
   auto distances_bf_recursive = g.BellmanFordRecursive(0);
   Print(distances_bf_recursive);
 
+   auto distances_bf_2d = g.BellmanFord2D(0);
+  Print(distances_bf_2d);
+
   return 0;
 }

@@ -44,8 +44,10 @@ class DistMatrixGraph {
   std::vector<long> DijkstraPriorityQueue(int source);
 
   std::vector<long> BellmanFord(int source);
+  std::vector<long> BellmanFord2D(int source);
+
   std::vector<long> BellmanFordRecursive(int source);
-  long BellmanFordRecursiveHelper(int s, int v, int i);
+  long BellmanFordRecursiveHelper(int s, int i, int v);
 
   int FindMinInDButNotInVisited(std::vector<long> &d,
                                 std::unordered_set<int> &visited);

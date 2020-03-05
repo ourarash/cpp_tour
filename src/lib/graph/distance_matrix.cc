@@ -28,13 +28,15 @@ void PrintWeightsTemplate(const std::vector<std::vector<T>> &weights) {
   }
   std::cout << " }" << std::endl;
 }
+//-----------------------------------------------------
 void DistMatrixGraph::PrintWeights(std::vector<std::vector<int>> weights) {
   PrintWeightsTemplate(weights);
 }
-
+//-----------------------------------------------------
 void DistMatrixGraph::PrintWeights(std::vector<std::vector<long>> weights) {
   PrintWeightsTemplate(weights);
 }
+//-----------------------------------------------------
 // Floyd-Warshal Algorithm for finding the shortest distance
 // - Can have negative edges
 // - Can't have negative cycles
@@ -46,7 +48,8 @@ std::vector<std::vector<long>> DistMatrixGraph::FloydWarshall() {
   // d is previously initialized to weights_
   for (int i = 0; i < weight_.size(); ++i) {
     for (int j = 0; j < weight_.size(); ++j) {
-      d[i][j] = weight_[i][j];
+      // 0 if i==j, and ∞ if no edge between them
+      d[i][j] = weight_[i][j];  
     }
   }
 
@@ -56,13 +59,11 @@ std::vector<std::vector<long>> DistMatrixGraph::FloydWarshall() {
         d[i][j] = std::min(d[i][j], d[i][k] + d[k][j]);
       }
     }
-    std::cout << "k: " << k << std::endl;
-    PrintWeights(d);
   }
 
   return d;
 }
-
+//-----------------------------------------------------
 // Calculates shortest distance between i,j using nodes 0 to k
 long DistMatrixGraph::FloydWarshallRecursiveHelper(int i, int j, int k) {
   if (k < 0) {
@@ -73,7 +74,7 @@ long DistMatrixGraph::FloydWarshallRecursiveHelper(int i, int j, int k) {
                         FloydWarshallRecursiveHelper(k, j, k - 1));
   }
 }
-
+//-----------------------------------------------------
 std::vector<std::vector<long>> DistMatrixGraph::FloydWarshallRecursive() {
   std::vector<std::vector<long>> d(weight_.size(),
                                    std::vector<long>(weight_.size()));
@@ -85,7 +86,7 @@ std::vector<std::vector<long>> DistMatrixGraph::FloydWarshallRecursive() {
   }
   return d;
 }
-
+//-----------------------------------------------------
 // Finds the minimum value in d that is not in visited
 int DistMatrixGraph::FindMinInDButNotInVisited(
     std::vector<long> &d, std::unordered_set<int> &visited) {
@@ -106,7 +107,7 @@ int DistMatrixGraph::FindMinInDButNotInVisited(
 
   return u;
 }
-
+//-----------------------------------------------------
 std::vector<long> DistMatrixGraph::Dijkstra(int source) {
   std::unordered_set<int> visited;
   std::vector<long> d(weight_.size());
@@ -126,7 +127,7 @@ std::vector<long> DistMatrixGraph::Dijkstra(int source) {
   }
   return d;
 }
-
+//-----------------------------------------------------
 std::vector<long> DistMatrixGraph::DijkstraPriorityQueue(int source) {
   // Queue of pairs of (distance, node number)
   std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>,
@@ -154,7 +155,7 @@ std::vector<long> DistMatrixGraph::DijkstraPriorityQueue(int source) {
   }
   return d;
 }
-
+//-----------------------------------------------------
 std::vector<long> DistMatrixGraph::BellmanFord(int source) {
   std::vector<long> d(weight_.size(), INT_MAX);
   d[source] = 0;
@@ -168,32 +169,57 @@ std::vector<long> DistMatrixGraph::BellmanFord(int source) {
   }
   return d;
 }
+//-----------------------------------------------------
+// Calculates all d(v,i) for v in V, and i=0 to n
+std::vector<long> DistMatrixGraph::BellmanFord2D(int source) {
+  std::vector<std::vector<long>> d(weight_.size() - 1,
+                                   std::vector<long>(weight_.size()));
+  for (int i = 0; i < weight_.size() - 1; i++) {
+    for (int v = 0; v < weight_.size(); v++) {
+      // Base case
+      if (i == 0 && v == source) {
+        d[0][v] = 0;
+        continue;
+      } else if (i == 0 && v != source) {
+        d[0][v] = INT_MAX;
+        continue;
+      }
 
+      // non-base case
+      long e = INT_MAX;
+      for (int u = 0; u < weight_.size(); u++) {
+        e = std::min(e, d[i - 1][u] + weight_[u][v]);
+      }
+      d[i][v] = std::min(d[i - 1][v], e);
+    }
+  }
+  return d[weight_.size() - 2];
+}
+//-----------------------------------------------------
 // s: source
 // v: target
 // i: maximum path size
-// d(v,i) =0 ;                              if (i==0 && v==s )
-// d(v,i) =infinity ;                       if (i==0 && v!=s )
-// d(v,i) = min(d[v], d[u] + weight[u][v]); otherwise
-long DistMatrixGraph::BellmanFordRecursiveHelper(int s, int v, int i) {
-  if (v == s) {
+// d(i,v) = 0 ;                                     if (i==0 && v==s )
+// d(i,v) = infinity ;                              if (i==0 && v!=s )
+// d(i,v) = min(d(i-1,v), min(d(i-1, u) + w(u,w)));  otherwise
+long DistMatrixGraph::BellmanFordRecursiveHelper(int s, int i, int v) {
+  if (i == 0 && v == s) {
     return 0;
-  } else if (i == 0) {
+  } else if (i == 0 && v != s) {
     return INT_MAX;
   } else {
     long d = INT_MAX;
     for (int u = 0; u < weight_.size(); u++) {
-      d = std::min(d, BellmanFordRecursiveHelper(s, u, i - 1) + weight_[u][v]);
+      d = std::min(d, BellmanFordRecursiveHelper(s, i - 1, u) + weight_[u][v]);
     }
-    return std::min(BellmanFordRecursiveHelper(s, v, i - 1), d);
+    return std::min(BellmanFordRecursiveHelper(s, i - 1, v), d);
   }
 }
-
+//-----------------------------------------------------
 std::vector<long> DistMatrixGraph::BellmanFordRecursive(int source) {
   std::vector<long> d;
   for (int i = 0; i < weight_.size(); i++) {
-    d.push_back(BellmanFordRecursiveHelper(source, i, weight_.size() - 1));
-    // Print(d);
+    d.push_back(BellmanFordRecursiveHelper(source, weight_.size() - 1, i));
   }
   return d;
 }
