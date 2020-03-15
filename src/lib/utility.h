@@ -70,6 +70,20 @@ void Print(T input, long infinity = INT_MAX) {
   std::cout << " }" << std::endl;
 }
 
+template <class T>
+void PrintVectorOfString(T input) {
+  std::cout << "{ ";
+  unsigned int count = 0;
+  for (auto n : input) {
+    count++;
+
+    std::cout << "\"" << n << "\"";
+
+    if (count < input.size()) std::cout << ", ";
+  }
+  std::cout << " }" << std::endl;
+}
+
 // Prints index of items if the item is non zero
 template <class T>
 void PrintIndexIfNonZero(T input) {

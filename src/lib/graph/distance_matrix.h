@@ -23,8 +23,6 @@ class DistMatrixGraph {
     for (size_t i = 0; i < n; i++) {
       weight_[i][i] = 0;
     }
-    { /* code */
-    }
   }
 
   void PrintGraph() {
@@ -45,7 +43,7 @@ class DistMatrixGraph {
 
   std::vector<long> BellmanFord(int source);
   std::vector<long> BellmanFord2D(int source);
-
+  std::map<int, std::set<int>> GetPredecessors();
   std::vector<long> BellmanFordRecursive(int source);
   long BellmanFordRecursiveHelper(int s, int i, int v);
 

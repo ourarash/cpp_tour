@@ -58,3 +58,10 @@ cc_binary(
     srcs = ["adjacency_matrix_main.cc"],
     deps = ["//src/lib:SolutionLib"],
 )
+
+
+cc_binary(
+    name = "pointer_main",
+    srcs = ["pointer_main.cc"],
+    deps = ["//src/lib:SolutionLib"],
+)

@@ -1,4 +1,5 @@
 #include "distance_matrix.h"
+#include <algorithm>
 #include <iostream>
 #include <map>
 #include <queue>
@@ -49,7 +50,7 @@ std::vector<std::vector<long>> DistMatrixGraph::FloydWarshall() {
   for (int i = 0; i < weight_.size(); ++i) {
     for (int j = 0; j < weight_.size(); ++j) {
       // 0 if i==j, and ∞ if no edge between them
-      d[i][j] = weight_[i][j];  
+      d[i][j] = weight_[i][j];
     }
   }
 
@@ -155,42 +156,59 @@ std::vector<long> DistMatrixGraph::DijkstraPriorityQueue(int source) {
   }
   return d;
 }
+
+
+std::map<int, std::set<int>> DistMatrixGraph::GetPredecessors() {
+  std::map<int, std::set<int>> pre;
+  for (int i = 0; i < weight_.size(); i++) {
+    for (int j = 0; j < weight_[0].size(); j++) {
+      if (weight_[i][j] < INT_MAX && i != j) {
+        pre[j].insert(i);
+      }
+    }
+  }
+  return pre;
+}
 //-----------------------------------------------------
 std::vector<long> DistMatrixGraph::BellmanFord(int source) {
   std::vector<long> d(weight_.size(), INT_MAX);
+  auto pre = GetPredecessors();
+
   d[source] = 0;
 
   for (int i = 0; i < weight_.size() - 1; i++) {
-    for (int u = 0; u < weight_.size(); u++) {
-      for (int v = 0; v < weight_.size(); v++) {
-        d[v] = std::min(d[v], d[u] + weight_[u][v]);
+    for (int v = 0; v < weight_.size(); v++) {
+      for (int u : pre[v]) {
+        std::vector<long> compareList = {d[v], d[u] + weight_[u][v]};
+        d[v] = *std::min_element(compareList.begin(), compareList.end());
       }
     }
   }
   return d;
 }
+
 //-----------------------------------------------------
 // Calculates all d(v,i) for v in V, and i=0 to n
 std::vector<long> DistMatrixGraph::BellmanFord2D(int source) {
   std::vector<std::vector<long>> d(weight_.size() - 1,
                                    std::vector<long>(weight_.size()));
+  auto pre = GetPredecessors(); // Map of node to its predecessors
+
   for (int i = 0; i < weight_.size() - 1; i++) {
     for (int v = 0; v < weight_.size(); v++) {
       // Base case
-      if (i == 0 && v == source) {
-        d[0][v] = 0;
-        continue;
-      } else if (i == 0 && v != source) {
-        d[0][v] = INT_MAX;
+      if(i==0){
+        d[0][v] = (v == source)? 0: INT_MAX;
         continue;
       }
-
+      
       // non-base case
-      long e = INT_MAX;
-      for (int u = 0; u < weight_.size(); u++) {
-        e = std::min(e, d[i - 1][u] + weight_[u][v]);
+      d[i][v] = INT_MAX;
+      for (int u : pre[v]) {
+        std::vector<long> compareList = {d[i][v], d[i - 1][v],
+                                         d[i - 1][u] + weight_[u][v]};
+        d[i][v] = *std::min_element(compareList.begin(), compareList.end());
       }
-      d[i][v] = std::min(d[i - 1][v], e);
     }
   }
   return d[weight_.size() - 2];
