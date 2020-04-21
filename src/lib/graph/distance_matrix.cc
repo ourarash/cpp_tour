@@ -157,7 +157,6 @@ std::vector<long> DistMatrixGraph::DijkstraPriorityQueue(int source) {
   return d;
 }
 
-
 std::map<int, std::set<int>> DistMatrixGraph::GetPredecessors() {
   std::map<int, std::set<int>> pre;
   for (int i = 0; i < weight_.size(); i++) {
@@ -192,16 +191,16 @@ std::vector<long> DistMatrixGraph::BellmanFord(int source) {
 std::vector<long> DistMatrixGraph::BellmanFord2D(int source) {
   std::vector<std::vector<long>> d(weight_.size() - 1,
                                    std::vector<long>(weight_.size()));
-  auto pre = GetPredecessors(); // Map of node to its predecessors
+  auto pre = GetPredecessors();  // Map of node to its predecessors
 
   for (int i = 0; i < weight_.size() - 1; i++) {
     for (int v = 0; v < weight_.size(); v++) {
       // Base case
-      if(i==0){
-        d[0][v] = (v == source)? 0: INT_MAX;
+      if (i == 0) {
+        d[0][v] = (v == source) ? 0 : INT_MAX;
         continue;
       }
-      
+
       // non-base case
       d[i][v] = INT_MAX;
       for (int u : pre[v]) {
@@ -221,13 +220,13 @@ std::vector<long> DistMatrixGraph::BellmanFord2D(int source) {
 // d(i,v) = infinity ;                              if (i==0 && v!=s )
 // d(i,v) = min(d(i-1,v), min(d(i-1, u) + w(u,w)));  otherwise
 long DistMatrixGraph::BellmanFordRecursiveHelper(int s, int i, int v) {
-  if (i == 0 && v == s) {
-    return 0;
-  } else if (i == 0 && v != s) {
-    return INT_MAX;
+  if (i == 0) {
+    return (v == s) ? 0 : INT_MAX;
   } else {
+    auto pre = GetPredecessors();  // Map of node to its predecessors
+
     long d = INT_MAX;
-    for (int u = 0; u < weight_.size(); u++) {
+    for (auto u : pre[v]) {
       d = std::min(d, BellmanFordRecursiveHelper(s, i - 1, u) + weight_[u][v]);
     }
     return std::min(BellmanFordRecursiveHelper(s, i - 1, v), d);

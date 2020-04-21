@@ -1,7 +1,10 @@
 #ifndef UTILITY_H
 #define UTILITY_H
+#include <cmath>
 #include <iostream>
+#include <numeric>
 #include <string>
+
 // Swaps values of i and j
 template <class T>
 void Swap(T &i, T &j) {
@@ -100,5 +103,86 @@ void PrintIndexIfNonZero(T input) {
     }
   }
   std::cout << " }" << std::endl;
+}
+
+template <class T>
+void PopulateVector(std::vector<T> &v) {
+  unsigned long i = 0;
+  for (auto &e : v) {
+    e = pow(-1, i % 2) * i;
+    i++;
+  }
+}
+
+template <class T>
+void PopulateVector(std::vector<T> &v, int number_of_elements) {
+  for (uint64_t i = 0; i < number_of_elements; i++) {
+    T e = pow(-1, i % 2) * i;
+    v.push_back(e);
+  }
+}
+
+// Multi threading
+template <class T>
+void AccumulateVector(const std::vector<T> &v, T &sum, T start_index,
+                      T end_index) {
+  sum = std::accumulate(v.begin() + start_index, v.begin() + end_index, T(0));
+}
+
+template <class T>
+T AccumulateVector(const std::vector<T> &v) {
+  T sum = 0;
+  for (auto ps : v) {
+    sum += ps;
+  }
+  return sum;
+}
+
+void CalculateShort(int64_t &sum, int64_t start, int64_t end) {
+  sum = 0;
+  for (auto i = start; i < end; i++) {
+    sum += pow(-1, i % 2);
+  }
+}
+
+class CalculateShortFunctor {
+ public:
+  void operator()(int64_t start, int64_t end) {
+    _sum = 0;
+    for (auto i = start; i < end; i++) {
+      _sum += pow(-1, i % 2);
+      // _sum += i;
+    }
+    std::cout << _sum << std::endl;
+  }
+  int64_t _sum;
+};
+
+class AccumulateFunctor {
+ public:
+  void operator()(int64_t start, int64_t end) {
+    _sum = 0;
+    for (auto i = start; i < end; i++) {
+      _sum += i;
+    }
+    std::cout << _sum << std::endl;
+  }
+  int64_t _sum;
+};
+
+uint64_t AccumulateRange(uint64_t &sum, uint64_t start, uint64_t end) {
+  sum = 0;
+  for (auto i = start; i < end; i++) {
+    sum += i;
+  }
+  return sum;
+}
+
+uint64_t GetRangeSum(uint64_t start, uint64_t end) {
+  uint64_t sum = 0;
+  for (auto i = start; i < end; i++) {
+    sum += i;
+  }
+  return sum;
 }
 #endif

@@ -5,12 +5,12 @@
     {
       "label": "Build Example (Debug)",
       "type": "shell",
-      "command": "bazel  build --cxxopt='-std=c++17' ${relativeFileDirname}:${fileBasenameNoExtension} -c dbg",
+      "command": "bazel  build --cxxopt='-std=c++17' ${relativeFileDirname}:${fileBasenameNoExtension} --compilation_mode=dbg",
       "windows": {
-        "command": "bazel build --cxxopt='-std=c++17' ${relativeFileDirname}:${fileBasenameNoExtension} --experimental_enable_runfiles -c dbg"
+        "command": "bazel build --cxxopt='-std=c++17' ${relativeFileDirname}:${fileBasenameNoExtension} --experimental_enable_runfiles --compilation_mode=dbg"
       },
       "osx": {
-        "command": "bazel build --cxxopt='-std=c++17' ${relativeFileDirname}:${fileBasenameNoExtension} -c dbg --spawn_strategy=standalone",
+        "command": "bazel build --cxxopt='-std=c++17' ${relativeFileDirname}:${fileBasenameNoExtension} --compilation_mode=dbg --spawn_strategy=standalone",
       },
       "group": {
         "kind": "build",

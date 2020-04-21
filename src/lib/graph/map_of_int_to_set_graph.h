@@ -11,7 +11,7 @@ class MapSetGraph {
   MapSetGraph(std::map<int, std::set<int>> &em) : edge_map_(em) {}
   MapSetGraph(std::map<int, std::set<int>> &em,
               std::map<std::pair<int, int>, int> &w)
-      : edge_map_(em), weights_(w) {}
+      : weights_(w), edge_map_(em) {}
 
   void DFS(int root);
   void BFS(int root);
