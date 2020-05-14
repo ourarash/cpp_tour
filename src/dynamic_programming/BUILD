@@ -85,3 +85,8 @@ cc_binary(
 )
 
 
+cc_binary(
+    name = "lpss_main",
+    srcs = ["lpss_main.cc"],
+    deps = ["//src/lib:SolutionLib"],
+)

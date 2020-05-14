@@ -16,8 +16,8 @@
 // Finds LSCS at index i
 int MAX_LSCS(std::vector<int> &input) {
   std::vector<int> d(input.size());
-
-  for (int i = 0; i < input.size(); i++) {
+  d[0] = input[0];
+  for (int i = 1; i < input.size(); i++) {
     d[i] = std::max(d[i - 1] + input[i], input[i]);
   }
   auto max = std::max_element(d.begin(), d.end());
