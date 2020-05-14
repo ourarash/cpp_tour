@@ -59,9 +59,14 @@ cc_binary(
     deps = ["//src/lib:SolutionLib"],
 )
 
-
 cc_binary(
     name = "pointer_main",
     srcs = ["pointer_main.cc"],
+    deps = ["//src/lib:SolutionLib"],
+)
+
+cc_binary(
+    name = "adjacency_vector_of_set_main",
+    srcs = ["adjacency_vector_of_set_main.cc"],
     deps = ["//src/lib:SolutionLib"],
 )

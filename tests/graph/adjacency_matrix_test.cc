@@ -1,21 +1,14 @@
-#include <functional>
-#include <iostream>
-#include <map>
-#include <set>
-#include <string>
 #include <vector>
 
+#include "gtest/gtest.h"
 #include "src/lib/graph/adjacency_matrix.h"
-#include "src/lib/utility.h"
 
-int main() {
+TEST(vector_v_vector_pair_e, euler_walkable1) {
   std::vector<std::vector<int>> adjacency = {{0, 1, 1, 0, 0},
                                              {1, 0, 1, 1, 1},
                                              {1, 1, 0, 1, 0},
                                              {0, 1, 1, 0, 1},
                                              {0, 1, 0, 1, 0}};
   Graph g(adjacency);
-  // g.PrintGraph();
-  // std::cout << "g.isEulerWalkable(): " << g.IsEulerWalkable() << std::endl;
-  return 0;
+  EXPECT_EQ(true, g.IsEulerWalkable());
 }
