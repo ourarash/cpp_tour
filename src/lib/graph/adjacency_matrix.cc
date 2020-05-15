@@ -7,9 +7,9 @@
 #include <vector>
 
 bool Graph::IsEulerWalkable() {
-  std::vector<int> degrees(adjacency_[0].size());
-  for (int i = 0; i < adjacency_[0].size(); i++) {
-    for (int j = 0; j < adjacency_[0].size(); j++) {
+  std::vector<int> degrees(adjacency_.size());
+  for (int i = 0; i < adjacency_.size(); i++) {
+    for (int j = 0; j < adjacency_.size(); j++) {
       if (adjacency_[i][j] == 1) {
         degrees[i]++;
         degrees[j]++;
@@ -19,7 +19,6 @@ bool Graph::IsEulerWalkable() {
   int countOdds = 0;
 
   for (auto d : degrees) {
-    std::cout << "d: " << d << std::endl;
     if ((d / 2) % 2 == 1) {
       countOdds++;
     }

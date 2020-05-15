@@ -15,7 +15,6 @@ int main() {
                                              {0, 1, 1, 0, 1},
                                              {0, 1, 0, 1, 0}};
   Graph g(adjacency);
-  // g.PrintGraph();
-  // std::cout << "g.isEulerWalkable(): " << g.IsEulerWalkable() << std::endl;
+  std::cout << "g.isEulerWalkable(): " << g.IsEulerWalkable() << std::endl;
   return 0;
 }
