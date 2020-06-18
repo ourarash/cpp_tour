@@ -62,5 +62,13 @@ void TestSort(std::function<void(std::vector<int>&)> sort_func) {
 
 TEST(SortTest, SelectionSort) { TestSort(Sort::SelectionSort); }
 TEST(SortTest, MergeSort) { TestSort(Sort::MergeSort); }
+TEST(SortTest, MergeSortPar) { TestSort(Sort::MergeSortPar); }
+
 TEST(SortTest, BubbleSort) { TestSort(Sort::BubbleSort); }
 TEST(SortTest, BubbleSortImproved) { TestSort(Sort::BubbleSortImproved); }
+TEST(SortTest, QuickSort) { TestSort(Sort::QuickSort); }
+TEST(SortTest, QuickSortPar) { TestSort(Sort::QuickSortPar); }
+TEST(SortTest, InsertionSort) { TestSort(Sort::InsertionSort); }
+
+TEST(SortTest, IntroSort) { TestSort(Sort::Introsort); }
+

@@ -8,7 +8,7 @@
 #include "src/lib/utility.h"
 
 int main() {
-  Graph g({Vertex(0, {1, 2}), Vertex(1, {0, 2, 3, 4}), Vertex(3, {1, 2, 4}),
-           Vertex(4, {2, 4, 4})});
+  Graph g({Vertex(0, {1, 2, 3}), Vertex(1, {0, 2, 3}), Vertex(2, {0, 1, 3}),
+           Vertex(3, {0, 1, 2})});
   std::cout << g.IsEulerWalkable() << std::endl;
 }

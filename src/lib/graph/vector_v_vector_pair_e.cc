@@ -7,13 +7,17 @@
 #include <vector>
 
 bool Graph::IsEulerWalkable() {
+  // Create a table to hold degree of each vertex
   std::vector<int> degrees(v_.size());
+  
+  // Iterate all edges
   for (auto e : e_) {
     degrees[e.first]++;
     degrees[e.second]++;
   }
   int countOdds = 0;
 
+  // Iterate through degree table and count the number of odd ones
   for (auto d : degrees) {
     if (d % 2 == 1) {
       countOdds++;

@@ -6,7 +6,7 @@
 
 int main() {
   std::vector<int> in = {5, 3, 1, 77, -1};
-  Sort::BubbleSort(in);
+  Sort::Introsort(in);
   Print(in);
 
   return 0;

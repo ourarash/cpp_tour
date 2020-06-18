@@ -20,8 +20,7 @@ cc_test(
     name = "sort_test",
     srcs = glob(["sort_test.cc"]),
     deps = [
-        "//src/lib:SolutionLib",
+        "//src/lib/sort:SortLib",
         "@googletest//:gtest_main",
     ],
 )
-
