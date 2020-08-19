@@ -5,8 +5,8 @@
 #include "src/lib/utility.h"
 
 int main() {
-  std::vector<int> in = {5, 3, 1, 77, -1};
-  Sort::Introsort(in);
+  std::vector<int> in = {5, 3, 1, 77, -1, 100};
+  Sort::QuickSort(in);
   Print(in);
 
   return 0;

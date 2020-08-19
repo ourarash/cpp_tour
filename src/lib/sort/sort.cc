@@ -80,6 +80,44 @@ void Sort::BubbleSortImproved(std::vector<int> &input) {
     }
   }
 }
+// To heapify a subtree rooted with node i which is
+// an index in arr
+
+void Sort::Heapify(std::vector<int> &arr, int n, int i) {
+  int largest = i;    // Initialize largest as root
+  int l = 2 * i + 1;  // left = 2*i + 1
+  int r = 2 * i + 2;  // right = 2*i + 2
+
+  // If left child is larger than root
+  if (l < n && arr[l] > arr[largest]) largest = l;
+
+  // If right child is larger than largest so far
+  if (r < n && arr[r] > arr[largest]) largest = r;
+
+  // If largest is not root
+  if (largest != i) {
+    Swap(arr[i], arr[largest]);
+
+    // Recursively heapify the affected sub-tree
+    Heapify(arr, n, largest);
+  }
+}
+
+// main function to do heap sort
+void Sort::HeapSort(std::vector<int> &arr) {
+  int n = arr.size();
+  // Build heap (rearrange array)
+  for (int i = n / 2 - 1; i >= 0; i--) Heapify(arr, n, i);
+
+  // One by one extract an element from heap
+  for (int i = n - 1; i > 0; i--) {
+    // Move current root to end
+    Swap(arr[0], arr[i]);
+
+    // call max heapify on the reduced heap
+    Heapify(arr, i, 0);
+  }
+}
 
 int Sort::GetMinValueAndIncrementItsIndex(std::vector<int> &input,
                                           int &left_index, int &right_index,
@@ -174,9 +212,9 @@ void Sort::InsertionSortImp(std::vector<int> &arr, int left, int right) {
 }
 
 // int Sort::Partition(std::vector<int> &input, int low, int high) {
-//   // int pivot = input[high];  // pivot
-//   int pivot_index = MedianOfThree(input, low, (low + high) / 2, high);
-//   int pivot = input[pivot_index];
+//   int pivot = input[high];  // pivot
+//   // int pivot_index = MedianOfThree(input, low, (low + high) / 2, high);
+//   // int pivot = input[pivot_index];
 
 //   int i = (low - 1);  // Index of smaller element
 
@@ -188,14 +226,15 @@ void Sort::InsertionSortImp(std::vector<int> &arr, int left, int right) {
 //     }
 //   }
 //   Swap(input[i + 1], input[high]);
-//   return (i + 1);
+//   return (i );
 // }
 
 int Sort::Partition(std::vector<int> &input, int low, int high) {
-  // int median_index = MedianOfThree(input, low, (low + high) / 2, high);
-  int pivot = input[(high + low) / 2];
+  // int median_index = MedianOfThree(input, low, (low + high) / 2, high - 1);
   // int pivot = input[median_index];
 
+  int pivot = input[(high + low) / 2];
+  // int pivot = input[high-1];
   int i = low;
   int j = high;
   while (true) {
@@ -219,16 +258,81 @@ int Sort::Partition(std::vector<int> &input, int low, int high) {
 arr[] --> Array to be sorted,
 low --> Starting index,
 high --> Ending index */
-void Sort::QuickSortImp(std::vector<int> &input, int low, int high) {
+void Sort::QuickSortImp_twoCalls(std::vector<int> &input, int low, int high) {
   if (low < high) {
+    if (high - low < 10) {
+      InsertionSortImp(input, low, high);
+    } else {
+      /* pi is partitioning index, arr[p] is now
+      at right place */
+      int pi = Partition(input, low, high);
+
+      // Separately sort elements before
+      // partition and after partition
+      QuickSortImp_twoCalls(input, low, pi);
+      QuickSortImp_twoCalls(input, pi + 1, high);
+    }
+  }
+}
+
+void Sort::QuickSortImp_oneCall(std::vector<int> &input, int low, int high) {
+  while (low < high) {
     /* pi is partitioning index, arr[p] is now
-    at right place */
+       at right place */
     int pi = Partition(input, low, high);
 
-    // Separately sort elements before
-    // partition and after partition
-    QuickSortImp(input, low, pi);
-    QuickSortImp(input, pi + 1, high);
+    // If left part is smaller, then recur for left
+    // part and handle right part iteratively
+    if (pi - low > high - pi) {
+      QuickSortImp_oneCall(input, low, pi);
+      low = pi + 1;
+    }
+
+    // Else recur for right part
+    else {
+      QuickSortImp_oneCall(input, pi + 1, high);
+      high = pi;
+    }
+  }
+}
+
+void Sort::QuickSortImp_iterative(std::vector<int> &input, int low, int high) {
+  if (high <= low) {
+    return;
+  }
+  // Create an auxiliary stack
+  std::vector<int> stack(high - low + 1);
+
+  // initialize top of stack
+  int top = -1;
+
+  // push initial values of l and h to stack
+  stack[++top] = low;
+  stack[++top] = high;
+
+  // Keep popping from stack while is not empty
+  while (top >= 0) {
+    // Pop h and l
+    high = stack[top--];
+    low = stack[top--];
+
+    // Set pivot element at its correct position
+    // in sorted array
+    int p = Partition(input, low, high);
+
+    // If there are elements on left side of pivot,
+    // then push left side to stack
+    if (p > low) {
+      stack[++top] = low;
+      stack[++top] = p;
+    }
+
+    // If there are elements on right side of pivot,
+    // then push right side to stack
+    if (p + 1 < high) {
+      stack[++top] = p + 1;
+      stack[++top] = high;
+    }
   }
 }
 
@@ -246,8 +350,8 @@ void Sort::QuickSortParImp(std::vector<int> &input, int low, int high) {
       t1.join();
       t2.join();
     } else {
-      QuickSortImp(input, low, pi);
-      QuickSortImp(input, pi + 1, high);
+      QuickSortParImp(input, low, pi);
+      QuickSortParImp(input, pi + 1, high);
     }
   }
 }
@@ -277,7 +381,7 @@ int Sort::MedianOfThree(std::vector<int> &v, int a_i, int b_i, int c_i) {
 }
 
 void Sort::IntrosortUtil(std::vector<int> &arr, int begin, int end,
-                         int depthLimit) {
+                         int depthLimit, bool par) {
   // Count the number of elements
   int size = end - begin;
 
@@ -289,8 +393,8 @@ void Sort::IntrosortUtil(std::vector<int> &arr, int begin, int end,
 
   // If the depth is zero use heapsort
   if (depthLimit == 0) {
-    std::make_heap(arr.begin(), arr.end());
-    std::sort_heap(arr.begin(), arr.end());
+    Sort::HeapSort(arr);
+
     return;
   }
 
@@ -303,27 +407,27 @@ void Sort::IntrosortUtil(std::vector<int> &arr, int begin, int end,
 
   // Perform Quick Sort
   // int partitionPoint = Partition(arr, begin, end);
-  if (size > INTROSORT_THREASHOLD) {
+  if (par && size > INTROSORT_THREASHOLD) {
     auto t1 = std::thread(IntrosortUtil, std::ref(arr), begin, partitionPoint,
-                          depthLimit - 1);
+                          depthLimit - 1, par);
     auto t2 = std::thread(IntrosortUtil, std::ref(arr), partitionPoint + 1, end,
-                          depthLimit - 1);
+                          depthLimit - 1, par);
     t1.join();
     t2.join();
   } else {
-    IntrosortUtil(arr, begin, partitionPoint, depthLimit - 1);
-    IntrosortUtil(arr, partitionPoint + 1, end, depthLimit - 1);
+    IntrosortUtil(arr, begin, partitionPoint, depthLimit - 1, par);
+    IntrosortUtil(arr, partitionPoint + 1, end, depthLimit - 1, par);
   }
   return;
 }
 
 /* Implementation of introsort*/
-void Sort::IntrosortImp(std::vector<int> &arr, int begin, int end) {
+void Sort::IntrosortImp(std::vector<int> &arr, int begin, int end, bool par) {
   int depthLimit = (end - begin) * std::log(end - begin);
   // int depthLimit = 20;
 
   // Perform a recursive Introsort
-  IntrosortUtil(arr, begin, end, depthLimit);
+  IntrosortUtil(arr, begin, end, depthLimit, par);
 
   return;
 }

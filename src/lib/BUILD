@@ -1,4 +1,5 @@
-# https://docs.bazel.build/versions/master/be/c-cpp.html#cc_library
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
 cc_library(
     name = "SolutionLib",
     srcs = glob(["**/*.cc"]),
@@ -32,5 +33,12 @@ cc_library(
     hdrs = ["graph/adjacency_matrix.h"],
     visibility = ["//visibility:public"],
 )
+
+cc_library(
+    name = "utility",
+    hdrs = ["utility.h"],
+    visibility = ["//visibility:public"],
+)
+
 
 

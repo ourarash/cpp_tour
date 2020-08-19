@@ -1,9 +1,12 @@
 #include "src/lib/sort/sort.h"
+
 #include <functional>
 #include <vector>
+
 #include "gtest/gtest.h"
 
-void TestSort(std::function<void(std::vector<int>&)> sort_func) {
+template <class T>
+void TestSort(T sort_func) {
   std::vector<int> in;
   std::vector<int> expected;
 
@@ -21,6 +24,7 @@ void TestSort(std::function<void(std::vector<int>&)> sort_func) {
   EXPECT_EQ(expected, in);
   EXPECT_EQ(expected.size(), in.size());
 
+  // Check small vector
   in = {5, 3, 1, 77, -1};
   sort_func(in);
   expected = {-1, 1, 3, 5, 77};
@@ -49,26 +53,71 @@ void TestSort(std::function<void(std::vector<int>&)> sort_func) {
   EXPECT_EQ(expected, in);
   EXPECT_EQ(expected.size(), in.size());
 
-  // Random large vector
-  std::srand(10);  // use a constant seed to make the test repeatable
-  in.resize(5000);
-  std::generate(in.begin(), in.end(), std::rand);
-  expected = in;
-  std::sort(expected.begin(), expected.end());
-  sort_func(in);
-  EXPECT_EQ(expected, in);
-  EXPECT_EQ(expected.size(), in.size());
+  // Random large vector, testing with multiple seeds
+  for (size_t i = 0; i < 50; i++) {
+    std::srand(i * 2);  // use a constant seed to make the test repeatable
+    in.resize(1000);
+    std::generate(in.begin(), in.end(), std::rand);
+    expected = in;
+    std::sort(expected.begin(), expected.end());
+    sort_func(in);
+    EXPECT_EQ(expected, in);
+    EXPECT_EQ(expected.size(), in.size());
+  }
+
+  //  large vector reverse sorted
+  for (size_t i = 0; i < 50; i++) {
+    std::srand(i * 2);  // use a constant seed to make the test repeatable
+    in.resize(1000);
+    std::generate(in.begin(), in.end(), std::rand);
+    std::sort(in.begin(), in.end(), std::greater<int>());
+    expected = in;
+    std::sort(expected.begin(), expected.end());
+    sort_func(in);
+    EXPECT_EQ(expected, in);
+    EXPECT_EQ(expected.size(), in.size());
+  }
+
+  // Random larger vector, testing with multiple seeds
+  for (size_t i = 0; i < 5; i++) {
+    std::srand(i);  // use a constant seed to make the test repeatable
+    in.resize(5000);
+    std::generate(in.begin(), in.end(), std::rand);
+    expected = in;
+    std::sort(expected.begin(), expected.end());
+    sort_func(in);
+    EXPECT_EQ(expected, in);
+    EXPECT_EQ(expected.size(), in.size());
+  }
+
+  //  large vector reverse sorted
+  for (size_t i = 0; i < 5; i++) {
+    std::srand(i * 2);  // use a constant seed to make the test repeatable
+    in.resize(5000);
+    std::generate(in.begin(), in.end(), std::rand);
+    std::sort(in.begin(), in.end(), std::greater<int>());
+    expected = in;
+    std::sort(expected.begin(), expected.end());
+    sort_func(in);
+    EXPECT_EQ(expected, in);
+    EXPECT_EQ(expected.size(), in.size());
+  }
 }
+
+TEST(SortTest, QuickSort_iterative) { TestSort(Sort::QuickSort_iterative); }
+TEST(SortTest, QuickSort_oneCall) { TestSort(Sort::QuickSort_oneCall); }
+TEST(SortTest, QuickSort_twoCalls) { TestSort(Sort::QuickSort_twoCalls); }
 
 TEST(SortTest, SelectionSort) { TestSort(Sort::SelectionSort); }
 TEST(SortTest, MergeSort) { TestSort(Sort::MergeSort); }
 TEST(SortTest, MergeSortPar) { TestSort(Sort::MergeSortPar); }
+TEST(SortTest, HeapSort) { TestSort(Sort::HeapSort); }
 
 TEST(SortTest, BubbleSort) { TestSort(Sort::BubbleSort); }
 TEST(SortTest, BubbleSortImproved) { TestSort(Sort::BubbleSortImproved); }
-TEST(SortTest, QuickSort) { TestSort(Sort::QuickSort); }
 TEST(SortTest, QuickSortPar) { TestSort(Sort::QuickSortPar); }
 TEST(SortTest, InsertionSort) { TestSort(Sort::InsertionSort); }
 
 TEST(SortTest, IntroSort) { TestSort(Sort::Introsort); }
+TEST(SortTest, IntrosortPar) { TestSort(Sort::IntrosortPar); }
 
