@@ -38,6 +38,6 @@ Here is a video that explains more about how to use Google Test with Bazel in Vi
 <table><tr><td>
 
 <a href="https://www.youtube.com/watch?v=0wMNtl2xDT0/">
-<img border="5" alt="Debugging C++ in Visual Studio Code using gcc/gdb and Bazel" src="https://raw.githubusercontent.com/ourarash/cpp-template/master/VSCDebug_yt.png" width="400">
+<img border="5" alt="Bazel & Google Test in Visual Studio Code" src="https://raw.githubusercontent.com/ourarash/cpp-template/master/bazel_yt.png" width="400">
 </a>
 </td></tr></table>
