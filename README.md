@@ -20,7 +20,7 @@ bazel run src/main:main
 
 ### Run Tests:
 
-You can run unit tests using [`blaze`](installing-bazel):
+You can run unit tests using [`bazel`](installing-bazel):
 
 ```bash
 bazel test tests:tests
