@@ -1,4 +1,4 @@
-# https://docs.bazel.build/versions/master/be/c-cpp.html#cc_binary
+load("@rules_cc//cc:defs.bzl", "cc_binary")
 cc_binary(
     name = "main",
     srcs = ["main.cc"],
