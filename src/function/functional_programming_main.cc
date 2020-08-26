@@ -30,6 +30,7 @@ float AccumulateVector(const std::vector<float>& v) {
                          // Binary lambda expression
                          [](const float& a, const float& b) { return a + b; });
 }
+
 //-----------------------------------------------------
 float AverageVectorFP(const std::vector<float>& v) {
   return Average(AccumulateVector(v), v.size());

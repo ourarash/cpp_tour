@@ -4,7 +4,8 @@
       "name": "Mac",
       "includePath": [
         "${workspaceFolder}/src/lib",
-        "${workspaceFolder}/src/lib/*"
+        "${workspaceFolder}/src/lib/*",
+        "/usr/local/include"
       ]
     }
   ],

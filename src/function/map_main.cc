@@ -30,7 +30,9 @@ T map(const T& v, U f) {
 //-----------------------------------------------------
 std::vector<int> DivEachByMap(const std::vector<int>& v,
                                 int denominator) {
-  return map(v, [denominator](const int& a) { return a / denominator; });
+  return map(v, 
+  
+  [denominator](const int& a) { return a / denominator; });
 }
 
 //-----------------------------------------------------

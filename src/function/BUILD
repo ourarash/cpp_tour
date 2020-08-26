@@ -73,3 +73,11 @@ cc_binary(
     deps = ["//src/lib:SolutionLib"],
 )
 
+cc_binary(
+    name = "copy_if_main",
+    srcs = ["copy_if_main.cc"],
+    deps = ["//src/lib:SolutionLib"],
+)
+
+
+

@@ -5,8 +5,24 @@
 #include <vector>
 
 class Solution {
-public:
+ public:
   std::string PrintHelloWorld();
+
+  int FindMax(std::vector<int> &inputs) {
+    if (inputs.empty()) {
+      return -1;
+    }
+
+    int result = INT32_MIN;
+
+    // Range based loop
+    for (auto n : inputs) {
+      if (n > result) {
+        result = n;
+      }
+    }
+    return result;
+  }
 };
 
 #endif

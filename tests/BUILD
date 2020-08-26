@@ -24,3 +24,12 @@ cc_test(
         "@googletest//:gtest_main",
     ],
 )
+
+cc_test(
+    name = "solution_test",
+    srcs = glob(["solution_test.cc"]),
+    deps = [
+        "//src/lib:SolutionLib",
+        "@googletest//:gtest_main",
+    ],
+)
