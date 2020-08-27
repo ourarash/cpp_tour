@@ -35,6 +35,13 @@ cc_library(
 )
 
 cc_library(
+    name = "vector_union_lib",
+    srcs = ["vector_union.cc"],
+    hdrs = ["vector_union.h"],
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
     name = "utility",
     hdrs = ["utility.h"],
     visibility = ["//visibility:public"],

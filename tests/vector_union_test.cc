@@ -1,6 +1,8 @@
 #include "src/lib/vector_union.h"
-#include "gtest/gtest.h"
+
 #include <vector>
+
+#include "gtest/gtest.h"
 
 TEST(VectorUnion, ShouldHandleEmptySetA) {
   VectorUnionSolution s;
@@ -17,7 +19,6 @@ TEST(VectorUnion, ShouldHandleEmptySetAB) {
   std::vector<int> expected = b;
   EXPECT_EQ(expected, actual);
 }
-
 
 TEST(VectorUnion, ShouldHandleUnion) {
   VectorUnionSolution s;
