@@ -1,4 +1,3 @@
-#include "src/lib/utility.h"
 #include <iostream>
 
 int main() {

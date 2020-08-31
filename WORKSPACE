@@ -5,3 +5,14 @@ git_repository(
     remote = "https://github.com/google/googletest",
     tag = "release-1.8.1",
 )
+git_repository(
+    name = "com_google_benchmark",
+    remote = "https://github.com/google/benchmark.git",
+    tag = "v1.5.1",
+)
+
+git_repository(
+    name = "com_google_absl",
+    remote = "https://github.com/abseil/abseil-cpp.git",
+    tag = "20200225.2",
+)

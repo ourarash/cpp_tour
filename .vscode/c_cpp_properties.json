@@ -5,7 +5,8 @@
       "includePath": [
         "${workspaceFolder}/src/lib",
         "${workspaceFolder}/src/lib/*",
-        "/usr/local/include"
+        "/usr/local/include",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/"
       ]
     }
   ],

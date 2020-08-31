@@ -16,3 +16,10 @@ cc_binary(
     srcs = ["constants_main.cc"],
     deps = ["//src/lib:SolutionLib"],
 )
+
+
+cc_binary(
+    name = "sizeof_main",
+    srcs = ["sizeof_main.cc"],
+    deps = ["//src/lib:utility"],
+)

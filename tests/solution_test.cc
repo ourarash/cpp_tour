@@ -20,6 +20,9 @@ TEST(FindMax, ShouldWorkForSimpleVector) {
   EXPECT_EQ(max, 5);
 }
 
+// Automatic grading
+int grade = 50;
+
 TEST(FindMax, ShouldWorkForEmptyVector) {
   Solution solution;
 
@@ -27,6 +30,10 @@ TEST(FindMax, ShouldWorkForEmptyVector) {
   int max = solution.FindMax(inputs);
 
   EXPECT_EQ(max, -1);
+  // Automatic grading
+  if (max != -1) {
+    grade -= 25;
+  }
 }
 
 TEST(FindMax, ShouldWorkForVectorOfAllEqualNumber) {
@@ -36,4 +43,9 @@ TEST(FindMax, ShouldWorkForVectorOfAllEqualNumber) {
   int max = solution.FindMax(inputs);
 
   EXPECT_EQ(max, 1);
+  // Automatic grading
+  if (max != 1) {
+    grade -= 25;
+  }
 }
+
