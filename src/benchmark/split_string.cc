@@ -71,8 +71,8 @@ static void BM_SplitSanjay(benchmark::State& state) {
 }
 //-----------------------------------------------------
 // Register the function as a benchmark
-BENCHMARK(BM_SplitStackOverflow);
-BENCHMARK(BM_SplitSanjay);
+BENCHMARK(BM_SplitStackOverflow)->RangeMultiplier(2)->Range(1 << 10, 1 << 16);;
+BENCHMARK(BM_SplitSanjay)->RangeMultiplier(2)->Range(1 << 10, 1 << 16);;
 
 // Run the benchmark
 BENCHMARK_MAIN();
