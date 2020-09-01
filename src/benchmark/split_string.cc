@@ -7,6 +7,7 @@
  */
 #include <iostream>
 #include <list>
+#include <random>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -14,6 +15,40 @@
 #include "benchmark/benchmark.h"
 #include "src/lib/utility.h"
 
+/**
+ * Generates a random string of size len
+ */
+auto GenerateRandomString(std::size_t n) -> std::string {
+  static constexpr auto chars =
+      "0123456789"
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      "abcdefghijklmnopqrstuvwxyz";
+
+  auto result = std::string(n, '\0');
+  std::generate_n(std::begin(result), n,
+                  [&]() { return chars[rand() % std::strlen(chars)]; });
+  return result;
+}
+//-----------------------------------------------------
+/**
+ * Generates a string that is the result of merging [n]
+ * random string concatenated by ','
+ */
+std::string GenerateRandomMergedString(std::size_t n) {
+  const int max_length = 10;
+  const int min_length = 2;
+  srand(123456);  // Use a set seed
+
+  std::string result;
+  for (std::size_t i = 0; i < n; i++) {
+    result +=
+        GenerateRandomString((rand() % (max_length - min_length)) + min_length);
+    if (i < n - 1) {
+      result += ",";
+    }
+  }
+  return result;
+}
 //-----------------------------------------------------
 std::vector<std::string> SplitStackOverflow(std::string input) {
   std::stringstream ss(input);
@@ -46,10 +81,7 @@ std::vector<std::string> SplitSanjay(const std::string& str) {
 // Benchmark function
 static void BM_SplitStackOverflow(benchmark::State& state) {
   // Perform setup here
-  std::string str(
-      "James,Mary,John,Patricia,Robert,Linda,Michael,Barbara,"
-      "William,Elizabeth,David,Jennifer,Richard,Maria,Charles,Susan,"
-      "Joseph,Margaret,Thomas,Dorothy");
+  std::string str = GenerateRandomMergedString(state.range(0));
 
   for (auto _ : state) {
     auto v = SplitStackOverflow(str);
@@ -60,10 +92,7 @@ static void BM_SplitStackOverflow(benchmark::State& state) {
 // Benchmark function
 static void BM_SplitSanjay(benchmark::State& state) {
   // Perform setup here
-  std::string str(
-      "James,Mary,John,Patricia,Robert,Linda,Michael,Barbara,"
-      "William,Elizabeth,David,Jennifer,Richard,Maria,Charles,Susan,"
-      "Joseph,Margaret,Thomas,Dorothy");
+  std::string str = GenerateRandomMergedString(state.range(0));
 
   for (auto _ : state) {
     auto v = SplitSanjay(str);
@@ -71,8 +100,10 @@ static void BM_SplitSanjay(benchmark::State& state) {
 }
 //-----------------------------------------------------
 // Register the function as a benchmark
-BENCHMARK(BM_SplitStackOverflow)->RangeMultiplier(2)->Range(1 << 10, 1 << 16);;
-BENCHMARK(BM_SplitSanjay)->RangeMultiplier(2)->Range(1 << 10, 1 << 16);;
+BENCHMARK(BM_SplitStackOverflow)->RangeMultiplier(2)->Range(1 << 10, 1 << 16);
+;
+BENCHMARK(BM_SplitSanjay)->RangeMultiplier(2)->Range(1 << 10, 1 << 16);
+;
 
 // Run the benchmark
 BENCHMARK_MAIN();
