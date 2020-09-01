@@ -77,6 +77,10 @@
     "__functional_03": "cpp",
     "unordered_set": "cpp",
     "forward_list": "cpp",
-    "future": "cpp"
+    "future": "cpp",
+    "random": "cpp",
+    "regex": "cpp",
+    "codecvt": "cpp",
+    "condition_variable": "cpp"
   }
 }

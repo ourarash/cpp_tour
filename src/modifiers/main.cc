@@ -14,5 +14,17 @@ int main() {
   std::cout << "Size of float : " << sizeof(float) << " bytes" << std::endl;
   std::cout << "Size of double : " << sizeof(double) << " bytes" << std::endl;
   std::cout << "Size of wchar_t : " << sizeof(wchar_t) << " bytes" << std::endl;
+
+  int* p;
+  std::cout << "Size of p : " << sizeof(p) << " bytes" << std::endl;
+
+  int array[10];
+  std::cout << "Size of array: " << sizeof(array) << " bytes" << std::endl;
+
+  int* dynamic_array;
+  dynamic_array = new int[10];
+  std::cout << "Size of dynamic_array: " << sizeof(dynamic_array) << " bytes"
+            << std::endl;
+
   return 0;
 }
