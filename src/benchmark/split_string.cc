@@ -81,6 +81,7 @@ std::vector<std::string> SplitSanjay(const std::string& str) {
 // Benchmark function
 static void BM_SplitStackOverflow(benchmark::State& state) {
   // Perform setup here
+  // Pass state.range(0) to GenerateRandomMergedString as n
   std::string str = GenerateRandomMergedString(state.range(0));
 
   for (auto _ : state) {
@@ -92,6 +93,7 @@ static void BM_SplitStackOverflow(benchmark::State& state) {
 // Benchmark function
 static void BM_SplitSanjay(benchmark::State& state) {
   // Perform setup here
+  // Pass state.range(0) to GenerateRandomMergedString as n
   std::string str = GenerateRandomMergedString(state.range(0));
 
   for (auto _ : state) {
