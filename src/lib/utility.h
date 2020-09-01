@@ -4,6 +4,7 @@
 #include <iostream>
 #include <numeric>
 #include <string>
+#include <climits>
 
 // Swaps values of i and j
 template <class T>
