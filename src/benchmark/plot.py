@@ -44,6 +44,10 @@ parser.add_argument('--series', dest='series',
                     type=str, nargs='+',
                     help='Series names to be shown on the plot')
 
+parser.add_argument('--output', dest='output',
+                    default='', type=str, nargs='?',
+                    help='Output file to write the plot to')
+
 args = parser.parse_args()
 
 # Read input CSV file
@@ -89,3 +93,5 @@ ax.set_xticklabels(df1['n'], rotation=45)
 ax.legend(fontsize=16)
 
 plt.show()
+if args.output != '':
+    plt.savefig(fname=args.output)
