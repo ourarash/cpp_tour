@@ -59,3 +59,24 @@ cc_binary(
         "@com_google_benchmark//:benchmark",
     ],
 )
+
+
+cc_binary(
+    name = "split_string_no_range",
+    srcs = ["split_string_no_range.cc"],
+    deps = [
+        "//src/lib:utility",
+        "@com_google_benchmark//:benchmark",
+    ],
+)
+
+
+
+cc_binary(
+    name = "plus_equal",
+    srcs = ["plus_equal.cc"],
+    deps = [
+        "//src/lib:utility",
+        "@com_google_benchmark//:benchmark",
+    ],
+)

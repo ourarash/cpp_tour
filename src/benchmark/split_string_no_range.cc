@@ -50,8 +50,8 @@ std::string GenerateRandomMergedString(std::size_t n) {
   return result;
 }
 //-----------------------------------------------------
-std::vector<std::string> SplitStackOverflow(std::string input) {
-  std::stringstream ss(input);
+std::vector<std::string> SplitStackOverflow(const std::string &str) {
+  std::stringstream ss(str);
   std::vector<std::string> result;
   while (ss.good()) {
     std::string substr;
@@ -61,7 +61,7 @@ std::vector<std::string> SplitStackOverflow(std::string input) {
   return result;
 }
 //-----------------------------------------------------
-std::vector<std::string> SplitSanjay(const std::string& str) {
+std::vector<std::string> SplitSanjay(const std::string &str) {
   const char delim = ',';
   std::vector<std::string> retVal;
 
@@ -77,35 +77,16 @@ std::vector<std::string> SplitSanjay(const std::string& str) {
   return retVal;
 }
 
-//-----------------------------------------------------
-// Benchmark function
-static void BM_SplitStackOverflow(benchmark::State& state) {
-  // Perform setup here
-  // Pass state.range(0) to GenerateRandomMergedString as n
-  std::string str = GenerateRandomMergedString(state.range(0));
-// asdf
-  for (auto _ : state) {
-    auto v = SplitStackOverflow(str);
-  }
+
+
+int main() {
+  std::string str = GenerateRandomMergedString(100000);
+  auto v1 = SplitSanjay(str);
+  auto v2 = SplitStackOverflow(str);
+  std::cout << "v1[0]: " << v1[0] << std::endl;
+  std::cout << "v2[0]: " << v2[0] << std::endl;
+  std::cout << "v1.size(): " << v1.size() << std::endl;
+  std::cout << "v2.size(): " << v2.size() << std::endl;
+
+  return 0;
 }
-
-//-----------------------------------------------------
-// Benchmark function
-static void BM_SplitSanjay(benchmark::State& state) {
-  // Perform setup here
-  // Pass state.range(0) to GenerateRandomMergedString as n
-  std::string str = GenerateRandomMergedString(state.range(0));
-
-  for (auto _ : state) {
-    auto v = SplitSanjay(str);
-  }
-}
-//-----------------------------------------------------
-// Register the function as a benchmark
-BENCHMARK(BM_SplitStackOverflow)->RangeMultiplier(2)->Range(1 << 10, 1 << 16);
-;
-BENCHMARK(BM_SplitSanjay)->RangeMultiplier(2)->Range(1 << 10, 1 << 16);
-;
-
-// Run the benchmark
-BENCHMARK_MAIN();
