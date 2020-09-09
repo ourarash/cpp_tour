@@ -24,7 +24,7 @@ struct Vector2 {
   Vector2(const Vector2& rhs) {
     X = rhs.X;
     Y = rhs.Y;
-    Z = new float[10];
+    // Z = new float[10];
   }
   // Vector2 a, b;
   // a += b;
@@ -70,3 +70,6 @@ BENCHMARK(BM_PlusEqual);
 
 // Run the benchmark
 BENCHMARK_MAIN();
+
+
+vector<char> 

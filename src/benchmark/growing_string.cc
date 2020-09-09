@@ -14,6 +14,8 @@
 #include "benchmark/benchmark.h"
 #include "src/lib/utility.h"
 
+// std::string original, postfix;
+// auto result = original + postfix;
 std::string GrowByAppend(const std::string& original,
                          const std::string& postfix) {
   std::string result = original;
@@ -61,6 +63,7 @@ static void BM_GrowByAppend(benchmark::State& state) {
     original.resize(state.range(0), 'a');
     postfix.resize(state.range(0), 'b');
     state.ResumeTiming();
+
     GrowByAppend(original, postfix);
   }
 }
@@ -107,12 +110,14 @@ static void BM_GrowByPushBack(benchmark::State& state) {
 static void BM_GrowByStringStream(benchmark::State& state) {
   // Perform setup here
   for (auto _ : state) {
+
     state.PauseTiming();
     std::string original;
     std::string postfix;
     original.resize(state.range(0), 'a');
     postfix.resize(state.range(0), 'b');
     state.ResumeTiming();
+
     GrowByStringStream(original, postfix);
   }
 }
@@ -121,8 +126,9 @@ static void BM_GrowByStringStream(benchmark::State& state) {
 BENCHMARK(BM_GrowByAppend)->RangeMultiplier(2)->Range(1 << 10, 1 << 16);
 BENCHMARK(BM_GrowByAppendReserve)->RangeMultiplier(2)->Range(1 << 10, 1 << 16);
 BENCHMARK(BM_GrowByAdd)->RangeMultiplier(2)->Range(1 << 10, 1 << 16);
-BENCHMARK(BM_GrowByPushBack)->RangeMultiplier(2)->Range(1 << 10, 1 << 16);
+// BENCHMARK(BM_GrowByPushBack)->RangeMultiplier(2)->Range(1 << 10, 1 << 16);
 BENCHMARK(BM_GrowByStringStream)->RangeMultiplier(2)->Range(1 << 10, 1 << 16);
 
 // Run the benchmark
 BENCHMARK_MAIN();
+

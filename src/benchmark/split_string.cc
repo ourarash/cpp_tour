@@ -83,7 +83,7 @@ static void BM_SplitStackOverflow(benchmark::State& state) {
   // Perform setup here
   // Pass state.range(0) to GenerateRandomMergedString as n
   std::string str = GenerateRandomMergedString(state.range(0));
-// asdf
+
   for (auto _ : state) {
     auto v = SplitStackOverflow(str);
   }

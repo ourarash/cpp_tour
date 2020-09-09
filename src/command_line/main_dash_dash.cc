@@ -13,8 +13,8 @@ void PrintErrorMessage() {
             << std::endl;
 }
 
-int main(int argc, char** argv) {s
-  if (argc < 5) {
+int main(int argc, char** argv) {
+  s if (argc < 5) {
     PrintErrorMessage();
     return -1;
   }
@@ -29,43 +29,47 @@ int main(int argc, char** argv) {s
   std::regex pattern("--(.*)=(.*)");
 
   // Iterate each element of argc
-  for (size_t i = 1; i < argc; i++) {
-    std::string p = argv[i];
-    std::smatch sm;
-    if (std::regex_match(p, sm, pattern)) {
-      auto it = sm.begin();
-      it++;
-
-      if ((*it) == "input") {
+  try {
+    for (size_t i = 1; i < argc; i++) {
+      std::string p = argv[i];
+      std::smatch sm;
+      if (std::regex_match(p, sm, pattern)) {
+        auto it = sm.begin();
         it++;
-        input = *it;
-        continue;
-      }
 
-      if ((*it) == "from") {
-        it++;
-        from = *it;
-        continue;
-      }
+        if ((*it) == "input") {
+          it++;
+          input = *it;
+          continue;
+        }
 
-      if ((*it) == "accuracy") {
-        it++;
-        accuracy = std::stoi(*it);
-        continue;
-      }
+        if ((*it) == "from") {
+          it++;
+          from = *it;
+          continue;
+        }
 
-      if ((*it) == "overwrite") {
-        it++;
-        std::istringstream((*it)) >> std::boolalpha >> overwrite;
-        continue;
-      }
-      PrintErrorMessage();
+        if ((*it) == "accuracy") {
+          it++;
+          accuracy = std::stoi(*it);
+          continue;
+        }
 
-    } else {
-      PrintErrorMessage();
+        if ((*it) == "overwrite") {
+          it++;
+          std::istringstream((*it)) >> std::boolalpha >> overwrite;
+          continue;
+        }
+        PrintErrorMessage();
+
+      } else {
+        PrintErrorMessage();
+      }
     }
+  } catch (const std::exception& e) {
+    PrintErrorMessage();
+    return -1;
   }
-
   std::cout << "input: " << input << std::endl;
   std::cout << "from: " << from << std::endl;
   std::cout << "accuracy: " << accuracy << std::endl;
