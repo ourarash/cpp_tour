@@ -5,7 +5,12 @@ int main() {
   // Invalid rvalue operations
   {
     int a = 1;
-    int b + 1 = a;  // Invalid!
+    int c = a + 1;
+    // int b + 1 = a;  // Invalid!
+
+    // int *p = &1; // Invalid!
+    // int *q = &(a + 1); // Invalid!
+    int *t = &(a);
   }
 
   // Ternary operation
@@ -40,6 +45,13 @@ int main() {
   {
     int a = 1;
     int &ref_a_0 = (a + 1);  // invalid
+  }
+
+  {
+    int a =1;
+    int b = std::move(a);
+    
+    int c = std::move(a + 1);
   }
 
   return 0;

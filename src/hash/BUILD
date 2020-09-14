@@ -30,3 +30,11 @@ cc_binary(
     deps = ["//src/lib:SolutionLib"],
 )
 
+
+cc_binary(
+    name = "std_hash_main",
+    srcs = ["std_hash_main.cc"],
+    deps = ["//src/lib:SolutionLib"],
+)
+
+

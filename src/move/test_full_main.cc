@@ -12,9 +12,17 @@ struct Test {
   }
 
   // Move constructor
-  Test(Test&& rhs) : mName(rhs.mName), mValue(rhs.mValue) {
+  Test(Test&& rhs)
+      : mName(std::move(rhs.mName)), mValue(std::move(rhs.mValue)) {
     std::cout << "Move" << std::endl;
   }
+
+  // Move constructor
+  // Test(Test&& rhs) {
+  //   mName = std::move(rhs.mName);
+  //   mValue = std::move(rhs.mValue);
+  //   std::cout << "Move" << std::endl;
+  // }
   // Destructor
   ~Test() { std::cout << "Destructor" << std::endl; }
   // Assignment
@@ -45,12 +53,6 @@ Test doStuff() {
   temp.mName = "Hello World!";
   return temp;
 }
-
-// int main() {
-//   Test a(doStuff());
-//   std::cout << a.mName << std::endl;
-//   return 0;
-// }
 
 int main() {
   Test b;

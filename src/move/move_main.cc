@@ -21,24 +21,37 @@ class MyString {
   }
 
   // Copy constructor
-  MyString(const MyString &obj) {
+  MyString(const MyString &rhs) {
     std::cout << "Copy constructor was called." << std::endl;
 
-    this->data_ = new char[obj.size_];
-    this->size_ = obj.size_;
-    for (size_t i = 0; i < obj.size_; i++) {
-      this->data_[i] = obj.data_[i];
+    this->data_ = new char[rhs.size_];
+    this->size_ = rhs.size_;
+    for (size_t i = 0; i < rhs.size_; i++) {
+      this->data_[i] = rhs.data_[i];
     }
   }
 
   // Move constructor
-  // MyString(MyString &&obj) {
-  //   std::cout << "Move constructor was called." << std::endl;
-  //   this->data_ = obj.data_;
-  //   this->size_ = obj.size_;
-  //   obj.data_ = nullptr;
-  //   obj.size_ = 0;
-  // }
+  // rhs can be an rvalue, e.g.: (a + 1)
+  MyString(MyString &&rhs) {
+    std::cout << "Move constructor was called." << std::endl;
+    this->data_ = rhs.data_;
+    this->size_ = rhs.size_;
+    rhs.data_ = nullptr;
+    rhs.size_ = 0;
+  }
+
+  void Example() {
+    MyString b;
+    {
+      MyString a;
+      b = std::move(a);
+    }
+    // ->>>>> a is destructed ->> b to be invalid
+  }
+  void IOnlyTakeLvalue(MyString &rhs) {
+    std::cout << "IOnlyTakeLvalue" << std::endl;
+  }
 
   ~MyString() {
     // std::cout << "Destructor was called." << std::endl;
@@ -107,45 +120,29 @@ int main() {
     auto b = a;
     auto c = std::move(a);
     auto d = a + a;
-    auto e = std::move(a + a);
+    auto e = std::move(c + c);
 
     std::cout << "a: " << a << std::endl;
     std::cout << "b: " << b << std::endl;
     std::cout << "c: " << c << std::endl;
     std::cout << "d: " << d << std::endl;
     std::cout << "e: " << e << std::endl;
-    std::cout << std::endl;
-  }
 
-  // Using std::move with non-built-in variables.
-  {
-    std::cout << "------------------------------------------" << std::endl;
-    MyString a("MyString_a", strlen("MyString_a"));
-
-    MyString b = a;
-    MyString c(a);
-    MyString d = std::move(a);
-
-    std::cout << std::endl;
-    std::cout << "a: " << a << std::endl;
-    std::cout << "b: " << b << std::endl;
     std::cout << "c: " << c << std::endl;
-    std::cout << "d: " << d << std::endl;
+
     std::cout << std::endl;
   }
 
-  // Using std::move with non-built-in variables.
   {
     std::cout << "------------------------------------------" << std::endl;
     std::string a = "string_a";
     auto b = a;
-    auto c = a + a;
-    auto d = std::move(a + a);
+    auto c = std::move(a + a);
 
     std::cout << "a: " << a << std::endl;
     std::cout << "b: " << b << std::endl;
     std::cout << "c: " << c << std::endl;
-    std::cout << "d: " << d << std::endl;
+
     std::cout << std::endl;
   }
 
@@ -159,6 +156,16 @@ int main() {
     MyString c(a);
 
     MyString d = std::move(a);
+
+    std::cout << "------------------------------------------" << std::endl;
+    MyString e = a + a;
+    std::cout << "------------------------------------------" << std::endl;
+
+    // MyString f = SomeFunction(a);
+
+    d.IOnlyTakeLvalue(a);
+    // d.IOnlyTakeLvalue(a + a);
+
     std::cout << std::endl;
     std::cout << "a: " << a << std::endl;
     std::cout << "b: " << b << std::endl;
@@ -167,17 +174,69 @@ int main() {
     std::cout << std::endl;
   }
 
-  // Using std::move with non-built-in variables.
-  {
-    std::cout << "------------------------------------------" << std::endl;
-    MyString a("MyString_a", strlen("MyString_a"));
-    MyString b("MyString_b", strlen("MyString_b"));
+  // // Using std::move with non-built-in variables.
+  // {
+  //   std::cout << "------------------------------------------" << std::endl;
+  //   MyString a("MyString_a", strlen("MyString_a"));
 
-    MyString c = a + b;
+  //   MyString b = a;
 
-    std::cout << "a: " << a << std::endl;
-    std::cout << "b: " << b << std::endl;
-    std::cout << "c: " << c << std::endl;
-  }
+  //   MyString c(a);
+
+  //   MyString d = std::move(a);
+
+  //   std::cout << std::endl;
+  //   std::cout << "a: " << a << std::endl;
+  //   std::cout << "b: " << b << std::endl;
+  //   std::cout << "c: " << c << std::endl;
+  //   std::cout << "d: " << d << std::endl;
+  //   std::cout << std::endl;
+  // }
+
+  // // Using std::move with non-built-in variables.
+  // {
+  //   std::cout << "------------------------------------------" << std::endl;
+  //   std::string a = "string_a";
+  //   auto b = a;
+  //   auto c = a + a;
+  //   auto d = std::move(a + a);
+
+  //   std::cout << "a: " << a << std::endl;
+  //   std::cout << "b: " << b << std::endl;
+  //   std::cout << "c: " << c << std::endl;
+  //   std::cout << "d: " << d << std::endl;
+  //   std::cout << std::endl;
+  // }
+
+  // // Using std::move with non-built-in variables.
+  // {
+  //   std::cout << "------------------------------------------" << std::endl;
+  //   MyString a("MyString_a", strlen("MyString_a"));
+
+  //   MyString b = a;
+
+  //   MyString c(a);
+
+  //   MyString d = std::move(a);
+  //   std::cout << std::endl;
+  //   std::cout << "a: " << a << std::endl;
+  //   std::cout << "b: " << b << std::endl;
+  //   std::cout << "c: " << c << std::endl;
+  //   std::cout << "d: " << d << std::endl;
+  //   std::cout << std::endl;
+  // }
+
+  // // Using std::move with non-built-in variables.
+  // {
+  //   std::cout << "------------------------------------------" << std::endl;
+  //   MyString a("MyString_a", strlen("MyString_a"));
+  //   MyString b("MyString_b", strlen("MyString_b"));
+
+  //   MyString c = a + b;
+
+  //   std::cout << "a: " << a << std::endl;
+  //   std::cout << "b: " << b << std::endl;
+  //   std::cout << "c: " << c << std::endl;
+  // }
   return 0;
 }
