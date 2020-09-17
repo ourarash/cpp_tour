@@ -26,10 +26,18 @@ struct Test {
   }
 
   // Move constructor
-  Test(Test &&rhs) {
+  // This one cause the default constructor for mName and mValue
+  // Then, it calls move assignment for mName and mValue
+  // Test(Test &&rhs){
+  //   std::cout << "Move" << std::endl;
+  //   mName = std::move(rhs.mName);    // ----> We saved here :)
+  //   mValue = std::move(rhs.mValue);  // ----> We saved here :)
+  // }
+
+  // This one calls the move constructor for mName and mValue
+  Test(Test &&rhs)
+      : mName(std::move(rhs.mName)), mValue(std::move(rhs.mValue)) {
     std::cout << "Move" << std::endl;
-    mName = std::move(rhs.mName);    // ----> We saved here :)
-    mValue = std::move(rhs.mValue);  // ----> We saved here :)
   }
 
   // Move Assignment

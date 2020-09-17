@@ -1,27 +1,25 @@
-#include "src/lib/utility.h"
 #include <iostream>
 #include <string>
 #include <vector>
 class Person {
-
-public:
+ public:
   // Every constructor should initialize _ssn
-  Person(int ssn) : _ssn(ssn), _age(20) {}
-  Person(int ssn, int age) : _ssn(ssn), _age(age) {}
+  Person(int ssn) : _age(20), _ssn(ssn) {}
+  Person(int ssn, int age) : _age(age), _ssn(ssn) {}
 
   std::string _first_name;
   std::string _last_name;
   int _age;
-  const int _ssn; // const member variable
+  const int _ssn;  // const member variable
 
   // It doesn't change any member variables
   int size() const {
+    _first_name = std::string("Ari");
     return _first_name.size() + _last_name.size() + sizeof(_age);
   }
 };
 
 int main() {
-
   Person p(/*_ssn=*/354545454);
   p._first_name = "Tommy";
   p._last_name = "Trojan";

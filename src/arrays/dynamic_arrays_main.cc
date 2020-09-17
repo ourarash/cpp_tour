@@ -1,6 +1,7 @@
 #include "src/lib/utility.h"
 #include <iostream>
 #include <string>
+#include <vector>
 
 void InitializeArray(int arr[], int size) {
   for (int i = 0; i < size; i++) {
@@ -8,7 +9,15 @@ void InitializeArray(int arr[], int size) {
   }
 }
 
+void InitializeVector(std::vector<int> &input) {
+  for (int i = 0; i < input.size(); i++) {
+    input[i] = i;
+  }
+}
+
 int main() {
+  int constant_size_array [10];
+
   int *arr;
   int size;
 
@@ -17,6 +26,7 @@ int main() {
   std::cin >> size;
 
   arr = new int[size];
+
   InitializeArray(arr, size);
   PrintArray(arr, size);
 

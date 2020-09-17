@@ -90,7 +90,10 @@ int main() {
     std::cout << "p1->FullName(): " << p1->FullName() << std::endl;
 
     // Copy is possible!
-    SharedPtr<Person> p2 = p1;
+    {
+      SharedPtr<Person> p2 = p1;
+      std::cout << "p2->FullName(): " << p2->FullName() << std::endl;
+    }
 
     // Can have a reference to it.
     SharedPtr<Person>& p3 = p1;

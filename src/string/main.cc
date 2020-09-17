@@ -1,11 +1,11 @@
-#include "src/lib/utility.h"
+// #include "src/lib/utility.h"
 #include <iostream>
 #include <string>
 #include <vector>
 
 int main() {
   // c string array
-  char name[10] = "tommy";
+  char name[10] = "tommytomm"; 
   std::cout << name << std::endl;
 
   for (int i = 0; i < 10; i++) {
@@ -16,6 +16,8 @@ int main() {
   std::string first_name = "tommy";
   std::string last_name = "trojan";
   std::string full_name = first_name + " " + last_name;
+
+  full_name.push_back('!');
 
   std::cout << "full_name: " << full_name << std::endl;
 
@@ -43,15 +45,15 @@ int main() {
 
   std::cout << "a: " << a << std::endl;
 
-  // getline
-  std::string str;
-  getline(std::cin, str);
-  std::cout << "you entered: " << str << std::endl;
+  // // getline
+  // std::string str;
+  // getline(std::cin, str);
+  // std::cout << "you entered: " << str << std::endl;
 
-  // c_str
-  std::string str("This is a sample string.");
+  // // c_str
+  // std::string str("This is a sample string.");
 
-  char *cstr = new char[str.length() + 1];  // dynamic array
-  std::strcpy(cstr, str.c_str());
+  // char *cstr = new char[str.length() + 1];  // dynamic array
+  // std::strcpy(cstr, str.c_str());
   return 0;
 }
