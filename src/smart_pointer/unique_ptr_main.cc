@@ -52,6 +52,7 @@ int main() {
 
   std::cout << "------------------------------------------" << std::endl;
 
+
   // Copy and references
   {
     UniquePtr<Person> p1(new Person());
@@ -70,3 +71,4 @@ int main() {
   }
   return 0;
 }
+

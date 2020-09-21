@@ -12,7 +12,7 @@ struct Person {
 
 // Declare the control block
 struct ControlBlock {
-  unsigned mShared;
+  unsigned mShared; // Just a counter
 };
 
 template <typename T>

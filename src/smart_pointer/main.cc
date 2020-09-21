@@ -84,5 +84,6 @@ int main() {
     std::cout << "Deleting the dynamic array." << std::endl;
     delete[] dynamic_array;
   }
+
   return 0;
 }

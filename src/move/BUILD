@@ -37,3 +37,8 @@ cc_binary(
     name = "move_so_main",
     srcs = ["move_so_main.cc"],
 )
+
+cc_binary(
+    name = "rvalue_main",
+    srcs = ["rvalue_main.cc"],
+)

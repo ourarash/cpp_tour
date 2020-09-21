@@ -31,7 +31,7 @@ int main() {
   // Invalid rvalue pointer operations
   {
     int a = 1;
-    int *ptr_a_2 = &(a++);    // Valid, because a++ is an rvalue
+    int *ptr_a_2 = &(a++);    // Invalid, because a++ is an rvalue
     int *ptr_a_3 = &(a + 1);  // Invalid, because (a + 1) is not an lvalue
   }
 

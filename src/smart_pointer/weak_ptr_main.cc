@@ -201,6 +201,7 @@ int main() {
     {
       WeakPtr<Person> weakPtr(p_shared1);
       std::cout << "weakPtr->FullName(): " << weakPtr->FullName() << std::endl;
+      p_shared2.PrintBlock();
     }
 
     std::cout << "p_shared1->FullName(): " << p_shared1->FullName()
@@ -209,6 +210,9 @@ int main() {
 
   std::cout << "------------------------------------------" << std::endl;
   // Shared pointer going out of scope before weak pointer
+
+  // shared ====> obj 
+  // weak ====> obj
   {
     WeakPtr<Person> weakPtr(MakeWeakPerson());
 
