@@ -37,7 +37,7 @@ struct Test {
   // This one calls the move constructor for mName and mValue
   Test(Test &&rhs)
       : mName(std::move(rhs.mName)), mValue(std::move(rhs.mValue)) {
-    std::cout << "Move" << std::endl;
+    std::cout << "Move Constructor" << std::endl;
   }
 
   // Move Assignment

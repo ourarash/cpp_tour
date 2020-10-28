@@ -1,14 +1,19 @@
-#include "src/lib/utility.h"
 #include <iostream>
 #include <stack>
 #include <string>
 
 int main() {
-
   // Empty stack
   std::stack<int> s;
-  // int r = s.top(); // Seriously?
-  // s.pop();         // Don't do this!
+
+  int r;
+  r = s.top();  // Seriously?
+  s.pop();      // Don't do this!
+
+  if (!s.empty()) {
+    r = s.top();
+    s.pop();  // Don't do this!
+  }
 
   // // Do this:
   // if (!s.empty()) {

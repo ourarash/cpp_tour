@@ -23,3 +23,9 @@ cc_binary(
     srcs = ["sizeof_main.cc"],
     deps = ["//src/lib:utility"],
 )
+
+cc_binary(
+    name = "sizeof_examples_main",
+    srcs = ["sizeof_examples_main.cc"],
+    deps = ["//src/lib:utility"],
+)

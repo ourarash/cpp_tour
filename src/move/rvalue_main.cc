@@ -1,6 +1,6 @@
 #include <iostream>
+#include <string>
 #include <vector>
-
 int main() {
   // Invalid rvalue operations
   {
@@ -48,10 +48,17 @@ int main() {
   }
 
   {
-    int a =1;
+    int a = 1;
     int b = std::move(a);
-    
+    std::cout << "a: " << a << std::endl;
+
     int c = std::move(a + 1);
+  }
+
+  {
+    std::string a = "1";
+    auto b = std::move(a);
+    std::cout << "a: " << a << std::endl;
   }
 
   return 0;

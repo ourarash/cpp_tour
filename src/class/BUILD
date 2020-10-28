@@ -8,7 +8,6 @@ cc_binary(
 cc_binary(
     name = "constructor_main",
     srcs = ["constructor_main.cc"],
-    deps = ["//src/lib:SolutionLib"],
 )
 
 cc_binary(

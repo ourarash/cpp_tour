@@ -16,3 +16,8 @@ cc_binary(
     srcs = ["heap_main.cc"],
     deps = ["//src/lib:SolutionLib"],
 )
+
+cc_binary(
+    name = "shallow_copy_main",
+    srcs = ["shallow_copy_main.cc"],
+)

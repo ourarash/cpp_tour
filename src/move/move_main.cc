@@ -41,14 +41,14 @@ class MyString {
     rhs.size_ = 0;
   }
 
-  void Example() {
-    MyString b;
-    {
-      MyString a;
-      b = std::move(a);
-    }
-    // ->>>>> a is destructed ->> b to be invalid
-  }
+  // void Example() {
+  //   MyString b;
+  //   {
+  //     MyString a;
+  //     b = std::move(a);
+  //   }
+  //   // ->>>>> a is destructed ->> b to be invalid
+  // }
   void IOnlyTakeLvalue(MyString &rhs) {
     std::cout << "IOnlyTakeLvalue" << std::endl;
   }
@@ -131,6 +131,14 @@ int main() {
     std::cout << "c: " << c << std::endl;
 
     std::cout << std::endl;
+  }
+  // Self move
+  {
+    std::cout << "-------------self move--------------------" << std::endl;
+    std::string a = "string_a";
+    a = std::move(a);
+
+    std::cout << "a: " << a << std::endl;
   }
 
   {

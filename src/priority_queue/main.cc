@@ -1,10 +1,9 @@
-#include "src/lib/utility.h"
+// #include "src/lib/utility.h"
 #include <iostream>
 #include <queue>
 #include <string>
 
 int main() {
-
   {
     // max heap
     std::priority_queue<int> q;
@@ -23,10 +22,11 @@ int main() {
       q.pop();
     }
   }
+
   std::cout << "Output min heap" << std::endl;
   {
     // min heap
-    std::priority_queue <int, std::vector<int>, std::greater<int> > q; 
+    std::priority_queue<int, std::vector<int>, std::greater<int> > q;
 
     q.push(5);
     q.push(15);
@@ -44,3 +44,7 @@ int main() {
   }
   return 0;
 }
+
+void sort(std::vector<int>& inputs) {}
+
+std::vector<int> sort(const std::vector<int>& inputs) {}

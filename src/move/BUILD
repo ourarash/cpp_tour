@@ -42,3 +42,14 @@ cc_binary(
     name = "rvalue_main",
     srcs = ["rvalue_main.cc"],
 )
+
+
+cc_binary(
+    name = "test_main_modified_exam",
+    srcs = ["test_main_modified_exam.cc"],
+)
+
+cc_binary(
+    name = "rule_of_5_main",
+    srcs = ["rule_of_5_main.cc"],
+)

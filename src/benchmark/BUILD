@@ -4,7 +4,7 @@ cc_binary(
     name = "insert_into_collection",
     srcs = ["insert_into_collection.cc"],
     deps = [
-        "//src/lib:utility",
+          "//src/lib:utility",
         "@com_google_benchmark//:benchmark",
     ],
 )

@@ -1,24 +1,25 @@
-#include "src/lib/utility.h"
 #include <iostream>
 #include <set>
 #include <string>
 #include <vector>
 
+#include "src/lib/utility.h"
+
 int main() {
+  std::vector<int> v = {1, 2, 3, 4, 5};
 
-  // std::vector<int> v = {1, 2, 3, 4, 5};
+  // An easy way of iteration
+  // Range based loop
+  for (const int &n : v) {
+    std::cout << "n: " << n << std::endl;
+  }
 
-  // // An easy way of iteration
-  // for (int n : v) {
-  //   std::cout << "n: " << n << std::endl;
-  // }
-
-  // // General way of iteration
-  // std::vector<int>::iterator it;
-  // for (it = v.begin(); it != v.end(); ++it) {
-  //   int n = *it;
-  //   std::cout << "n: " << n << std::endl;
-  // }
+  // General way of iteration
+  std::vector<int>::iterator it;
+  for (it = v.begin(); it != v.end(); ++it) {
+    const int n = *it;
+    std::cout << "n: " << n << std::endl;
+  }
 
   // // If we can index it
   // for (int i = 0; i < v.size(); i++) {
@@ -26,20 +27,21 @@ int main() {
   //   std::cout << "n: " << n << std::endl;
   // }
 
-  // { // Set vs vector
-  //   std::vector<int> v = {1, 2, 3, 4, 5};
-  //   std::vector<int>::iterator v_it;
-  //   for (it = v.begin(); it != v.end(); ++it) {
-  //     int n = *it;
-  //     std::cout << "n: " << n << std::endl;
-  //   }
-  //   std::set<int> s = {1, 2, 3, 4, 5};
-  //   std::set<int>::iterator s_it;
-  //   for (s_it = s.begin(); s_it != s.end(); ++s_it) {
-  //     int n = *s_it;
-  //     std::cout << "n: " << n << std::endl;
-  //   }
-  // }
+  {  // Set vs vector
+    std::vector<int> v = {1, 2, 3, 4, 5};
+
+    for (auto v_it = v.begin(); it != v.end(); ++it) {
+      int n = *it;
+      std::cout << "n: " << n << std::endl;
+    }
+
+    std::set<int> v = {1, 2, 3, 4, 5};
+
+    for (auto v_it = v.begin(); it != v.end(); ++it) {
+      int n = *it;
+      std::cout << "n: " << n << std::endl;
+    }
+  }
 
   // using auto
   std::set<int> s = {1, 2, 3, 4, 5};

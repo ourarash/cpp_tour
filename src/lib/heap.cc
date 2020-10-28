@@ -1,6 +1,9 @@
 #include "heap.h"
-#include "utility.h"
+
 #include <iostream>
+#include <map>
+
+#include "utility.h"
 
 int Heap::GetParent(int i) {
   if (i == 0) {
@@ -15,7 +18,6 @@ int Heap::GetLeft(int i) {
   return data_[(2 * i) + 1];
 }
 int Heap::GetRight(int i) {
-
   if ((2 * i) + 2 >= data_.size()) {
     return INT_MAX;
   }

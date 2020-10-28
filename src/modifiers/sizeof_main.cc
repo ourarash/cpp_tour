@@ -4,6 +4,11 @@ int main() {
   // Pointer size
   {
     int* ptr;
+
+    std::cout << "Size of ptr : " << sizeof(ptr) << " byte" << std::endl;
+  }
+  {
+    int* ptr;
     ptr = new int[10];
 
     std::cout << "Size of ptr : " << sizeof(ptr) << " byte" << std::endl;

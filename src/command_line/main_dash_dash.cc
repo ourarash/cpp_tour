@@ -13,8 +13,8 @@ void PrintErrorMessage() {
             << std::endl;
 }
 
-int main(int argc, char** argv) {
-  s if (argc < 5) {
+int ProcessCommandLine(int argc, const char* argv[]) {
+  if (argc < 2) {
     PrintErrorMessage();
     return -1;
   }
@@ -31,11 +31,14 @@ int main(int argc, char** argv) {
   // Iterate each element of argc
   try {
     for (size_t i = 1; i < argc; i++) {
-      std::string p = argv[i];
-      std::smatch sm;
-      if (std::regex_match(p, sm, pattern)) {
-        auto it = sm.begin();
+      std::string param_to_search = argv[i];
+      std::smatch matches;
+      if (std::regex_match(param_to_search, matches, pattern)) {
+        auto it = matches.begin();
+
+        std::cout << "(*it): " << (*it) << std::endl;
         it++;
+        std::cout << "(*it): " << (*it) << std::endl;
 
         if ((*it) == "input") {
           it++;
@@ -77,3 +80,29 @@ int main(int argc, char** argv) {
 
   return 0;
 }
+
+int main() {
+  const char* argv[] = {"test", "--input=my_file.txt", "--from=Japanese", "--accuracy=2", "--overwrite=true"};
+  return ProcessCommandLine(5, argv);
+}
+
+
+
+
+
+
+int a = 4; // ====> tokens of your language ( int, a, =, 4, ;) ===> (type, identifier, equal_sign, number)
+           // ====> Correct: type identifier equal_sign number semi_colon
+int a = 5  // ====> Error: missing semicolon
+Person p = 6; // Syntax is correct, but a number cannot be assigned to a Person (semantic)
+
+
+p = 4 ;
+
+assignment:  identifier, =, identifier | number ; 
+
+                        start
+                        /
+                assignment 
+                      /  \ 
+       identifier_left     identifier_right

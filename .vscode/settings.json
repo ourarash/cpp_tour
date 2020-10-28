@@ -81,6 +81,9 @@
     "random": "cpp",
     "regex": "cpp",
     "codecvt": "cpp",
-    "condition_variable": "cpp"
+    "condition_variable": "cpp",
+    "__memory": "cpp",
+    "__functional_base_03": "cpp",
+    "memory_resource": "cpp"
   }
 }

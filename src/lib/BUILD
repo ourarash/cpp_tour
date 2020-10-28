@@ -42,6 +42,14 @@ cc_library(
 )
 
 cc_library(
+    name = "heap_lib",
+    srcs = ["heap.cc"],
+    hdrs = ["heap.h"],
+    visibility = ["//visibility:public"],
+)
+
+
+cc_library(
     name = "utility",
     hdrs = ["utility.h"],
     visibility = ["//visibility:public"],
