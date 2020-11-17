@@ -3,9 +3,8 @@
 #include <iostream>
 #include <map>
 #include <set>
-#include <unordered_set>
-
 #include <string>
+#include <unordered_set>
 #include <vector>
 
 #include "src/lib/utility.h"
@@ -53,6 +52,18 @@ class DistMatrixGraph {
   long FloydWarshallRecursiveHelper(int i, int j, int k);
 
   std::vector<std::vector<long>> FloydWarshallRecursive();
+
+  // std::vector<long> shortestPathTopo(int source);
+
+  // Travelling Salesperson
+  int TSP3(int start);
+  int TSP_Helper3(int start, int cur_node, std::vector<int> path);
+  
+  int TSP1(int start);
+  int TSP_Helper1(int start, int cur_node, int cur_cost, int &min_cost,
+                  std::vector<int> path);
+  int TSP2(int start);
+  int TSP_Helper2(int start, int cur_node, int cur_cost, std::vector<int> path);
 
   std::vector<std::vector<int>> weight_;
 };

@@ -25,3 +25,12 @@ cc_test(
         "@googletest//:gtest_main",
     ],
 )
+
+cc_test(
+    name = "distance_matrix_test",
+    srcs = ["distance_matrix_test.cc"],
+    deps = [
+        "//src/lib:graph_distance_matrix_lib",
+        "@googletest//:gtest_main",
+    ],
+)

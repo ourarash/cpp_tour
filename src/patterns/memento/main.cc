@@ -3,6 +3,9 @@
 #include <string>
 #include <vector>
 
+
+
+// A state wrapper. Or just a snapshot.
 class Memento {
  private:
   std::string state;
@@ -37,14 +40,18 @@ class Originator {
   }
 };
 //-----------------------------------------------------
+// Hello world
 // Caretaker
 int main() {
-  std::vector<Memento> savedStates;
+  std::vector<Memento> savedStates; // vector of snapshots.
 
   Originator originator;
-  originator.set("State1");
-  originator.set("State2");
-  savedStates.push_back(originator.saveToMemento());
+  
+  originator.set("State1"); // H
+  originator.set("State2"); // e
+  savedStates.push_back(originator.saveToMemento()); // Saving the state
+
+
   originator.set("State3");
   // We can request multiple mementos, and choose which one to roll back to.
   savedStates.push_back(originator.saveToMemento());

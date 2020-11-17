@@ -17,7 +17,12 @@ class Singleton {
   }
 };
 
+// Initialize the static variable.
 template <class T>
-T* Singleton<T>::sInstance = 0;
+T* Singleton<T>::sInstance = nullptr;
 
-// class FileSystem : public Singleton<FileSystem>
+
+class MyFileSystem : public Singleton<FileSystem>{
+
+};
+MyFileSystem::get()

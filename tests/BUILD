@@ -34,3 +34,12 @@ cc_test(
         "@googletest//:gtest_main",
     ],
 )
+
+cc_test(
+    name = "backtracking_test",
+    srcs = ["backtracking_test.cc"],
+    deps = [
+        "//src/lib/backtracking:BacktrackingLib",
+        "@googletest//:gtest_main",
+    ],
+)

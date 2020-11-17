@@ -1,12 +1,12 @@
 #include "distance_matrix.h"
+
 #include <algorithm>
 #include <iostream>
 #include <map>
 #include <queue>
 #include <set>
-#include <unordered_set>
-
 #include <string>
+#include <unordered_set>
 #include <vector>
 
 #include "src/lib/utility.h"
@@ -239,4 +239,106 @@ std::vector<long> DistMatrixGraph::BellmanFordRecursive(int source) {
     d.push_back(BellmanFordRecursiveHelper(source, weight_.size() - 1, i));
   }
   return d;
+}
+//-----------------------------------------------------
+// std::vector<long> DistMatrixGraph::shortestPathTopo(int source) {
+//   std::vector<long> d(weight_.size(), INT_MAX);
+//   d[source] = 0;
+//   std::vector<int> sorted = topologicalSortDFS(graph);
+//   for (auto n : sorted) {
+//     for (int j = 0; j < weight_.size(); j++) {
+//       // Relax outgoing edges of n
+//       if (weight_[n][j] != INT_MAX) {
+//         d[j] = min(d[j], d[n] + weight_[n][j]);
+//       }
+//     }
+//   }
+//   return d;
+// }
+//-----------------------------------------------------
+int DistMatrixGraph::TSP3(int start) {
+  std::vector<int> path;
+  return TSP_Helper3(start, start, path);
+}
+//-----------------------------------------------------
+// This version calculates the sum from bottom to top
+int DistMatrixGraph::TSP_Helper3(int start, int cur_node,
+                                 std::vector<int> path) {
+  int result = INT_MAX;
+  path.push_back(cur_node);
+
+  // If we are at a leaf, return the cost of leaf to start.
+  if (path.size() == weight_.size()) {
+    return weight_[cur_node][start];
+  }
+
+  // Else, return the min of TSP among all children of cur_node
+  for (int i = 0; i < weight_.size(); i++) {
+    if (i != cur_node && std::find(path.begin(), path.end(), i) == path.end()) {
+      result =
+          std::min(result, weight_[cur_node][i] + TSP_Helper3(start, i, path));
+    }
+  }
+  return result;
+}
+//-----------------------------------------------------
+int DistMatrixGraph::TSP2(int start) {
+  std::vector<int> path;
+  return TSP_Helper2(start, start, 0, path);
+}
+//-----------------------------------------------------
+int DistMatrixGraph::TSP_Helper2(int start, int cur_node, int cur_cost,
+                                 std::vector<int> path) {
+  int result = INT_MAX;
+  path.push_back(cur_node);
+
+  // If we are at a leaf, return cur_cost + the cost of leaf to start.
+  if (path.size() == weight_.size()) {
+    return cur_cost + weight_[cur_node][start];
+  }
+
+  // Else, return the min of TSP among all children of cur_node
+  for (int i = 0; i < weight_.size(); i++) {
+    if (i != cur_node && std::find(path.begin(), path.end(), i) == path.end()) {
+      result = std::min(
+          result, TSP_Helper2(start, i, cur_cost + weight_[cur_node][i], path));
+    }
+  }
+  return result;
+}
+//-----------------------------------------------------
+int DistMatrixGraph::TSP1(int start) {
+  std::vector<int> path;
+  int min_cost = INT_MAX;
+  return TSP_Helper1(start, start, 0, min_cost, path);
+}
+//-----------------------------------------------------
+// This version tries to keep the min_cost and only visit nodes when the
+// cur_cost is less than min_cost
+int DistMatrixGraph::TSP_Helper1(int start, int cur_node, int cur_cost,
+                                 int &min_cost, std::vector<int> path) {
+  int result = INT_MAX;
+  path.push_back(cur_node);
+
+  // If we are at a leaf, return cur_cost + the cost of leaf to start.
+  if (path.size() == weight_.size()) {
+    min_cost = std::min(min_cost, cur_cost + weight_[cur_node][start]);
+    return cur_cost + weight_[cur_node][start];
+  }
+
+  // Else, return the min of TSP among all children of cur_node
+  for (int i = 0; i < weight_.size(); i++) {
+    if (i != cur_node && std::find(path.begin(), path.end(), i) == path.end()) {
+      if (cur_cost < min_cost) {
+        result = std::min(result,
+                          TSP_Helper1(start, i, cur_cost + weight_[cur_node][i],
+                                      min_cost, path));
+      } else {
+        std::cout << "cur_cost: " << cur_cost << ", min_cost: " << min_cost << std::endl;
+        std::cout << "We saved! i: " << i << std::endl;
+        Print(path);
+      }
+    }
+  }
+  return result;
 }

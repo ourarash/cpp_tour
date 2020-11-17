@@ -7,6 +7,7 @@ struct Test {
     std::cout << "Constructor is called." << std::endl;
     mValue = 0;
   }
+  ~Test() { std::cout << "Destructor is called." << std::endl; }
 
   // Copy constructor
   Test(const Test &rhs) {
@@ -61,6 +62,9 @@ Test doStuff() {
 }
 
 int main() {
+  Test a(doStuff());
+  std::cout << a.mName << std::endl;
+  std::cout << "------------------------------------------" << std::endl;
   Test c;         // Default constructor?
   c = doStuff();  // Move assignment operator
 }
