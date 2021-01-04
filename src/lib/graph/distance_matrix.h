@@ -56,9 +56,17 @@ class DistMatrixGraph {
   // std::vector<long> shortestPathTopo(int source);
 
   // Travelling Salesperson
+  int TSP5(int start);
+  void TSP_aux5(int start, int cur_node, int cur_cost,
+                std::vector<int> &cur_path, int &min_cost,
+                std::vector<int> &min_path);
+
+  int TSP4(int start);
+  int TSP_aux(int start, int cur_node, std::vector<int> &cur_path);
+
   int TSP3(int start);
   int TSP_Helper3(int start, int cur_node, std::vector<int> path);
-  
+
   int TSP1(int start);
   int TSP_Helper1(int start, int cur_node, int cur_cost, int &min_cost,
                   std::vector<int> path);

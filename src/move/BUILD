@@ -39,6 +39,12 @@ cc_binary(
 )
 
 cc_binary(
+    name = "test_full_main",
+    srcs = ["test_full_main.cc"],
+)
+
+
+cc_binary(
     name = "rvalue_main",
     srcs = ["rvalue_main.cc"],
 )

@@ -7,11 +7,11 @@ cc_library(
     visibility = ["//visibility:public"],
 )
 
-cc_library(
-    name = "dynamic_programming_lpss_lib",
-    hdrs = ["dynamic_programming/lpss.h"],
-    visibility = ["//visibility:public"],
-)
+# cc_library(
+#     name = "dynamic_programming_lpss_lib",
+#     hdrs = ["dynamic_programming/lpss.h"],
+#     visibility = ["//visibility:public"],
+# )
 
 cc_library(
     name = "graph_vector_v_vector_pair_e_lib",

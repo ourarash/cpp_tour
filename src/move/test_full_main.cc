@@ -55,9 +55,10 @@ Test doStuff() {
 }
 
 int main() {
-  Test b;
-  b.mName = "Goodbye!";
-  b = doStuff();
+  // Test b;
+  // b.mName = "Goodbye!";
+  // b = doStuff();
+  Test b = doStuff();
   std::cout << b.mName << std::endl;
   return 0;
 }

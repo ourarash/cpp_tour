@@ -256,6 +256,78 @@ std::vector<long> DistMatrixGraph::BellmanFordRecursive(int source) {
 //   return d;
 // }
 //-----------------------------------------------------
+int DistMatrixGraph::TSP5(int start) {
+  std::vector<int> cur_path = {start};
+  std::vector<int> min_path;
+  int min_cost = INT_MAX;
+  TSP_aux5(start, start, 0, cur_path, min_cost, min_path);
+  std::cout << "min_path:" << std::endl;
+  Print(min_path);
+  return min_cost;
+}
+//-----------------------------------------------------
+// This version conforms to the template. It also calculates both min_cost and
+// min_path.
+void DistMatrixGraph::TSP_aux5(int start, int cur_node, int cur_cost,
+                               std::vector<int> &cur_path, int &min_cost,
+                               std::vector<int> &min_path) {
+  // If we are at a leaf, update min_cost and min_path.
+  if (cur_path.size() == weight_.size()) {
+    int final_cost = cur_cost + weight_[cur_node][start];
+    if (final_cost < min_cost) {
+      min_cost = final_cost;
+      min_path = cur_path;
+    }
+    return;
+  }
+  // Early backtracking
+  if (cur_cost > min_cost) {
+    return;
+  }
+  // Else, evaluate all children.
+  for (int i = 0; i < weight_.size(); i++) {
+    if (std::find(cur_path.begin(), cur_path.end(), i) == cur_path.end()) {
+      cur_path.push_back(i);
+
+      TSP_aux5(start, i, cur_cost + weight_[cur_node][i], cur_path, min_cost,
+               min_path);
+
+      cur_path.pop_back();
+    }
+  }
+}
+//-----------------------------------------------------
+int DistMatrixGraph::TSP4(int start) {
+  std::vector<int> cur_path = {start};
+  return TSP_aux(start, start, cur_path);
+}
+//-----------------------------------------------------
+// This version calculates the sum from bottom to top and also conforms to the
+// standard backtracking template
+int DistMatrixGraph::TSP_aux(int start, int cur_node,
+                             std::vector<int> &cur_path) {
+  // If we are at a leaf, return the cost of leaf to start.
+  if (cur_path.size() == weight_.size()) {
+    return weight_[cur_node][start];
+  }
+
+  // Else, return the min of TSP among all children of cur_node
+  int result = INT_MAX;
+  for (int i = 0; i < weight_.size(); i++) {
+    if (i != cur_node &&
+        std::find(cur_path.begin(), cur_path.end(), i) == cur_path.end()) {
+      cur_path.push_back(i);
+
+      int branch_cost = weight_[cur_node][i] + TSP_aux(start, i, cur_path);
+      result = std::min(result, branch_cost);
+
+      cur_path.pop_back();
+    }
+  }
+  return result;
+}
+//-----------------------------------------------------
+
 int DistMatrixGraph::TSP3(int start) {
   std::vector<int> path;
   return TSP_Helper3(start, start, path);
@@ -334,7 +406,8 @@ int DistMatrixGraph::TSP_Helper1(int start, int cur_node, int cur_cost,
                           TSP_Helper1(start, i, cur_cost + weight_[cur_node][i],
                                       min_cost, path));
       } else {
-        std::cout << "cur_cost: " << cur_cost << ", min_cost: " << min_cost << std::endl;
+        std::cout << "cur_cost: " << cur_cost << ", min_cost: " << min_cost
+                  << std::endl;
         std::cout << "We saved! i: " << i << std::endl;
         Print(path);
       }
