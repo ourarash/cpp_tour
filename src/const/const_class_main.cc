@@ -14,7 +14,7 @@ class Person {
 
   // It doesn't change any member variables
   int size() const {
-    _first_name = std::string("Ari");
+    // _first_name = std::string("Ari");
     return _first_name.size() + _last_name.size() + sizeof(_age);
   }
 };
