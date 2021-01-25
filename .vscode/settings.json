@@ -84,6 +84,14 @@
     "condition_variable": "cpp",
     "__memory": "cpp",
     "__functional_base_03": "cpp",
-    "memory_resource": "cpp"
+    "memory_resource": "cpp",
+    "*.inc": "cpp",
+    "cfenv": "cpp",
+    "clocale": "cpp",
+    "csignal": "cpp",
+    "scoped_allocator": "cpp",
+    "typeindex": "cpp",
+    "valarray": "cpp",
+    "variant": "cpp"
   }
 }

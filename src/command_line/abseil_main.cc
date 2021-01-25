@@ -14,13 +14,29 @@ ABSL_FLAG(std::string, from, "german", "from language");
 ABSL_FLAG(int, accuracy, 1, "accuracy of translation");
 ABSL_FLAG(bool, overwrite, false, "whether to overwrite the output files");
 
-int main(int argc, char** argv) {
-  absl::SetProgramUsageMessage("This program translates an input file.");
+void Translate(std::string_view input, std::string_view from, int accuracy,
+               bool overwrite) {
+  // Perform translation...
+  std::cout << "input: " << input << std::endl;
+  std::cout << "from: " << from << std::endl;
+  std::cout << "accuracy: " << accuracy << std::endl;
+  std::cout << "overwrite: " << std::boolalpha << overwrite << std::endl;
+}
+void PrintErrorMessage() {
+  std::cout << "translate:" << std::endl;
+  std::cout << "\tError: command line arguments were not correct." << std::endl;
+
+  std::cout << absl::ProgramUsageMessage() << std::endl;
+}
+
+int main(int argc, char* argv[]) {
+  absl::SetProgramUsageMessage(
+      "Usage example: --input=my_file.txt --from=Japanese --accuracy=2 "
+      "--overwrite=true");
   absl::ParseCommandLine(argc, argv);
 
   if (argc < 5) {
-    std::cout << "Error: not enough input parameters provided." << std::endl;
-    std::cout << absl::ProgramUsageMessage() << std::endl;
+    PrintErrorMessage();
     return -1;
   }
 
@@ -29,10 +45,7 @@ int main(int argc, char** argv) {
   int accuracy = absl::GetFlag(FLAGS_accuracy);
   bool overwrite = absl::GetFlag(FLAGS_overwrite);
 
-  std::cout << "input: " << input << std::endl;
-  std::cout << "from: " << from << std::endl;
-  std::cout << "accuracy: " << accuracy << std::endl;
-  std::cout << "overwrite: " << std::boolalpha << overwrite << std::endl;
+  Translate(input, from, accuracy, overwrite);
 
   return 0;
 }

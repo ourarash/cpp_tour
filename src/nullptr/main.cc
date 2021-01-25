@@ -6,7 +6,7 @@ void func(bool) {}
 
 int main() {
   func(nullptr);
-  // func(NULL);
+  func(NULL);
 
   return 0;  // End of a line
 }

@@ -1,11 +1,12 @@
-#include "src/lib/utility.h"
 #include <iostream>
 #include <string>
 #include <vector>
 
+#include "src/lib/utility.h"
+
 int main() {
-  int color = 0;  // Red
-  int color2 = 1; // Green
+  int color = 0;   // Red
+  int color2 = 1;  // Green
 
   // Enum type in C:
   enum ColorPallet1 { Red, Green, Blue };
@@ -31,4 +32,15 @@ int main() {
   std::cout << "color3: " << color3 << std::endl;
 
   return 0;
+
+  ColorPalletClass1 option;
+  if (option == Red) {
+  } else if (option == Brown) {
+  }
+
+  // 1. Readability
+  // 2. Type checking
+
+
+  Arash, Ari
 }

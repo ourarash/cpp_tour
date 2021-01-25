@@ -61,4 +61,8 @@ int main() {
   Point p3 = p2;
 
   MyFunction(p3);
+  Point* ptr;
+  ptr = new Point;
+
+  { Point local_p1; }
 }

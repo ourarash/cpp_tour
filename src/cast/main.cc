@@ -2,17 +2,39 @@
 #include <string>
 #include <vector>
 
-#include "src/lib/utility.h"
-
 int main() {
+  {
+    double d = 3.14159265;
+    int i = static_cast<int>(d);
+    std::cout << "i: " << i << std::endl;
+  }
+  {
+    int i = 0xabcd;
+    char c = (char)(i & 0xFF);
+    printf("c:%x\n", c & 0xff);
+  }
+  
+
+  {
+    int i = 0xabcd;
+    char c = (char)(i >> 8);
+    printf("c:%x\n", c & 0xff);
+  }
+
+  {
+    int i = 0xabcd;
+    char c = static_cast<char>(i & 0x00ff);
+    printf("c3:%x\n", c & 0xff);
+  }
+
   // c style casting and increments
   {
-    char c = 10;               // 1 byte
-    char *char_p = &c;         // 4 bytes
+    char c = 10;        // 1 byte
+    char *char_p = &c;  // 4 bytes
 
     int *int_p = (int *)(&c);  // 4 bytes
 
-    *int_p = 12;               //⚡☠️ Dangerous!
+    *int_p = 12;  //⚡☠️ Dangerous!
 
     char_p++;
     int_p++;

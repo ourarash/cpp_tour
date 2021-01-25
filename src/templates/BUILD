@@ -68,6 +68,17 @@ cc_binary(
     deps = ["//src/lib:utility"],
 )
 
+cc_binary(
+    name = "variadic_functions",
+    srcs = ["variadic_functions.cc"],
+    deps = ["//src/lib:utility"],
+)
+
+cc_binary(
+    name = "variadic_functions_simple",
+    srcs = ["variadic_functions_simple.cc"],
+    deps = ["//src/lib:utility"],
+)
 
 
 

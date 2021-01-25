@@ -82,27 +82,7 @@ int ProcessCommandLine(int argc, const char* argv[]) {
 }
 
 int main() {
-  const char* argv[] = {"test", "--input=my_file.txt", "--from=Japanese", "--accuracy=2", "--overwrite=true"};
+  const char* argv[] = {"test", "--input=my_file.txt", "--from=Japanese",
+                        "--accuracy=2", "--overwrite=true"};
   return ProcessCommandLine(5, argv);
 }
-
-
-
-
-
-
-int a = 4; // ====> tokens of your language ( int, a, =, 4, ;) ===> (type, identifier, equal_sign, number)
-           // ====> Correct: type identifier equal_sign number semi_colon
-int a = 5  // ====> Error: missing semicolon
-Person p = 6; // Syntax is correct, but a number cannot be assigned to a Person (semantic)
-
-
-p = 4 ;
-
-assignment:  identifier, =, identifier | number ; 
-
-                        start
-                        /
-                assignment 
-                      /  \ 
-       identifier_left     identifier_right
