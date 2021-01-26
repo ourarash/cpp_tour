@@ -13,7 +13,6 @@ int main() {
     char c = (char)(i & 0xFF);
     printf("c:%x\n", c & 0xff);
   }
-  
 
   {
     int i = 0xabcd;
@@ -34,6 +33,9 @@ int main() {
 
     int *int_p = (int *)(&c);  // 4 bytes
 
+    std::cout << "char_p: " << (long)char_p << std::endl;
+    std::cout << "int_p: " << (long)int_p << std::endl;
+
     *int_p = 12;  //⚡☠️ Dangerous!
 
     char_p++;
@@ -41,8 +43,10 @@ int main() {
     std::cout << "char_p: " << (long)char_p << std::endl;
     std::cout << "int_p: " << (long)int_p << std::endl;
 
-    // int *int_p_sc = static_cast<int *>(&c);  // compile-time error
+    int *int_p_sc = static_cast<int *>(&c);  // compile-time error
 
+    // ...But we can do this unsafe conversion with reinterpret_cast.
     int *int_p_rp = reinterpret_cast<int *>(&c);
+    std::cout << "int_p_rp: " << (long)int_p_rp << std::endl;
   }
 }
