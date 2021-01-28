@@ -19,10 +19,10 @@ int ProcessCommandLine(int argc, const char* argv[]) {
     return -1;
   }
 
-  std::string input;
-  std::string from;
-  int accuracy;
-  bool overwrite;
+  std::string input="default_file.txt";
+  std::string from = "japanese";
+  int accuracy = 2
+  bool overwrite = false;
 
   // Regular expression matching --parameter=value.
   // Example: --input=my_file.txt

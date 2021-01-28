@@ -15,7 +15,7 @@ cc_binary(
 cc_binary(
     name = "lambda_stl_main",
     srcs = ["lambda_stl_main.cc"],
-    deps = ["//src/lib:SolutionLib"],
+    deps = ["//src/lib:SolutionLib", "//src/lib:utility"],
 )
 
 cc_binary(
@@ -78,6 +78,16 @@ cc_binary(
     srcs = ["copy_if_main.cc"],
     deps = ["//src/lib:SolutionLib"],
 )
+
+cc_binary(
+    name = "lambda_event_class",
+    srcs = ["lambda_event_class.cc"],
+    deps = ["//src/lib:SolutionLib",
+    "//src/lib:utility",
+],
+    
+)
+
 
 
 
