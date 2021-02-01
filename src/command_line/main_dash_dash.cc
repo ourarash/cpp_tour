@@ -19,9 +19,9 @@ int ProcessCommandLine(int argc, const char* argv[]) {
     return -1;
   }
 
-  std::string input="default_file.txt";
+  std::string input = "default_file.txt";
   std::string from = "japanese";
-  int accuracy = 2
+  int accuracy = 2;
   bool overwrite = false;
 
   // Regular expression matching --parameter=value.
@@ -35,18 +35,20 @@ int ProcessCommandLine(int argc, const char* argv[]) {
       std::smatch matches;
       if (std::regex_match(param_to_search, matches, pattern)) {
         auto it = matches.begin();
-
-        std::cout << "(*it): " << (*it) << std::endl;
+        // The first match because it's the entire string.
         it++;
-        std::cout << "(*it): " << (*it) << std::endl;
 
+        // The second match is the parameter name.
         if ((*it) == "input") {
+          // The third match is the parameter value.
           it++;
           input = *it;
           continue;
         }
 
+        // The second match is the parameter name.
         if ((*it) == "from") {
+          // The third match is the parameter value
           it++;
           from = *it;
           continue;

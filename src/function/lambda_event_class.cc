@@ -25,7 +25,7 @@ int main() {
   Event myEvent;
   myEvent.AddHandler([]() { std::cout << "This is handler 1" << std::endl; });
   myEvent.AddHandler(
-      [name]() { std::cout << "This is handler 2: " << name << std::endl; });
+      [&name]() { std::cout << "This is handler 2: " << name << std::endl; });
       
   name = "Ari";
   int x = 5;

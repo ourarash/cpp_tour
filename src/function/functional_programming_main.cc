@@ -44,4 +44,5 @@ int main() {
   auto sum_2 = AverageVectorFP(my_vector);
   std::cout << "sum_1: " << sum_1 << ", sum_2: " << sum_2 << std::endl;
   return 0;
+
 }
