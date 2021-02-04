@@ -1,10 +1,10 @@
-#include "src/lib/utility.h"
 #include <iostream>
 #include <string>
 #include <vector>
 
-int main() {
+#include "src/lib/utility.h"
 
+int main() {
   std::vector<int> a;
   std::cout << "a.size(): " << a.size() << std::endl;
   PrintVector(a);
@@ -40,7 +40,15 @@ int main() {
     std::vector<int> v;
     for (int i = 0; i < n; i++) {
       v.push_back(i);
+      std::cout << "v[i]: " << v[i] << std::endl;
     }
+    PrintVector(v);
+
+    for (auto &n : v) {
+      n *= 10;
+    }
+
+    PrintVector(v);
   }
   return 0;
 }

@@ -150,5 +150,9 @@ int main() {
 
     std::cout << "Size of A : " << sizeof(A) << " byte" << std::endl;
   }
+
+  {
+    std::cout << "sizeof(double): " << sizeof(double) << std::endl;
+  }
   return 0;
 }

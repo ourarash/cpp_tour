@@ -1,9 +1,10 @@
 /**
  * Benchmark code for comparison of inserting inside a vector vs list
  * Run:
- *        bazel run NAME_OF_TARGET -c opt -- --benchmark_format=csv | \
- *        tee output/NAME_OF_TARGET.csv
- *        python3 plot.py NAME_OF_TARGET.csv
+        NAME_OF_TARGET=search_collection
+        bazel run src/benchmark/$NAME_OF_TARGET -c opt -- --benchmark_format=csv | \
+         tee run src/benchmark/output/$NAME_OF_TARGET.csv
+         python3  src/benchmark/plot.py src/benchmark/output/$NAME_OF_TARGET.csv
  */
 #include <iostream>
 #include <list>

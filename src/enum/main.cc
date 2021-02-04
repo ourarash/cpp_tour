@@ -12,7 +12,12 @@ int main() {
   enum ColorPallet1 { Red, Green, Blue };
   enum ColorPallet2 { Yellow, Orange, Red };
 
-  ColorPallet1 color3 = Red;
+
+  // Red // Ambiguous !!
+
+
+
+
 
   // Enum Class in C++
   // Declaration
@@ -42,5 +47,7 @@ int main() {
   // 2. Type checking
 
 
-  Arash, Ari
+  if (trafficLight = Red)
+  else if (trafficLight = Green)
+  else if (trafficLight = Yellow)
 }
