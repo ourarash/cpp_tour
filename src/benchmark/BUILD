@@ -80,3 +80,21 @@ cc_binary(
         "@com_google_benchmark//:benchmark",
     ],
 )
+
+cc_binary(
+    name = "variable_in_loop",
+    srcs = ["variable_in_loop.cc"],
+    deps = [
+        "//src/lib:utility",
+        "@com_google_benchmark//:benchmark",
+    ],
+)
+
+cc_binary(
+    name = "emplace_vs_push",
+    srcs = ["emplace_vs_push.cc"],
+    deps = [
+        "//src/lib:utility",
+        "@com_google_benchmark//:benchmark",
+    ],
+)

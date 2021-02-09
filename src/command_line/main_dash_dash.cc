@@ -65,13 +65,17 @@ int ProcessCommandLine(int argc, const char* argv[]) {
           std::istringstream((*it)) >> std::boolalpha >> overwrite;
           continue;
         }
+
         PrintErrorMessage();
+        return -1;
 
       } else {
         PrintErrorMessage();
+        return -1;
       }
     }
   } catch (const std::exception& e) {
+    std::cout << "Exception!" << std::endl;
     PrintErrorMessage();
     return -1;
   }
@@ -85,6 +89,6 @@ int ProcessCommandLine(int argc, const char* argv[]) {
 
 int main() {
   const char* argv[] = {"test", "--input=my_file.txt", "--from=Japanese",
-                        "--accuracy=2", "--overwrite=true"};
+                        "--accuracy=a", "--overwrite=true"};
   return ProcessCommandLine(5, argv);
 }
