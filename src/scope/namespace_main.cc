@@ -37,5 +37,6 @@ int main() {
   // PrintSomething();
   ns2::PrintSomething();
   ::PrintSomething();
+
   return 0;
 }

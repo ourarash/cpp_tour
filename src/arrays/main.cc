@@ -51,6 +51,7 @@ int main() {
 
   // Using a pointer instead of arr
   int my_arr[8];
+
   InitializeArray(my_arr, 8);
   PrintArray(my_arr, 8);
   int *p = &my_arr[0];

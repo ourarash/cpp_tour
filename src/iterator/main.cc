@@ -32,10 +32,10 @@ int main() {
 
     for (auto v_it = v.begin(); it != v.end(); ++it) {
       int n = *it;
+      *it = *it + 2;
       std::cout << "n: " << n << std::endl;
     }
 
-    std::set<int> v = {1, 2, 3, 4, 5};
 
     for (auto v_it = v.begin(); it != v.end(); ++it) {
       int n = *it;
@@ -69,5 +69,22 @@ int main() {
     std::sort(v.begin(), v.end());
     Print(v);
   }
+
+  {
+    std::vector<int> v = {1, 2, 3, 4, 5};
+    for (int i = 0; i < v.size(); i++) {
+      v[i] = v[i] + 10;
+    }
+
+    std::set<int> s = {1, 2, 3, 4, 5};
+    for (int i = 0; i < s.size(); i++) {
+      s[i] = ss[i] + 10;
+    }
+
+    for (auto &n : v) {
+      n += 10;
+    }
+  }
+
   return 0;
 }

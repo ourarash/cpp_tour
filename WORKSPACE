@@ -16,3 +16,9 @@ git_repository(
     remote = "https://github.com/abseil/abseil-cpp.git",
     tag = "20200225.2",
 )
+
+new_local_repository(
+    name = "usr_local",
+    build_file = "third_party/usr_local.BUILD",
+    path = "/usr/local",
+)

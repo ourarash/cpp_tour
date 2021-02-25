@@ -1,4 +1,4 @@
-#include "src/lib/utility.h"
+// #include "src/lib/utility.h"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -16,21 +16,40 @@ void InitializeVector(std::vector<int> &input) {
 }
 
 int main() {
-  int constant_size_array [10];
+  int constant_size_array[10];
 
-  int *arr;
-  int size;
+  int *arr = nullptr;
+  int size = 1000;
+
+  int x = 0;
+
+  std::cout << "x (gabage): " << x << std::endl;
 
   std::cout << "Please enter the size: " << std::endl;
+
+  // check if arr is not allocated
+  // check if arr is pointing to an invalid location.
+  if (arr == nullptr) {
+    std::cout << "arr is not allocated yet." << std::endl;
+  } else {
+    std::cout << "arr is allocated." << std::endl;
+  }
 
   std::cin >> size;
 
   arr = new int[size];
 
-  InitializeArray(arr, size);
-  PrintArray(arr, size);
+  if (arr == nullptr) {
+    std::cout << "arr is not allocated yet." << std::endl;
+  } else {
+    std::cout << "arr is allocated." << std::endl;
+  }
+  std::cout << "arr: " << arr << std::endl;
 
-  delete [] arr;
+  InitializeArray(arr, size);
+  // PrintArray(arr, size);
+
+  delete[] arr;
 
   return 0;
 }

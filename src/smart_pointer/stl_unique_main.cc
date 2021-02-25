@@ -9,21 +9,26 @@ struct Person {
 
   Person() { std::cout << "Person constructor" << std::endl; }
   ~Person() { std::cout << "Person destructor" << std::endl; }
+  void Talk() {
+    std::cout << "Hi, my name is: " << first_name + ' ' + last_name
+              << std::endl;
+  }
 
   std::string FullName() { return first_name + ' ' + last_name; }
 };
 
+void DoStuff(std::unique_ptr<Person> p) { p->Talk(); }
+
 int main() {
   // Weak pointer going out of scope before shared pointer
   {
-    std::unique_ptr<Person> p_shared1(new Person());
+    std::unique_ptr<Person> uptr(new Person());
 
     // Can call functions just like a regular pointer!
-    p_shared1->first_name = "Ari";
-    p_shared1->last_name = "Saif";
+    uptr->first_name = "Ari";
+    uptr->last_name = "Saif";
 
-    std::cout << "p_shared1->FullName(): " << p_shared1->FullName()
-              << std::endl;
+    uptr->Talk();
   }
 
   return 0;

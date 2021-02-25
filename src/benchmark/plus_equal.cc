@@ -57,3 +57,26 @@ struct Vector2 {
     return orig;
   }
 };
+
+int main(int argc, char const* argv[]) {
+  {
+    Vector2 a, b;
+    a = a + b;
+    a += b;
+  }
+  {
+    Vector2 a, b;
+    b = a++;
+    b = ++a;
+  }
+
+
+  for(it=...; ... ; it++){
+      
+  }
+
+  for(it=...; ... ; ++it){
+      
+  }
+  return 0;
+}

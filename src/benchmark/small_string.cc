@@ -46,20 +46,33 @@ class String {
   union {
     struct {
       char* mData;
-      size_t mSize;
       size_t mCapacity;
     } Large;
     struct {
       char mData[22];
-      char mSize;
-      bool mIsSmallString;
+
     } Small;
   } mStr;
+
+  size_t mSize;
+
+  // bool mIsSmallString;
 };
+
+String f() {
+  String a;
+  return a;
+}
+
+#include "lib.h"
 
 int main(int argc, char const* argv[]) {
   String small("Hello");
   String large("This string is so long omgggggggg");
 
+  {
+    String y;
+    String x = f(y);
+  }
   return 0;
 }

@@ -1,6 +1,5 @@
 #include <iostream>
 #include <map>
-#include <pair>
 #include <string>
 #include <vector>
 
@@ -15,18 +14,25 @@ struct MyPerson {
 int main() {
   std::map<std::string, MyPerson> persons;
 
-  persons["Tom"] = MyPerson("Tom", 12, "310-888-8889");
+  // persons["Tom"] = MyPerson("Tom", 12, "310-888-8889");
   persons["Tom"].age = 18;
   persons["Tom"].age = 25;
 
   persons["Alice"] = MyPerson("Alice", 18);
   persons["Bob"] = MyPerson("Bob", 15);
-  persons["Ted"] = MyPerson("Ted", 57);
 
-  std::cout << "persons.count(" Tom "): " << persons.count("Tom") << std::endl;
+  persons["Ted"] = MyPerson("Ted", 57);
+  persons["Ted"] = MyPerson("Ted", 10);
+
+  std::cout << "persons.count(\" Ted \"): " << persons.count("Ted")
+            << std::endl;
+
+  std::cout << "persons.count(\" Ari \"): " << persons.count("Ari")
+            << std::endl;
+
   std::cout << "persons.size(): " << persons.size() << std::endl;
 
   std::cout << "Tom's age: " << persons["Tom"].age << std::endl;
 
-  std::pair<std::string, MyPerson> persons["Annie"] = MyPerson("Annie", 55);
+  // std::pair<std::string, MyPerson> persons["Annie"] = MyPerson("Annie", 55);
 }

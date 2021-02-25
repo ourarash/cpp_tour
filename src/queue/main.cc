@@ -1,4 +1,3 @@
-#include "src/lib/utility.h"
 #include <iostream>
 #include <queue>
 #include <stack>
@@ -6,7 +5,7 @@
 
 int main() {
 
-  // Empty stack
+  // Empty queue
   std::queue<int> q;
   // int r = q.front();  // Seriously?
   // q.pop();          // Don't do this!

@@ -31,11 +31,35 @@ bool GreaterThan(int a, int b) { return a > b; }
 int Multiply(int i, int j) { return i * j; }
 
 int main() {
-  // Count_if
+  // Find
   {
-    std::vector<int> v = {12, -2, 0, 0, 1, 12, 5, 3, 13, 3, 5};
-    auto count = std::count_if(v.begin(), v.end(), IsOdd);
-    std::cout << "count_if: " << count << std::endl;
+    std::vector<int> v = {12, -2, 0, 13, 3, 5};
+    auto it2 = v.begin();
+    it2++;
+
+    auto it = std::find(it2, v.end(), 12);
+
+    if (it != v.end()) {
+      const auto& n = *it;
+      std::cout << "Found n: " << n << std::endl;
+
+      it++;
+
+      std::cout << "*it: " << *it << std::endl;
+      v.insert(it, 20);
+
+    } else {
+      std::cout << "Didn't find." << std::endl;
+    }
+  }
+
+  {
+    std::vector<int> v = {12, -2, 0, 13, 3, 5};
+
+    std::sort(v.begin(), v.end());
+
+    std::cout << "v[0]: " << v[0] << std::endl;
+
   }
 
   // Count_if
@@ -45,82 +69,78 @@ int main() {
     std::cout << "count_if: " << count << std::endl;
   }
 
-  // Sort
+  // // Count_if
+  // {
+  //   std::vector<int> v = {12, -2, 0, 0, 1, 12, 5, 3, 13, 3, 5};
+  //   auto count = std::count_if(v.begin(), v.end(), IsOdd);
+  //   std::cout << "count_if: " << count << std::endl;
+  // }
+
+  // // Sort
+  // // {
+  // //   std::vector<int> v = {12, -2, 0, 13, 3, 5};
+  // //   std::sort(v.begin(), v.end());
+  // //   Print(v);
+  // // }
+
+  // // Sort
   // {
   //   std::vector<int> v = {12, -2, 0, 13, 3, 5};
   //   std::sort(v.begin(), v.end());
   //   Print(v);
   // }
 
-  // Sort
-  {
-    std::vector<int> v = {12, -2, 0, 13, 3, 5};
-    std::sort(v.begin(), v.end());
-    Print(v);
-  }
+  // // Sort
+  // {
+  //   std::vector<int> v = {12, -2, 0, 13, 3, 5};
+  //   std::sort(v.begin(), v.end(), GreaterThan);
+  //   Print(v);
+  // }
 
-  // Sort
-  {
-    std::vector<int> v = {12, -2, 0, 13, 3, 5};
-    std::sort(v.begin(), v.end(), GreaterThan);
-    Print(v);
-  }
+  // // Reverse
+  // {
+  //   std::vector<int> v = {12, -2, 0, 13, 3, 5};
+  //   auto it = std::find(v.begin(), v.end(), 4);
+  //   std::reverse(v.begin(), v.end());
+  //   Print(v);
+  // }
 
-  // Find
-  {
-    std::vector<int> v = {12, -2, 0, 13, 3, 5};
-    auto it = std::find(v.begin(), v.end(), 4);
-    if (it != v.end()) {
-      const auto& n = *it;
-      std::cout << "Found n: " << n << std::endl;
-    } else {
-      std::cout << "Didn't find." << std::endl;
-    }
-  }
+  // // Count
+  // {
+  //   std::vector<int> v = {12, -2, 0, 0, 1, 12, 5, 3, 13, 3, 5};
+  //   auto count = std::count(v.begin(), v.end(), 5);
+  //   std::cout << "count: " << count << std::endl;
+  // }
 
-  // Reverse
-  {
-    std::vector<int> v = {12, -2, 0, 13, 3, 5};
-    auto it = std::find(v.begin(), v.end(), 4);
-    std::reverse(v.begin(), v.end());
-    Print(v);
-  }
+  // // Accumulate
+  // {
+  //   std::vector<int> v = {1, 2, 3, 4, 5, 6};
+  //   auto sum = std::accumulate(v.begin(), v.end(), 0);
+  //   std::cout << "sum: " << sum << std::endl;
+  // }
 
-  // Count
-  {
-    std::vector<int> v = {12, -2, 0, 0, 1, 12, 5, 3, 13, 3, 5};
-    auto count = std::count(v.begin(), v.end(), 5);
-    std::cout << "count: " << count << std::endl;
-  }
+  // // Accumulate 2
+  // {
+  //   std::vector<int> v = {1, 2, 3, 4, 5, 6};
+  //   auto sum =
+  //       std::accumulate(v.begin(), v.end(), /*init=*/1,
+  //       /*binary_op=*/Multiply);
+  //   std::cout << "mult: " << sum << std::endl;
+  // }
 
-  // Accumulate
-  {
-    std::vector<int> v = {1, 2, 3, 4, 5, 6};
-    auto sum = std::accumulate(v.begin(), v.end(), 0);
-    std::cout << "sum: " << sum << std::endl;
-  }
+  // // Add up all odd numbers
+  // {
+  //   std::vector<int> v = {1, 2, 3, 4, 5, 6};
 
-  // Accumulate 2
-  {
-    std::vector<int> v = {1, 2, 3, 4, 5, 6};
-    auto sum =
-        std::accumulate(v.begin(), v.end(), /*init=*/1, /*binary_op=*/Multiply);
-    std::cout << "mult: " << sum << std::endl;
-  }
+  //   auto all_odd_number = std::copy_if(v.begin(), v.end(), v.begin(), IsOdd);
 
-  // Add up all odd numbers
-  {
-    std::vector<int> v = {1, 2, 3, 4, 5, 6};
+  //   // define all_odd_number_multiplied_by_10
+  //   std::transform(all_odd_number.begin(), all_odd_number.end(),
+  //                  all_odd_number_multiplied_by_10.begin(), MultiplyBy10);
 
-    auto all_odd_number = std::copy_if(v.begin(), v.end(), v.begin(), IsOdd);
-
-    // define all_odd_number_multiplied_by_10
-    std::transform(all_odd_number.begin(), all_odd_number.end(),
-                   all_odd_number_multiplied_by_10.begin(), MultiplyBy10);
-
-    auto sum = std::accumulate(all_odd_number_multiplied_by_10.begin(),
-                               all_odd_number_multiplied_by_10.end(), 0);
-  }
+  //   auto sum = std::accumulate(all_odd_number_multiplied_by_10.begin(),
+  //                              all_odd_number_multiplied_by_10.end(), 0);
+  // }
 
   return 0;
 }

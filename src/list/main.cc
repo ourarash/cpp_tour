@@ -1,8 +1,17 @@
-#include "src/lib/utility.h"
 #include <iostream>
 #include <list>
 #include <string>
 #include <vector>
+
+#include "src/lib/utility.h"
+
+int GetIndexValue(const std::list<int> &l, int index) {
+  auto it = l.begin();
+
+  std::advance(it, index);
+  int data = *it;
+  return data;
+}
 
 int main() {
   std::list<int> l;
@@ -16,17 +25,21 @@ int main() {
   l.push_back(7);
   l.push_back(8);
   l.push_back(9);
+
   Print(l);
 
   auto it = l.begin();
 
-  std::advance(it, 5);
+  std::advance(it, 4);
   int data = *it;
 
   std::cout << "data: " << data << std::endl;
 
-  auto it = l.begin();
-  auto it_next = std::next(it, 1);
+  int value = GetIndexValue(l, 5);
+
+  std::cout << "value: " << value << std::endl;
+  // auto it = l.begin();
+  // auto it_next = std::next(it, 1);
 
   return 0;
 }

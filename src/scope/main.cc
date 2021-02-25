@@ -26,6 +26,12 @@ void MyFunc() {
 int main() {
   // Scope
   {
+    {
+      Person p;
+      int a = 1000;
+      // std::cout << "a: " << a << std::endl;
+    }
+
     int a;
     a = 109;
     // std::cout << "a: " << a << std::endl;
@@ -33,13 +39,11 @@ int main() {
     {
       Person p;
       int a = 1000;
-      // std::cout << "a: " << a << std::endl;
+      std::cout << "a: " << a << std::endl;
     }
 
     std::cout << "a: " << a << std::endl;
   }
-
-  // std::cout << "a: " << a << std::endl;
 
   // std::cout << "i: " << i << std::endl;
 
@@ -48,7 +52,7 @@ int main() {
   // MyFunc();
   // //--------------------------------------------------
   // Inside control blocks
-  int i = 1;
+ 
   for (int i = 0; i < 10; i++) {
     // scope of the i in for loop is only here
     std::cout << "i: " << i << std::endl;

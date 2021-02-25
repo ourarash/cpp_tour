@@ -17,7 +17,4 @@ int main() {
   persons.insert("Ted");
   persons.insert("Ted");
 
-  for (const auto &p : persons) {
-    std::cout << "p: " << p << std::endl;
-  }
 }

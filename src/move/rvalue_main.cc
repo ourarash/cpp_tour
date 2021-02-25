@@ -1,7 +1,20 @@
 #include <iostream>
 #include <string>
 #include <vector>
+
+int &foo(int &j) {
+  j = 5;
+  return j;
+}
+
 int main() {
+  {
+    int a = 5;
+    int &ref = a;  // valid, because a is an lvalue
+    // int &ref2 = (a + 1);  // invalid -- (a + 1) is not an lvalue
+
+    // int &ref3 = 5;
+  }
   // Invalid rvalue operations
   {
     int a = 1;
@@ -17,7 +30,7 @@ int main() {
   {
     int a = 0, b = 0;
     bool condition = true;
-    condition ? a : b = 1;
+    condition ? a : b = 1;  // a = 1; or b = 1;
   }
 
   // Valid lvalue pointer operations
@@ -26,13 +39,14 @@ int main() {
 
     int *ptr_a_0 = &a;      // valid, because a is an lvalue
     int *ptr_a_1 = &(++a);  // Valid, because ++a is an lvalue
+    // int *ptr_a_2 = &(a++);  // Valid, because ++a is an lvalue
   }
 
   // Invalid rvalue pointer operations
   {
     int a = 1;
-    int *ptr_a_2 = &(a++);    // Invalid, because a++ is an rvalue
-    int *ptr_a_3 = &(a + 1);  // Invalid, because (a + 1) is not an lvalue
+    // int *ptr_a_2 = &(a++);    // Invalid, because a++ is an rvalue
+    // int *ptr_a_3 = &(a + 1);  // Invalid, because (a + 1) is not an lvalue
   }
 
   // Valid reference
@@ -44,7 +58,13 @@ int main() {
   // Invalid reference
   {
     int a = 1;
-    int &ref_a_0 = (a + 1);  // invalid
+    // int &ref_a_0 = (a + 1);  // invalid
+  }
+
+  {
+    int i = 0;
+    foo(i) = 42;  // ok, foo() is an lvalue
+    std::cout << "i: " << i << std::endl;
   }
 
   {

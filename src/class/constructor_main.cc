@@ -7,32 +7,41 @@ class Point {
   Point() {
     i_ = 0;
     j_ = 0;
+
+    z_ = new int;
     std::cout << "***NO PARAMETERIZED constructor." << std::endl;
   }
 
-  // Constructor
+  // PARAMETERIZED Constructor
   Point(int i, int j) {
     std::cout << "**PARAMETERIZED constructor." << std::endl;
     i_ = i;
     j_ = j;
+    z_ = new int;
   }
 
-  Point(int i) : Point(i, 0) {}
-
-  // If you don't define constructor (any type of it), the compiler create a
-  // default one for you The default one my not do what you want!
+  // PARAMETERIZED Constructor
+  Point(int i) {
+    std::cout << "**PARAMETERIZED constructor 2." << std::endl;
+    i_ = i;
+    j_ = 0;
+    z_ = new int;
+  }
 
   // Copy constructor
   Point(const Point &p2) {
     std::cout << "COPY constructor." << std::endl;
 
-    i_ = p2.GetI() * 2;
-    j_ = p2.GetJ() * 2;
-
-    std::cout << "Thanks for calling me!" << std::endl;
+    i_ = p2.GetI();
+    j_ = p2.GetJ();
+    z_ = new int;
+    // *z_ = p2.GetZ();
   }
 
-  ~Point() { std::cout << "DESTRUCTOR." << std::endl; }
+  ~Point() {
+    delete z_;  // Deallocate z_
+    std::cout << "DESTRUCTOR." << std::endl;
+  }
 
   // Getter or Accessor
   int GetI() const { return i_; };
@@ -44,13 +53,15 @@ class Point {
  private:
   int i_;
   int j_;
+
+  int *z_;
 };
 
 std::ostream &operator<<(std::ostream &os, const Point &m) {
   return os << "( " << m.GetI() << ", " << m.GetJ() << " )";
 }
 
-void MyFunction(Point &param) { std::cout << "param: " << param << std::endl; }
+void MyFunction(Point param) { std::cout << "param: " << param << std::endl; }
 
 int main() {
   Point p1;
@@ -58,11 +69,20 @@ int main() {
 
   Point p2(1, 2);
 
-  Point p3 = p2;
+  Point p3 = p2;  // Copy constructor
+
+  p2.SetI(10);
+  p2.SetJ(50);
+
+  std::cout << "p3: " << p3 << std::endl;
 
   MyFunction(p3);
-  Point* ptr;
+
+  Point p4;  // Default constructor
+  p4 = p2;   // Assignments (Copy assignment)
+
+  Point *ptr;
   ptr = new Point;
 
-  { Point local_p1; }
+  delete ptr;
 }

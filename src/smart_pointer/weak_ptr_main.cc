@@ -8,6 +8,8 @@ struct Person {
 
   Person() { std::cout << "Person constructor" << std::endl; }
   ~Person() { std::cout << "Person destructor" << std::endl; }
+  void Talk() { std::cout << "Hi, my name is: " << FullName() << std::endl; }
+
   std::string FullName() { return first_name + ' ' + last_name; }
 };
 //-----------------------------------------------------
@@ -211,7 +213,7 @@ int main() {
   std::cout << "------------------------------------------" << std::endl;
   // Shared pointer going out of scope before weak pointer
 
-  // shared ====> obj 
+  // shared ====> obj
   // weak ====> obj
   {
     WeakPtr<Person> weakPtr(MakeWeakPerson());

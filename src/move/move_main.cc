@@ -111,6 +111,10 @@ int main() {
     std::cout << "b: " << b << std::endl;
     std::cout << "c: " << c << std::endl;
     std::cout << std::endl;
+    a++;
+    std::cout << "a: " << a << std::endl;
+    std::cout << "b: " << b << std::endl;
+    std::cout << "c: " << c << std::endl;
   }
 
   // Using std::move with non-built-in variables.
@@ -167,6 +171,7 @@ int main() {
 
     std::cout << "------------------------------------------" << std::endl;
     MyString e = a + a;
+
     std::cout << "------------------------------------------" << std::endl;
 
     // MyString f = SomeFunction(a);
@@ -179,72 +184,20 @@ int main() {
     std::cout << "b: " << b << std::endl;
     std::cout << "c: " << c << std::endl;
     std::cout << "d: " << d << std::endl;
+    std::cout << "e: " << e << std::endl;
     std::cout << std::endl;
   }
 
-  // // Using std::move with non-built-in variables.
-  // {
-  //   std::cout << "------------------------------------------" << std::endl;
-  //   MyString a("MyString_a", strlen("MyString_a"));
+  // Using std::move with non-built-in variables.
+  {
+    std::cout << "------------------------------------------" << std::endl;
+    MyString a("1234", strlen("1234"));
+    MyString b("5678", strlen("5678"));
 
-  //   MyString b = a;
+    MyString c(a + b);
 
-  //   MyString c(a);
+    std::cout << "a: " << a << ", b: " << b << ", c: " << c << std::endl;
 
-  //   MyString d = std::move(a);
-
-  //   std::cout << std::endl;
-  //   std::cout << "a: " << a << std::endl;
-  //   std::cout << "b: " << b << std::endl;
-  //   std::cout << "c: " << c << std::endl;
-  //   std::cout << "d: " << d << std::endl;
-  //   std::cout << std::endl;
-  // }
-
-  // // Using std::move with non-built-in variables.
-  // {
-  //   std::cout << "------------------------------------------" << std::endl;
-  //   std::string a = "string_a";
-  //   auto b = a;
-  //   auto c = a + a;
-  //   auto d = std::move(a + a);
-
-  //   std::cout << "a: " << a << std::endl;
-  //   std::cout << "b: " << b << std::endl;
-  //   std::cout << "c: " << c << std::endl;
-  //   std::cout << "d: " << d << std::endl;
-  //   std::cout << std::endl;
-  // }
-
-  // // Using std::move with non-built-in variables.
-  // {
-  //   std::cout << "------------------------------------------" << std::endl;
-  //   MyString a("MyString_a", strlen("MyString_a"));
-
-  //   MyString b = a;
-
-  //   MyString c(a);
-
-  //   MyString d = std::move(a);
-  //   std::cout << std::endl;
-  //   std::cout << "a: " << a << std::endl;
-  //   std::cout << "b: " << b << std::endl;
-  //   std::cout << "c: " << c << std::endl;
-  //   std::cout << "d: " << d << std::endl;
-  //   std::cout << std::endl;
-  // }
-
-  // // Using std::move with non-built-in variables.
-  // {
-  //   std::cout << "------------------------------------------" << std::endl;
-  //   MyString a("MyString_a", strlen("MyString_a"));
-  //   MyString b("MyString_b", strlen("MyString_b"));
-
-  //   MyString c = a + b;
-
-  //   std::cout << "a: " << a << std::endl;
-  //   std::cout << "b: " << b << std::endl;
-  //   std::cout << "c: " << c << std::endl;
-  // }
-  return 0;
+    return 0;
+  }
 }

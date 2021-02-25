@@ -11,7 +11,7 @@
         "command": "bazel build --cxxopt='-std=c++17' ${relativeFileDirname}:${fileBasenameNoExtension} --experimental_enable_runfiles --compilation_mode=dbg"
       },
       "osx": {
-        "command": "/usr/local/bin/bazel build --cxxopt='-std=c++17' ${relativeFileDirname}:${fileBasenameNoExtension} --compilation_mode=dbg --spawn_strategy=standalone --copt=\"-fno-elide-constructors\"",
+        "command": "/usr/local/bin/bazel build --cxxopt='-std=c++11' ${relativeFileDirname}:${fileBasenameNoExtension} --compilation_mode=dbg --spawn_strategy=standalone --copt=\"-fno-elide-constructors\"",
       },
       "group": {
         "kind": "build",

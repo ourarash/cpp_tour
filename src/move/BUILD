@@ -59,3 +59,14 @@ cc_binary(
     name = "rule_of_5_main",
     srcs = ["rule_of_5_main.cc"],
 )
+
+cc_binary(
+    name = "copy_elision",
+    srcs = ["copy_elision.cc"],
+)
+
+
+cc_binary(
+    name = "std_forward",
+    srcs = ["std_forward.cc"],
+)

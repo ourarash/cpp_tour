@@ -16,6 +16,19 @@ cc_binary(
 )
 
 cc_binary(
+    name = "shared_ptr_main_cycle",
+    srcs = ["shared_ptr_main_cycle.cc"],
+)
+
+
+cc_binary(
+    name = "stl_shared_cycle",
+    srcs = ["stl_shared_cycle.cc"],
+)
+
+
+
+cc_binary(
     name = "weak_ptr_main",
     srcs = ["weak_ptr_main.cc"],
 )
