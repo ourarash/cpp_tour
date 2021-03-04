@@ -30,3 +30,10 @@ cc_binary(
 )
 
 
+cc_binary(
+    name = "operator_overloading2",
+    srcs = ["operator_overloading2.cc"],
+    deps = ["//src/lib:SolutionLib"],
+)
+
+

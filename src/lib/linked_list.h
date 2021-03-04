@@ -7,6 +7,8 @@ struct ListNode {
   ListNode(int x) : val(x), next(nullptr) {}
 };
 
+
+
 class SinglyLinkedList {
 public:
   SinglyLinkedList() { head_ = nullptr; }

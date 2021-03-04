@@ -22,15 +22,21 @@ bool GreaterThanAge(const Person& p1, const Person& p2) {
 // std::sort(persons.begin(), persons.end(), GreaterThanSSN);
 // std::sort(persons.begin(), persons.end(), GreaterThanAge);
 
-// TODO: make the parameres const
-bool IsOdd(int i, int j) { return ((i % 2) == 1); }
+bool IsOdd(int i) { return ((i % 2) == 1); }
 bool IsEven(int i) { return ((i % 2) == 0); }
 bool LessThanOrEqual(int a, int b) { return a <= b; }
 bool GreaterThan(int a, int b) { return a > b; }
 
 int Multiply(int i, int j) { return i * j; }
+int MultiplyBy10(int i) { return i * 10; }
 
 int main() {
+  {
+    std::vector<int> v = {12, -2, 0, 0, 1, 12, 5, 3, 13, 3, 5};
+    auto count = std::count_if(v.begin(), v.end(), IsOdd);
+    std::cout << "count_if: " << count << std::endl;
+  }
+
   // Find
   {
     std::vector<int> v = {12, -2, 0, 13, 3, 5};
@@ -53,82 +59,64 @@ int main() {
     }
   }
 
+  // Sort
   {
     std::vector<int> v = {12, -2, 0, 13, 3, 5};
-
     std::sort(v.begin(), v.end());
-
-    std::cout << "v[0]: " << v[0] << std::endl;
-
+    Print(v);
   }
 
-  // Count_if
+  // Sort
+  {
+    std::vector<int> v = {12, -2, 0, 13, 3, 5};
+    std::sort(v.begin(), v.end(), GreaterThan);
+    Print(v);
+  }
+
+  // Reverse
+  {
+    std::vector<int> v = {12, -2, 0, 13, 3, 5};
+    std::reverse(v.begin(), v.end());
+    Print(v);
+  }
+
+  // Count
   {
     std::vector<int> v = {12, -2, 0, 0, 1, 12, 5, 3, 13, 3, 5};
-    auto count = std::count_if(v.begin(), v.end(), IsOdd);
-    std::cout << "count_if: " << count << std::endl;
+    auto count = std::count(v.begin(), v.end(), 5);
+    std::cout << "count: " << count << std::endl;
   }
 
-  // // Count_if
-  // {
-  //   std::vector<int> v = {12, -2, 0, 0, 1, 12, 5, 3, 13, 3, 5};
-  //   auto count = std::count_if(v.begin(), v.end(), IsOdd);
-  //   std::cout << "count_if: " << count << std::endl;
-  // }
+  // Accumulate
+  {
+    std::vector<int> v = {1, 2, 3, 4, 5, 6};
+    auto sum = std::accumulate(v.begin(), v.end(), 0);
+    std::cout << "sum: " << sum << std::endl;
+  }
 
-  // // Sort
-  // // {
-  // //   std::vector<int> v = {12, -2, 0, 13, 3, 5};
-  // //   std::sort(v.begin(), v.end());
-  // //   Print(v);
-  // // }
+  // Accumulate 2
+  {
+    std::vector<int> v = {1, 2, 3, 4, 5, 6};
+    auto sum = std::accumulate(v.begin(), v.end(), /*init=*/1,
+                               /*binary_op=*/Multiply);
+    std::cout << "mult: " << sum << std::endl;
+  }
 
-  // // Sort
-  // {
-  //   std::vector<int> v = {12, -2, 0, 13, 3, 5};
-  //   std::sort(v.begin(), v.end());
-  //   Print(v);
-  // }
+  {
+    std::vector<int> v = {1, 2, 3, 4, 5, 6};
 
-  // // Sort
-  // {
-  //   std::vector<int> v = {12, -2, 0, 13, 3, 5};
-  //   std::sort(v.begin(), v.end(), GreaterThan);
-  //   Print(v);
-  // }
+    std::vector<int> v2(
+        v.size());  // Constructor! The size of the vector; Initialize to 0
 
-  // // Reverse
-  // {
-  //   std::vector<int> v = {12, -2, 0, 13, 3, 5};
-  //   auto it = std::find(v.begin(), v.end(), 4);
-  //   std::reverse(v.begin(), v.end());
-  //   Print(v);
-  // }
+    std::transform(v.begin(), v.end(), v2.begin(), MultiplyBy10);
 
-  // // Count
-  // {
-  //   std::vector<int> v = {12, -2, 0, 0, 1, 12, 5, 3, 13, 3, 5};
-  //   auto count = std::count(v.begin(), v.end(), 5);
-  //   std::cout << "count: " << count << std::endl;
-  // }
+    std::transform(v.begin(), v.end(), v.begin(), MultiplyBy10);
 
-  // // Accumulate
-  // {
-  //   std::vector<int> v = {1, 2, 3, 4, 5, 6};
-  //   auto sum = std::accumulate(v.begin(), v.end(), 0);
-  //   std::cout << "sum: " << sum << std::endl;
-  // }
+    Print(v2);
+    Print(v);
+  }
 
-  // // Accumulate 2
-  // {
-  //   std::vector<int> v = {1, 2, 3, 4, 5, 6};
-  //   auto sum =
-  //       std::accumulate(v.begin(), v.end(), /*init=*/1,
-  //       /*binary_op=*/Multiply);
-  //   std::cout << "mult: " << sum << std::endl;
-  // }
-
-  // // Add up all odd numbers
+  // Add up all odd numbers
   // {
   //   std::vector<int> v = {1, 2, 3, 4, 5, 6};
 

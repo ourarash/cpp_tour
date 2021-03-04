@@ -7,6 +7,20 @@ cc_library(
     visibility = ["//visibility:public"],
 )
 
+cc_library(
+    name = "TreeLib",
+    srcs = ["tree.cc"],
+    hdrs = ["tree.h"],
+    visibility = ["//visibility:public"],
+)
+cc_library(
+    name = "BSTLib",
+    srcs = ["bst.cc"],
+    hdrs = ["bst.h"],
+    visibility = ["//visibility:public"],
+    deps=[":TreeLib"]
+)
+
 # cc_library(
 #     name = "dynamic_programming_lpss_lib",
 #     hdrs = ["dynamic_programming/lpss.h"],

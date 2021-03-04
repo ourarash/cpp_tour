@@ -1,4 +1,5 @@
 #include "linked_list.h"
+
 #include <iostream>
 
 bool SinglyLinkedList::empty() { return head_ == nullptr; }
@@ -54,7 +55,7 @@ ListNode *SinglyLinkedList::GetIthPointer(int i) {
   int count = 0;
   while (p != nullptr && count < max_size && count <= i) {
     p_prev = p;
-    p = p->next;
+    p = p->next;  // Dangerous!! If p is null, then p->next = crash!!
     count++;
   }
 
@@ -84,7 +85,6 @@ int SinglyLinkedList::back() { return 0; }
 void SinglyLinkedList::print() {
   std::cout << "{";
   if (!empty()) {
-
     ListNode *p = head_;
     ListNode *p_prev;
     while (p != nullptr) {
@@ -105,3 +105,16 @@ int &SinglyLinkedList::operator[](int i) {
   // Dangerous!
   return ith_pointer->val;
 }
+
+ListNode *p = list._head;
+if (p != null) {
+  p = p->next;
+  p->value = 2;
+}
+
+Dangerous : 
+1. p = nullptr 
+2. p not initialized
+
+                       Very common mistakes in your programs or
+                   HW assignments

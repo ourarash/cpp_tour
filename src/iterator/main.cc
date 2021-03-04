@@ -76,10 +76,11 @@ int main() {
       v[i] = v[i] + 10;
     }
 
-    std::set<int> s = {1, 2, 3, 4, 5};
-    for (int i = 0; i < s.size(); i++) {
-      s[i] = ss[i] + 10;
-    }
+    // Set does not provide subscript operator.
+    // std::set<int> s = {1, 2, 3, 4, 5};
+    // for (int i = 0; i < s.size(); i++) {
+    //   s[i] = s[i] + 10;
+    // }
 
     for (auto &n : v) {
       n += 10;
@@ -88,3 +89,4 @@ int main() {
 
   return 0;
 }
+
