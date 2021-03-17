@@ -29,6 +29,7 @@ bool IsA(const This* ptr) {
 //-----------------------------------------------------
 // Casts ptr to Type if valid
 // Usage: Cast<Type>(ptr)
+// dynamic_cast<Type*>(ptr)
 template <typename Other, typename This>
 Other* Cast(This* ptr) {
   if (IsA<Other>(ptr)) {
@@ -40,6 +41,10 @@ Other* Cast(This* ptr) {
 
 //-----------------------------------------------------
 class Base {
+  // Other function
+
+  // End of other functions
+  // RTTI
  private:
   static const TypeInfo sType;
 
@@ -50,6 +55,10 @@ class Base {
 const TypeInfo Base::sType(nullptr);
 //-----------------------------------------------------
 class Derived : public Base {
+  // Other function
+
+  // End of other functions
+
  private:
   static const TypeInfo sType;
 
@@ -71,19 +80,22 @@ const TypeInfo Derived::sType(Base::StaticType());
 #define IMPL_OBJECT(d, s) const TypeInfo d::sType(s::StaticType());
 
 class Derived2 : public Base {
+  // Other function
+
+  // End of other functions
   DECL_OBJECT();
 };
 
 IMPL_OBJECT(Derived2, Base);
 
 int main() {
-  Base* myBase = new Derived;
   Base* base = new Base;
+  Base* myBase = new Derived;
 
   Derived* myDerived = Cast<Derived, Base>(myBase);
   // dynamic_cast returns 0 if not a triangle
   if (myDerived) {
-    std::cout << "Yes, it's a triangle!" << std::endl;
+    std::cout << "Yes, it's Derived!" << std::endl;
   }
 
   Base* myBase2 = Cast<Derived, Base>(base);
@@ -91,7 +103,6 @@ int main() {
   if (myBase2) {
     std::cout << "Yes, myBase2 a triangle!" << std::endl;
   }
-
 
   // std::cout << "typeid(*myBase): " << typeid(*myBase).name() << std::endl;
   // std::cout << "typeid(*base): " << typeid(*base).name() << std::endl;

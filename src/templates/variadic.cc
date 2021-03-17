@@ -1,4 +1,5 @@
 #include <iostream>
+#include <map>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -25,7 +26,7 @@ struct Op {
   virtual void Execute(class Machine& machine) = 0;
 };
 
-struct MovI : Op {
+struct MovI_old : Op {
   const char* GetName() const override { return "movi"; }
   void Parse(const std::string& params) override {
     // Split comma-separated list
@@ -100,24 +101,47 @@ std::tuple<T, Args...> ParseStrHelper(std::vector<std::string>& paramV) {
   return std::tuple_cat(ParseElem<T>(elem), ParseStr<Args...>(paramV));
 }
 //-----------------------------------------------------
-struct MovI2 : OpBase<std::string, int> {
+struct MovI : OpBase<std::string, int> {
   const char* GetName() const override { return "movi"; }
   void Execute(class Machine& machine) override {
     // Still have to implement this
   }
 };
 
+//-----------------------------------------------------
+//  map for shared pointer
+template <typename T>
+std::shared_ptr<Op> CreateOp() {
+  return std::make_shared<T>();
+}
+
+std::map<std::string, std::function<std::shared_ptr<Op>()>> opMap;
+//-----------------------------------------------------
 int main() {
   std::vector<std::string> paramV = {"5", "r1"};
   auto t = ParseStr<std::string, int>(paramV);
 
   std::cout << "std::get<0>(t): " << std::get<0>(t) << std::endl;
   std::cout << "std::get<1>(t): " << std::get<1>(t) << std::endl;
-  MovI2 m;
+  MovI m;
   m.Parse("r1,5");
 
   std::cout << "std::get<0>(m.mParameters): " << std::get<0>(m.mParameters)
             << std::endl;
+
+  {
+    opMap.emplace("mov", &CreateOp<MovI>);
+
+    // Get the string for op name and params
+    std::string opName = "mov";
+    std::string params = "r1,10";
+
+    // Look up the opName in our map, and call the
+    // correct CreateOp function! (note the extra
+    // parenthesis at the end, that's the function call)
+    std::shared_ptr<Op> ptr = opMap.at(opName)();
+    ptr->Parse(params);
+  }
   return 0;
 }
 

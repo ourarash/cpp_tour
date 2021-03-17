@@ -5,6 +5,7 @@ bool Tree::empty() { return root_ == nullptr; }
 
 int Tree::size() { return 0; }
 
+// Inorder (LNR): Left, Node, Right
 void Tree::InOrder(TreeNode *start) {
   if (start == nullptr) {
     return;
@@ -15,6 +16,7 @@ void Tree::InOrder(TreeNode *start) {
   InOrder(start->right);
 };
 
+// Preorder (NLR): Node, Left, Right. 
 void Tree::PreOrder(TreeNode *start) {
   if (start == nullptr) {
     return;

@@ -4,7 +4,6 @@
 #include <vector>
 class Subject;
 //-----------------------------------------------------
-
 class Observer {
  public:
   virtual void Update(Subject* updatedSubject) = 0;
@@ -12,8 +11,10 @@ class Observer {
 //-----------------------------------------------------s
 class Subject {
  public:
+  // Register, and unregister
   virtual void Attach(Observer* o) { mObservers.push_back(o); }  // subscribe
   virtual void Detach(Observer* o) { mObservers.remove(o); }     // unsubscribe
+
   virtual void NotifyObservers() {
     for (auto i = mObservers.begin(); i != mObservers.end(); ++i) {
       i->Update(this);
@@ -22,6 +23,7 @@ class Subject {
 
  private:
   std::list<Observer*> mObservers;
+  std::list<std::function<>> mLambdaList; // An Alternative
 };
 
 class MyObserver : Observer {
@@ -40,12 +42,13 @@ class mySubject : Subject {
   int mValue;
 };
 
-MyObserver x, y, z;
-
 int main(int argc, char const* argv[]) {
-  MyObserver a;
+  MyObserver a, b;
+  mySubject subject;
+  subject.Attach(&a);
+  subject.Attach(&b);
 
-  a.Assign(56);
+  subject.Assign(565);
 
   return 0;
 }

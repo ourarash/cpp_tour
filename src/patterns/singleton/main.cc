@@ -1,3 +1,4 @@
+#include <iostream>
 template <class T>
 class Singleton {
  private:
@@ -9,8 +10,10 @@ class Singleton {
  public:
   static T& get() {
     if (sInstance) {
+      std::cout << "Reusing the instance." << std::endl;
       return *sInstance;
     } else {
+      std::cout << "Constructing the instance." << std::endl;
       sInstance = new T();
       return *sInstance;
     }
@@ -21,8 +24,17 @@ class Singleton {
 template <class T>
 T* Singleton<T>::sInstance = nullptr;
 
-
-class MyFileSystem : public Singleton<FileSystem>{
-
+class MyFileSystem : public Singleton<MyFileSystem> {
+ public:
+  void Print() { std::cout << "This is my file system!" << std::endl; }
 };
-MyFileSystem::get()
+
+int main(int argc, char const* argv[]) {
+  MyFileSystem::get().Print();
+  
+  MyFileSystem::get().Print();
+  MyFileSystem::get().Print();
+  MyFileSystem::get().Print();
+
+  return 0;
+}

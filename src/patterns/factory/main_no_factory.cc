@@ -22,9 +22,9 @@ class FiveWheeler : public Vehicle {
   void printVehicle() { cout << "I am five wheeler" << endl; }
 };
 
-
 //-----------------------------------------------------
 // Client (or user) class
+// If we have a new FiveWheeler class, we should also modify the Client.
 class Client {
  public:
   Client(int type) {
@@ -33,13 +33,15 @@ class Client {
       pVehicle = new TwoWheeler();
     else if (type == 2)
       pVehicle = new FourWheeler();
+    else if (type == 3)
+      pVehicle = new FiveWheeler();
     else
       pVehicle = NULL;
   }
 
   ~Client() {
     if (pVehicle) {
-      delete[] pVehicle;
+      delete pVehicle;
       pVehicle = NULL;
     }
   }
@@ -57,19 +59,3 @@ int main() {
   pVehicle->printVehicle();
   return 0;
 }
-
-
-H --> Font_h; // 100 bytes
-E --> Font_e; // 100 bytes
-L --> Font_l; // 100 bytes
-L --> Font_l; // 100 bytes
-
-
-
-H --> 48; // 1 byte
-E --> 45; // 1 byte
-L --> 4C; // 1 byte
-L --> 4C; // 1 byte
-
-
-ASCII: maps an integer to an image

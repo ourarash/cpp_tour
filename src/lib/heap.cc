@@ -2,9 +2,13 @@
 
 #include <iostream>
 #include <map>
-
-#include "utility.h"
-
+// Swaps values of i and j
+template <class T>
+void Swap(T &i, T &j) {
+  T temp = i;
+  i = j;
+  j = temp;
+}
 int Heap::GetParent(int i) {
   if (i == 0) {
     return INT_MAX;
@@ -107,21 +111,3 @@ void Heap::TrickleDown(int i) {
     TrickleDown(smallest_child_index);
   }
 }
-
-
-#include<set>
-#include<map>
-
-int a = 2;
-int b{2};
-double d{2.54};
-std::vector<int> v = {1, 2, 3, 4};
-std::set<int> s = {1, 2, 3, 4};
-std::pair<int, int> p = {1, 2}; // (1,2)
-
-
-std::vector<std::pair<int,int>> E={{0,1}, {1,2}, {2,3}, {3,0}};
-V = {0, 1, 2, 3}
-
-
-// Uniform initialization: initialize everything using {}

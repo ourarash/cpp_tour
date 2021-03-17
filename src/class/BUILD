@@ -1,4 +1,5 @@
 load("@rules_cc//cc:defs.bzl", "cc_binary")
+
 cc_binary(
     name = "main",
     srcs = ["main.cc"],
@@ -22,18 +23,20 @@ cc_binary(
     deps = ["//src/lib:SolutionLib"],
 )
 
-
 cc_binary(
     name = "operator_overloading_main",
     srcs = ["operator_overloading_main.cc"],
-    deps = ["//src/lib:SolutionLib"],
+    deps = [
+        "//src/lib:SolutionLib",
+        "//src/lib:utility",
+    ],
 )
-
 
 cc_binary(
     name = "operator_overloading2",
     srcs = ["operator_overloading2.cc"],
-    deps = ["//src/lib:SolutionLib"],
+    deps = [
+        "//src/lib:SolutionLib",
+        "//src/lib:utility",
+    ],
 )
-
-

@@ -1,11 +1,11 @@
 #ifndef UTILITY_H
 #define UTILITY_H
+#include <climits>
 #include <cmath>
 #include <iostream>
 #include <numeric>
 #include <string>
-#include <climits>
-
+#include <vector>
 // Swaps values of i and j
 template <class T>
 void Swap(T &i, T &j) {
@@ -58,12 +58,12 @@ void Print2dVector(std::vector<std::vector<T>> input) {
 }
 //-----------------------------------------------------
 template <class T>
-void Print(T input, long infinity = INT_MAX) {
+void Print(const T &input, long infinity = INT_MAX) {
   std::cout << "{ ";
   unsigned int count = 0;
   for (auto n : input) {
     count++;
-    if (n == infinity) {
+    if (static_cast<long>(n) == infinity) {
       std::cout << "∞";
 
     } else {
@@ -73,6 +73,19 @@ void Print(T input, long infinity = INT_MAX) {
   }
   std::cout << " }" << std::endl;
 }
+
+// void Print(const std::vector<int> &input) {
+//   std::cout << "{ ";
+//   unsigned int count = 0;
+//   for (auto n : input) {
+//     count++;
+
+//     std::cout << n;
+
+//     if (count < input.size()) std::cout << ", ";
+//   }
+//   std::cout << " }" << std::endl;
+// }
 
 template <class T>
 void PrintVectorOfString(T input) {

@@ -4,3 +4,9 @@ cc_binary(
     srcs = ["main.cc"],
     deps = ["//src/lib:SolutionLib"],
 )
+
+cc_binary(
+    name = "virtual",
+    srcs = ["virtual.cc"],
+    deps = ["//src/lib:SolutionLib"],
+)

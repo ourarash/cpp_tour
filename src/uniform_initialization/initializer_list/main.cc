@@ -1,7 +1,19 @@
 #include <iostream>
+#include <list>
+#include <map>
+#include <set>
 #include <string>
 #include <vector>
 //-----------------------------------------------------
+class Test {
+ public:
+ private:
+  int x = 5;     // Works
+  int y = {25};  // Works
+  int z{125};    // Works
+  //  int a(125);     // ERROR!
+};
+
 template <typename T>
 class DynArray {
  public:
@@ -42,8 +54,8 @@ int main(int argc, char const* argv[]) {
   // (Creates a list of size 5 with no data)
   DynArray<int> test3(5);
 
+  std::vector<int> my_vector(10);   // vector of 10 items
+  std::vector<int> my_vector2{10};  // A vector of one value which is 10
 
-  std::vector<int> my_vector (10);
-  std::vector<int> my_vector2 {10};
   return 0;
 }

@@ -13,12 +13,13 @@ cc_library(
     hdrs = ["tree.h"],
     visibility = ["//visibility:public"],
 )
+
 cc_library(
     name = "BSTLib",
     srcs = ["bst.cc"],
     hdrs = ["bst.h"],
     visibility = ["//visibility:public"],
-    deps=[":TreeLib"]
+    deps = [":TreeLib"],
 )
 
 # cc_library(
@@ -52,10 +53,10 @@ cc_library(
     name = "graph_distance_matrix_lib",
     srcs = ["graph/distance_matrix.cc"],
     hdrs = ["graph/distance_matrix.h"],
-    deps = ["utility"],
     visibility = ["//visibility:public"],
+    deps = ["utility"],
 )
- 
+
 cc_library(
     name = "vector_union_lib",
     srcs = ["vector_union.cc"],
@@ -68,6 +69,7 @@ cc_library(
     srcs = ["heap.cc"],
     hdrs = ["heap.h"],
     visibility = ["//visibility:public"],
+    deps = [":utility"],
 )
 
 cc_library(

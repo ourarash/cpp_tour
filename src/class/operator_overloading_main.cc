@@ -1,12 +1,13 @@
 
-#include "src/lib/utility.h"
 #include <iostream>
 #include <string>
 #include <vector>
 
+#include "src/lib/utility.h"
+
 // Operator overloading
 class Point {
-public:
+ public:
   // Constructor
   Point() {
     i_ = 0;
@@ -23,15 +24,16 @@ public:
     j_ = p2.GetJ();
   }
 
-  Point operator+(const Point &rhs) {
+  Point operator+(const Point &rhs) const {
     Point res;
-    res.SetI(i_ + rhs.GetI());
-    res.SetJ(j_ + rhs.GetJ());
+    res.i_ = i_ + rhs.i_;
+    res.j_ = j_ + rhs.j_;
     return res;
   }
 
   // Prefix overload
   // ++p;
+  // Point p2 = ++p1;
   Point operator++() {
     i_++;
     j_++;
@@ -40,11 +42,14 @@ public:
 
   // Postfix overload
   // p++;
+  // Point p2 = p1++;
+  // 1. Return the previous value
+  // 2. Increment p1
   Point operator++(int) {
-    Point temp = *this;
-    i_++;
-    j_++;
-    return temp;
+    Point temp = *this;  // 1.
+    i_++;                // 2.
+    j_++;                // 2.
+    return temp;         // 1.
   }
 
   int GetI() const { return i_; };
@@ -52,8 +57,11 @@ public:
   void SetI(int i) { i_ = i; };
   void SetJ(int j) { j_ = j; };
   friend std::istream &operator>>(std::istream &is, Point &p);
+  friend Point operator-(const Point &lhs, const Point &rhs);
 
-private:
+  friend int MyFunction(const Point &p);
+
+ private:
   int i_;
   int j_;
 };
@@ -70,11 +78,22 @@ std::istream &operator>>(std::istream &is, Point &p) {
   return is;
 }
 
+int MyFunction(const Point &p) { std::cout << "p.i_: " << p.i_ << std::endl; }
+
+// p1 - p2
+Point operator-(const Point &lhs, const Point &rhs) {
+  Point res;
+  res.SetI(lhs.i_ - rhs.GetI());
+  res.SetJ(lhs.j_ - rhs.GetJ());
+  return res;
+}
+
 int main() {
   // OPerator overloading
   Point p1(1, 2);
   Point p2(10, 20);
   Point p3 = p1 + p2;
+  Point p4 = p1 - p2;
   std::cout << "p3: " << p3 << std::endl;
 
   ++p1;
@@ -87,8 +106,3 @@ int main() {
   std::cin >> p1;
   std::cout << "p1: " << p1 << std::endl;
 }
-
-
-
-  
-

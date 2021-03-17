@@ -5,3 +5,10 @@ cc_binary(
     srcs = ["main.cc"],
     deps = ["//src/lib:SolutionLib"],
 )
+
+
+cc_binary(
+    name = "explicit_constructor",
+    srcs = ["explicit_constructor.cc"],
+    deps = ["//src/lib:SolutionLib"],
+)

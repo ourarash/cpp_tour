@@ -46,5 +46,5 @@ int main() {
 
 
 
-movi tx,110  ====> ((string) "tx", (int) 110)  ---> std::get<0>(my_tuple)
-movi ty,105
+// movi tx,110  ====> ((string) "tx", (int) 110)  ---> std::get<0>(my_tuple)
+// movi ty,105
