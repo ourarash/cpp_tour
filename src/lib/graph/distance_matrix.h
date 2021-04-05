@@ -4,6 +4,7 @@
 #include <map>
 #include <set>
 #include <string>
+#include <map>
 #include <unordered_set>
 #include <vector>
 
@@ -50,8 +51,11 @@ class DistMatrixGraph {
                                 std::unordered_set<int> &visited);
 
   long FloydWarshallRecursiveHelper(int i, int j, int k);
-
   std::vector<std::vector<long>> FloydWarshallRecursive();
+
+  long FloydWarshallRecursiveHelperMemo(
+      int i, int j, int k, std::map<std::vector<int>, long> &memo);
+  std::vector<std::vector<long>> FloydWarshallRecursiveMemo();
 
   // std::vector<long> shortestPathTopo(int source);
 

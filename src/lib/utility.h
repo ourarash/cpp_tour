@@ -152,12 +152,12 @@ T AccumulateVector(const std::vector<T> &v) {
   return sum;
 }
 
-void CalculateShort(int64_t &sum, int64_t start, int64_t end) {
-  sum = 0;
-  for (auto i = start; i < end; i++) {
-    sum += pow(-1, i % 2);
-  }
-}
+// void CalculateShort(int64_t &sum, int64_t start, int64_t end) {
+//   sum = 0;
+//   for (auto i = start; i < end; i++) {
+//     sum += pow(-1, i % 2);
+//   }
+// }
 
 class CalculateShortFunctor {
  public:
@@ -184,19 +184,19 @@ class AccumulateFunctor {
   int64_t _sum;
 };
 
-uint64_t AccumulateRange(uint64_t &sum, uint64_t start, uint64_t end) {
-  sum = 0;
-  for (auto i = start; i < end; i++) {
-    sum += i;
-  }
-  return sum;
-}
+// uint64_t AccumulateRange(uint64_t &sum, uint64_t start, uint64_t end) {
+//   sum = 0;
+//   for (auto i = start; i < end; i++) {
+//     sum += i;
+//   }
+//   return sum;
+// }
 
-uint64_t GetRangeSum(uint64_t start, uint64_t end) {
-  uint64_t sum = 0;
-  for (auto i = start; i < end; i++) {
-    sum += i;
-  }
-  return sum;
-}
+// uint64_t GetRangeSum(uint64_t start, uint64_t end) {
+//   uint64_t sum = 0;
+//   for (auto i = start; i < end; i++) {
+//     sum += i;
+//   }
+//   return sum;
+// }
 #endif

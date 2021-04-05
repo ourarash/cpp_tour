@@ -31,22 +31,59 @@ std::vector<int> ReturnLargestItems(const std::vector<int> &input, int k) {
   return result;
 }
 
+using namespace std;
+std::vector<int> ReturnLargestItems2(const std::vector<int> &input, int k) {
+  int n = input.size();
+  int j = n - k;
+  // #convert to min heap, assume this function is min heap convert function.
+  auto minheap = ConvertToHeap(input);
+  std::vector<int> output;
+  for (int i = 0; i < n; i++) {
+    
+    auto value = minheap.top();
+    minheap.pop();
+    if (i >= k) {
+      output.push_back(value);
+    }
+  }
+  return output;
+}
+
 int main(int argc, char const *argv[]) {
   std::vector<int> input = {1, 20, 5, 8, -7};
   auto res1 = ReturnLargestItems(input, 3);
-  Print(res1);
+  auto res2 = ReturnLargestItems2(input, 3);
 
+  Print(res1);
+  Print(res2);
+  std::cout << "------------------------------------------" << std::endl;
   {
     std::vector<int> input = {1, 2, 3, 5, 4};
-    auto res1 = ReturnLargestItems(input, 3);
-    Print(res1);
-  }
+    auto res1 = ReturnLargestItems(input, 2);
+    auto res2 = ReturnLargestItems2(input, 2);
 
+    Print(res1);
+    Print(res2);
+  }
+  std::cout << "------------------------------------------" << std::endl;
+  {
+    std::vector<int> input = {-1, -3, 0, 0, 0, 1, 2};
+    auto res1 = ReturnLargestItems(input, 3);
+    auto res2 = ReturnLargestItems2(input, 3);
+
+    Print(res1);
+    Print(res2);
+  }
+  std::cout << "------------------------------------------" << std::endl;
   {
     std::vector<int> input = {5, 6, 1, 2, 3};
     auto res1 = ReturnLargestItems(input, 3);
+    auto res2 = ReturnLargestItems2(input, 3);
+
     Print(res1);
+    Print(res2);
   }
+
   // Heap heap = ConvertToHeap(input);
 
   // while (!heap.empty()) {

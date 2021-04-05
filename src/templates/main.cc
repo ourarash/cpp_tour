@@ -1,10 +1,12 @@
 #include <iostream>
 
+// Works for T = any type but std::string, double
 template <typename T>
 T Max(T a, T b) {
   return ((a > b) ? a : b);
 }
 
+// Works for T =std::string
 template <>
 std::string Max<std::string>(std::string a, std::string b) {
   // Code specific for this case

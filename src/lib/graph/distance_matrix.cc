@@ -70,9 +70,27 @@ long DistMatrixGraph::FloydWarshallRecursiveHelper(int i, int j, int k) {
   if (k < 0) {
     return weight_[i][j];
   } else {
-    return std::min(FloydWarshallRecursiveHelper(i, j, k - 1),
-                    FloydWarshallRecursiveHelper(i, k, k - 1) +
-                        FloydWarshallRecursiveHelper(k, j, k - 1));
+    auto res = std::min(FloydWarshallRecursiveHelper(i, j, k - 1),
+                        FloydWarshallRecursiveHelper(i, k, k - 1) +
+                            FloydWarshallRecursiveHelper(k, j, k - 1));
+    return res;
+  }
+}
+//-----------------------------------------------------
+// Calculates shortest distance between i,j using nodes 0 to k
+long DistMatrixGraph::FloydWarshallRecursiveHelperMemo(
+    int i, int j, int k, std::map<std::vector<int>, long> &memo) {
+  if (k < 0) {
+    return weight_[i][j];
+  } else {
+    if (memo.count({i, j, k}) > 0) {
+      return memo[{i, j, k}];
+    }
+    memo[{i, j, k}] =
+        std::min(FloydWarshallRecursiveHelperMemo(i, j, k - 1, memo),
+                 FloydWarshallRecursiveHelperMemo(i, k, k - 1, memo) +
+                     FloydWarshallRecursiveHelperMemo(k, j, k - 1, memo));
+    return memo[{i, j, k}];
   }
 }
 //-----------------------------------------------------
@@ -83,6 +101,20 @@ std::vector<std::vector<long>> DistMatrixGraph::FloydWarshallRecursive() {
   for (int i = 0; i < weight_.size(); ++i) {
     for (int j = 0; j < weight_.size(); ++j) {
       d[i][j] = FloydWarshallRecursiveHelper(i, j, weight_.size() - 1);
+    }
+  }
+  return d;
+}
+//-----------------------------------------------------
+std::vector<std::vector<long>> DistMatrixGraph::FloydWarshallRecursiveMemo() {
+  std::map<std::vector<int>, long> memo;
+  std::vector<std::vector<long>> d(weight_.size(),
+                                   std::vector<long>(weight_.size()));
+  // Find all pair distances
+  for (int i = 0; i < weight_.size(); ++i) {
+    for (int j = 0; j < weight_.size(); ++j) {
+      d[i][j] =
+          FloydWarshallRecursiveHelperMemo(i, j, weight_.size() - 1, memo);
     }
   }
   return d;

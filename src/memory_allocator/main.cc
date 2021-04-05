@@ -1,32 +1,49 @@
 #include <iostream>
-
-BasicStackAlloc arena;
 class Test {
  public:
   Test() { std::cout << "Constructor!" << std::endl; }
   ~Test() { std::cout << "Destructor!" << std::endl; }
-
-  // Override operator "new" to allocate with malloc
-  static void* operator new(size_t size) {
-    std::cout << "Custom new!" << std::endl;
-    std::cout << "size: " << size << std::endl;
-    // return malloc(size);
-    return arena.Allocate(size);
-  }
-
-  // Override operator "delete" to free with free
-  static void operator delete(void* ptr) {
-    std::cout << "Custom delete!" << std::endl;
-    free(ptr);
-  }
-
-  // NOTE: Should also overload new[] and delete[]
-  int data_[10];
 };
 
+class MyClass {};
+
 int main(int argc, char const* argv[]) {
-  Test* myTest = new Test();
-  delete myTest;
+  { Test* test_p = new Test; }
+  {
+    Test* myTest = static_cast<Test*>(malloc(sizeof(Test)));
+    new (myTest) Test();  // Placement new to construct.
+    delete myTest;
+  }
+
+  {
+    // “nothrow” placement new tells the program you don’t want it throwing an
+    //     exception if it fails :
+    // This will return nullptr if it fails
+    char* c = new (std::nothrow) char[1024];
+  }
+  {
+    char buffer[1024];
+    MyClass* p = new (buffer) MyClass();
+
+    p->~MyClass();
+    free(p);
+
+    MyClass* q = new MyClass;
+    free(q);
+  }
+
+  {
+    // Allocate memory for a Test instance
+    Test* myTest = static_cast<Test*>(malloc(sizeof(Test)));
+    // Construct the object using "placement" new
+    new (myTest) Test();
+    // Destruct the object
+    myTest->~Test();
+    // Free the memory
+    free(myTest);
+  }
 
   return 0;
 }
+
+// What's the difference between free and delete???

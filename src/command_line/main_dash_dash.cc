@@ -26,6 +26,10 @@ int ProcessCommandLine(int argc, const char* argv[]) {
 
   // Regular expression matching --parameter=value.
   // Example: --input=my_file.txt
+  // myprogram --input=my_file.txt --timeout=5
+  // myprogram --timeout=5 --input=my_file.txt
+
+
   std::regex pattern("--(.*)=(.*)");
 
   // Iterate each element of argc

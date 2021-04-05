@@ -127,3 +127,120 @@ TEST(TSP_Test, TSP) {
     EXPECT_EQ(25, g.TSP5(0));
   }
 }
+//-----------------------------------------------------
+// Tests FloydWarshallRecursive and FloydWarshallRecursiveMemo
+TEST(FloydWarshallRecursive, FloydWarshallRecursive1) {
+  std::vector<std::vector<int>> distances;
+
+  {
+    distances = {
+        {0, 1000, 20, 35},  // 0
+        {40, 0, 30, 10},    // 1
+        {20, 30, 0, 30},    // 2
+        {35, 10, 30, 0},    // 3
+    };
+    {
+      DistMatrixGraph g(distances);
+      std::vector<std::vector<long>> actual = g.FloydWarshallRecursive();
+      std::vector<std::vector<long>> expected = {
+          {0, 45, 20, 35},  // 0
+          {40, 0, 30, 10},  // 1
+          {20, 30, 0, 30},  // 2
+          {35, 10, 30, 0}   // 3
+      };
+      EXPECT_EQ(expected, actual);
+    }
+    {
+      DistMatrixGraph g(distances);
+      std::vector<std::vector<long>> actual = g.FloydWarshallRecursiveMemo();
+      std::vector<std::vector<long>> expected = {
+          {0, 45, 20, 35},  // 0
+          {40, 0, 30, 10},  // 1
+          {20, 30, 0, 30},  // 2
+          {35, 10, 30, 0}   // 3
+      };
+      EXPECT_EQ(expected, actual);
+    }
+  }
+}
+
+// Tests FloydWarshallRecursive and FloydWarshallRecursiveMemo
+TEST(FloydWarshallRecursive, FloydWarshallRecursive2) {
+  std::vector<std::vector<int>> distances;
+  auto INF = INT_MAX;
+  {
+    distances = {
+        {0, 4, 2, INF, INF, INF},        // 0
+        {INF, 0, 5, 10, INF, INF},       // 1
+        {INF, INF, 0, INF, 3, INF},      // 2
+        {INF, INF, INF, 0, INF, 11},     // 3
+        {INF, INF, INF, 4, 0, INF},      // 4
+        {INF, INF, INF, INF, INF, INF},  // 5
+    };
+    std::vector<std::vector<long>> expected = {
+        {0, 4, 2, 9, 5, 20},            // 0
+        {INF, 0, 5, 10, 8, 21},         // 1
+        {INF, INF, 0, 7, 3, 18},        // 2
+        {INF, INF, INF, 0, INF, 11},    // 3
+        {INF, INF, INF, 4, 0, 15},      // 4
+        {INF, INF, INF, INF, INF, INF}  // 5
+    };
+
+    DistMatrixGraph g(distances);
+    std::vector<std::vector<long>> actual_no_memo = g.FloydWarshallRecursive();
+    std::vector<std::vector<long>> actual_memo = g.FloydWarshallRecursiveMemo();
+
+    EXPECT_EQ(expected, actual_no_memo);
+    EXPECT_EQ(expected, actual_memo);
+  }
+}
+// Tests FloydWarshallRecursive and FloydWarshallRecursiveMemo
+TEST(FloydWarshallRecursive, FloydWarshallRecursive3) {
+  std::vector<std::vector<int>> distances;
+  auto INF = INT_MAX;
+  {
+    distances = {
+        {0, 4, INF, INF, INF, INF, INF, 8, INF},   // 0
+        {4, 0, 8, INF, INF, INF, INF, 11, INF},    // 1
+        {INF, 8, 0, 7, INF, 4, INF, INF, 2},       // 2
+        {INF, INF, 7, 0, 9, 14, INF, INF, INF},    // 3
+        {INF, INF, INF, 9, 0, 10, INF, INF, INF},  // 4
+        {INF, INF, 4, 14, 10, 0, 2, INF, INF},     // 5
+        {INF, INF, INF, INF, INF, 2, 0, 1, 6},     // 6
+        {8, 11, INF, INF, INF, INF, 1, 0, 7},      // 7
+        {INF, INF, 2, INF, INF, INF, 6, 7, 0}      // 8
+    };
+    std::vector<std::vector<long>> expected = {
+        {0, 4, 12, 19, 21, 11, 9, 8, 14},    // 0
+        {4, 0, 8, 15, 22, 12, 12, 11, 10},   // 1
+        {12, 8, 0, 7, 14, 4, 6, 7, 2},       // 2
+        {19, 15, 7, 0, 9, 11, 13, 14, 9},    // 3
+        {21, 22, 14, 9, 0, 10, 12, 13, 16},  // 4
+        {11, 12, 4, 11, 10, 0, 2, 3, 6},     // 5
+        {9, 12, 6, 13, 12, 2, 0, 1, 6},      // 6
+        {8, 11, 7, 14, 13, 3, 1, 0, 7},      // 7
+        {14, 10, 2, 9, 16, 6, 6, 7, 0}       // 8
+    };
+
+    DistMatrixGraph g(distances);
+
+    auto start_time_no_memo = std::chrono::high_resolution_clock::now();
+    std::vector<std::vector<long>> actual_no_memo = g.FloydWarshallRecursive();
+    auto end_time_no_memo = std::chrono::high_resolution_clock::now();
+    auto duration_no_memo =
+        std::chrono::duration_cast<std::chrono::milliseconds>(
+            end_time_no_memo - start_time_no_memo);
+
+    auto start_time_memo = std::chrono::high_resolution_clock::now();
+    std::vector<std::vector<long>> actual_memo = g.FloydWarshallRecursiveMemo();
+    auto end_time_memo = std::chrono::high_resolution_clock::now();
+    auto duration_memo = std::chrono::duration_cast<std::chrono::milliseconds>(
+        end_time_memo - start_time_memo);
+
+    EXPECT_EQ(expected, actual_no_memo);
+    EXPECT_EQ(expected, actual_memo);
+    std::cout << "duration_no_memo: " << duration_no_memo.count() << std::endl;
+    std::cout << "duration_memo: " << duration_memo.count() << std::endl;
+    EXPECT_LE(duration_memo.count(), duration_no_memo.count());
+  }
+}

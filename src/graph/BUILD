@@ -1,4 +1,5 @@
 load("@rules_cc//cc:defs.bzl", "cc_binary")
+
 cc_binary(
     name = "main",
     srcs = ["main.cc"],
@@ -50,7 +51,11 @@ cc_binary(
 cc_binary(
     name = "map_of_int_to_set_graph",
     srcs = ["map_of_int_to_set_graph.cc"],
-    deps = ["//src/lib:SolutionLib"],
+    deps = [
+        "//src/lib:map_of_int_to_set_graph_lib",
+        "//src/lib:SolutionLib",
+        "//src/lib:utility",
+    ],
 )
 
 cc_binary(

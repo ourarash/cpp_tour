@@ -12,6 +12,12 @@ cc_binary(
 )
 
 cc_binary(
+    name = "variadic_no_helper",
+    srcs = ["variadic_no_helper.cc"],
+    deps = ["//src/lib:utility"],
+)
+
+cc_binary(
     name = "numbers",
     srcs = ["numbers.cc"],
     deps = ["//src/lib:utility"],
@@ -77,6 +83,15 @@ cc_binary(
 cc_binary(
     name = "variadic_functions_simple",
     srcs = ["variadic_functions_simple.cc"],
+    deps = ["//src/lib:utility"],
+)
+
+
+
+
+cc_binary(
+    name = "non_type",
+    srcs = ["non_type.cc"],
     deps = ["//src/lib:utility"],
 )
 

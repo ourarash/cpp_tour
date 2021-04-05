@@ -25,8 +25,10 @@ struct has_iterator {
   template <typename U>
   static true_type check(typename U::iterator*);
 
-  static const bool value =
-      is_same<decltype(check<T>(nullptr)), true_type>::value;
+  // static const bool value =
+  //     is_same<decltype(check<T>(nullptr)), true_type>::value;
+
+  static const bool value = decltype(check<T>(nullptr))::value;
 };
 //-----------------------------------------------------
 template <typename T>

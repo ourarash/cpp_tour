@@ -26,7 +26,7 @@ int main(int argc, char const *argv[]) {
     // constructs a vector of over a million elements!
     vec2.emplace_back(1 << 20);
 
-    // vec3.push_back(1 << 20); // compile error!}}
+    std::cout << "test" << std::endl;
   }
   {
     std::vector<std::string> my_vec;

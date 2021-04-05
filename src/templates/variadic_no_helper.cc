@@ -5,22 +5,43 @@
 #include <vector>
 //-----------------------------------------------------
 // Related to PA5
-// Forward declaraion
 
-// template <typename T>
-// std::tuple<T> ParseStr(std::vector<std::string>& paramV);
+// ParseElem
+template <typename T>
+std::tuple<T> ParseElem(const std::string& elem) {}
 
-// template <typename T1, typename T2>
-// std::tuple<T1, T2> ParseStr(std::vector<std::string>& paramV);
+// Specialized template
+template <>
+inline std::tuple<int> ParseElem(const std::string& elem) {
+  return std::make_tuple(std::stoi(elem));
+}
 
-// {"r1", "r2", "r3"}  -> std::tuple<std::string, std::string, std::string>
-// {"r1", "10"}       -> std::tuple<std::string, int>
-// { }                 -> std::tuple<>
+// Specialized template
+template <>
+inline std::tuple<std::string> ParseElem(const std::string& elem) {
+  return std::make_tuple(elem);
+}
 template <typename... Args>
-std::tuple<Args...> ParseStr(std::vector<std::string>& paramV);
+std::tuple<Args...> ParseStr(std::vector<std::string>& paramV) {
+  return ParseStr<Args...>(paramV);
+}
 
-// Later on:
-// ParseStr<std::string, std::string, std::string> ({"r1", "r2", "r3"});
+template <typename T, typename... Args>
+std::tuple<T, Args...> ParseStr(std::vector<std::string>& paramV) {
+  std::string elem = paramV.back();
+  paramV.pop_back();
+
+  return std::tuple_cat(ParseElem<T>(elem), ParseStr<Args...>(paramV));
+}
+//--
+// Base case
+template <>
+std::tuple<> ParseStr(std::vector<std::string>& paramV) {
+  return std::make_tuple();
+}
+// Forward declaraion
+// template <typename... Args>
+// std::tuple<Args...> ParseStr(std::vector<std::string>& paramV);
 
 std::vector<std::string> Split(const std::string& str) {
   std::stringstream ss(str);
@@ -61,60 +82,18 @@ struct OpBase : Op {
     std::vector<std::string> paramV = Split(params);
     std::reverse(paramV.begin(), paramV.end());
     mParameters = ParseStr<Args...>(paramV);
-    // empty tuple -> tuple<Args[0]> -> tuple<Args[0], Args[1]> -> tuple<Args[0], ..., Args[N]>
   }
 
   std::tuple<Args...> mParameters;
 };
 
 //-----------------------------------------------------
-// ParseElem
-template <typename T>
-std::tuple<T> ParseElem(const std::string& elem) {}
-
-// Specialized template
-template <>
-inline std::tuple<int> ParseElem(const std::string& elem) {
-  return std::make_tuple(std::stoi(elem));
-}
-
-// Specialized template
-template <>
-inline std::tuple<std::string> ParseElem(const std::string& elem) {
-  return std::make_tuple(elem);
-}
-
-//-----------------------------------------------------
-// Forward declaration
-template <typename T, typename... Args>
-std::tuple<T, Args...> ParseStrHelper(std::vector<std::string>& paramV);
-//-----------------------------------------------------
-
-template <typename... Args>
-std::tuple<Args...> ParseStr(std::vector<std::string>& paramV) {
-  return ParseStrHelper<Args...>(paramV);
-}
-
-// Base case
-template <>
-std::tuple<> ParseStr(std::vector<std::string>& paramV) {
-  return std::make_tuple();
-}
 
 //  Arg... = <int, float, std::string>
 //  T = int, Arg... = <float, std::string>
 //                   T = float, Arg... = std::string
 //                                     T = std::string, Arg... = {}
 
-//-----------------------------------------------------
-// <int, std::string, std::string>
-template <typename T, typename... Args>
-std::tuple<T, Args...> ParseStrHelper(std::vector<std::string>& paramV) {
-  std::string elem = paramV.back();
-  paramV.pop_back();
-
-  return std::tuple_cat(ParseElem<T>(elem), ParseStr<Args...>(paramV));
-}
 //-----------------------------------------------------
 struct MovI : OpBase<std::string, int> {
   const char* GetName() const override { return "movi"; }
@@ -133,32 +112,16 @@ std::shared_ptr<Op> CreateOp() {
 std::map<std::string, std::function<std::shared_ptr<Op>()>> opMap;
 //-----------------------------------------------------
 int main() {
-  {
-    auto parsed = ParseElem<int>("10");
-    // std::tuple<int> parsed
-
-    std::cout << "parsed: " << std::get<0>(parsed) << std::endl;
-  }
-
-  {
-    auto parsed = ParseElem<std::string>("r1");
-    // std::tuple<std::string> parsed
-    std::cout << "parsed: " << std::get<0>(parsed) << std::endl;
-  }
-
   std::vector<std::string> paramV = {"5", "r1"};
   auto t = ParseStr<std::string, int>(paramV);
 
   std::cout << "std::get<0>(t): " << std::get<0>(t) << std::endl;
   std::cout << "std::get<1>(t): " << std::get<1>(t) << std::endl;
+  MovI m;
+  m.Parse("r1,5");
 
-  {
-    MovI m;
-    m.Parse("r1,5");
-
-    std::cout << "std::get<0>(m.mParameters): " << std::get<0>(m.mParameters)
-              << std::endl;
-  }
+  std::cout << "std::get<0>(m.mParameters): " << std::get<0>(m.mParameters)
+            << std::endl;
 
   {
     opMap.emplace("mov", &CreateOp<MovI>);

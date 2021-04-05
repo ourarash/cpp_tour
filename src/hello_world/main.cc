@@ -2,15 +2,13 @@
 
 // My first C++ program
 
-/* Prints "Hello World"
-multi line comments
-*/
-int main() {
-  std::cout << "Hello World" << std::endl;
-
+int f() {
   int a;
-  std::cin >> a;
-  std::cout << "a: " << a << std::endl;
+  return a = 10;
+}
+int main() {
+  auto t = f();
+  std::cout << "t: " << t << std::endl;
 
-  return 0; // End of a line
+  return 0;  // End of a line
 }

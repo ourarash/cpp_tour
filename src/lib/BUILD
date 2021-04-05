@@ -58,6 +58,14 @@ cc_library(
 )
 
 cc_library(
+    name = "map_of_int_to_set_graph_lib",
+    srcs = ["graph/map_of_int_to_set_graph.cc"],
+    hdrs = ["graph/map_of_int_to_set_graph.h"],
+    visibility = ["//visibility:public"],
+    deps = ["utility"],
+)
+
+cc_library(
     name = "vector_union_lib",
     srcs = ["vector_union.cc"],
     hdrs = ["vector_union.h"],

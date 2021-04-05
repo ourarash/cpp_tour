@@ -25,6 +25,7 @@ void MapSetGraph::DFS_helper(int root, std::map<int, int> &marks) {
       DFS_helper(child, marks);
     }
   }
+  // At this point, all children of root are visited.
 }
 
 void MapSetGraph::DFS(int root) {
@@ -51,6 +52,7 @@ std::vector<int> MapSetGraph::TopologicalSort(int root) {
   std::map<int, int> marks;
 
   DFS_helper_with_topo(root, marks, topo_list);
+  std::reverse(topo_list);
   return topo_list;
 }
 
