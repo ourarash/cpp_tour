@@ -39,3 +39,13 @@ cc_binary(
     name = "pool_allocator",
     srcs = ["pool_allocator.cc"],
 )
+
+cc_binary(
+    name = "override_new_delete2",
+    srcs = ["override_new_delete2.cc"],
+)
+
+cc_binary(
+name = "std_allocator1",
+srcs = ["std_allocator1.cc"],
+)

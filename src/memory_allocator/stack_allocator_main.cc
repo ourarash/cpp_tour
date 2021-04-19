@@ -36,6 +36,8 @@ BasicStackAlloc::BasicStackAlloc(size_t size)
 }
 
 BasicStackAlloc::~BasicStackAlloc() {
+  std::cout << "Arena destructor is called" << std::endl;
+
   delete[] mMemoryBuffer;
   mMemoryBuffer = nullptr;
   mTop = nullptr;
@@ -90,7 +92,7 @@ int main(int argc, char const* argv[]) {
   {
     Test* myTest = new Test();
     myTest->Talk();
-    delete myTest;
+    // delete myTest;
   }
   std::cout << "arena.GetBytesRemaining(): " << arena.GetBytesRemaining()
             << std::endl;

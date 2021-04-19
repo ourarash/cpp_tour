@@ -18,9 +18,15 @@ int main() {
   {
     {  // Declare this as a binary number
       int x = 0b1010;
+      std::cout << "x: " << x << std::endl;
 
       // Add digit separators so numbers are easier to read
       int y = 300'000;
+      std::cout << "y: " << y << std::endl;
+
+      // Base 8
+      int z = 01010;
+      std::cout << "z: " << z << std::endl;
     }
 
     {

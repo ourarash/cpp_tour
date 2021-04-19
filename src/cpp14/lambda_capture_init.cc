@@ -10,19 +10,9 @@ int main() {
       return x + 2;
     };
 
-    y();  // Updates ::x to 6, and initializes y to 7.
-
-    std::cout << "x: " << x << std::endl;
-  }
-
-  {
-    int x = 4;
-    auto y = [& r = x, x = x + 1]() -> int {
-      r += 2;  // r=6
-      std::cout << "r: " << r << std::endl;
-      return x + 2;  // 5+2
-    };
+    // Updates ::x to 6, and initializes y to 7.
     std::cout << "y(): " << y() << std::endl;
+    std::cout << "x: " << x << std::endl;
   }
 
   // Move inside lambda

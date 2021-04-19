@@ -7,6 +7,7 @@ class Test {
   // Override operator "new" to allocate with malloc
   static void* operator new(size_t size) {
     std::cout << "Custom new!" << std::endl;
+    
     return malloc(size);
   }
   // Override operator "delete" to free with free
@@ -18,9 +19,8 @@ class Test {
 };
 
 int main(int argc, char const* argv[]) {
-  {
-    Test* myTest = new Test();
-    delete myTest;
-  }
+  Test* myTest = new Test();
+  delete myTest;
+
   return 0;
 }
