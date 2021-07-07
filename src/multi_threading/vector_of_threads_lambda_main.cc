@@ -19,6 +19,8 @@ int main() {
       for (uint64_t j = i * step; j < (i + 1) * step; j++) {
         partial_sums[i] += j;
       }
+
+      while(true)
     }));
   }
 

@@ -9,8 +9,16 @@ constexpr unsigned long long factorial(long x) {
 }
 
 constexpr int product(int x, int y) { return (x * y); }
+constexpr auto InchToMm(double inch) { return inch * 25.4; }
 
 int main() {
+  {
+    const double const_inch{6};
+    const auto mm1{InchToMm(const_inch)};  // at compile time ✔
+
+    double dynamic_inch{8};
+    const auto mm2{InchToMm(dynamic_inch)};  // at run time ❌ (still compiles)
+  }
   {
     const int x = product(1, 2);
     std::cout << "x: " << x << std::endl;
@@ -35,8 +43,8 @@ int main() {
     // }
     // std::cout << "x: " << x << std::endl;
   }
-  const long a = 5;
-  constexpr unsigned long long f = factorial(a + 10000);
-  std::cout << "f: " << f << std::endl;
+  // const long a = 5;
+  // constexpr unsigned long long f = factorial(a + 10000);
+  // std::cout << "f: " << f << std::endl;
   return 0;
 }

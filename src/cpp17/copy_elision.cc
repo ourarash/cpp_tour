@@ -61,9 +61,9 @@ T h(T& t) {
 }
 
 int main(int argc, char const* argv[]) {
-  Test x = f<Test>();              // no copy here either (C++17)
-  auto y = g<Test>();              // no copy here (C++17)
-  auto z = h<Test>(x);             // no copy here (C++17)
+  // Test x = f<Test>();              // no copy here either (C++17)
+  // auto y = g<Test>();              // no copy here (C++17)
+  // auto z = h<Test>(x);             // no copy here (C++17)
   auto t = Test(Test(f<Test>()));  // only one call to default constructor
   // of T, to initialize x
 

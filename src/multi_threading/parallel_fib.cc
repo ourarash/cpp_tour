@@ -30,12 +30,12 @@ void parallelFib(unsigned n, unsigned& sum) {
 }
 
 
-// Not ok in STL, but ok in TBB
-In thread 1: v.push_back()
+// // Not ok in STL, but ok in TBB
+// In thread 1: v.push_back()
 
-In thread 2: v.empty()
+// In thread 2: v.empty()
 
 
-This is ok: 
-In thread 1: v[1] = 1
-In thread 2: reading v[2]
+// This is ok: 
+// In thread 1: v[1] = 1
+// In thread 2: reading v[2]

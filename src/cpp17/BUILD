@@ -46,6 +46,17 @@ cc_binary(
 )
 
 cc_binary(
-name = "no_discard",
-srcs = ["no_discard.cc"],
+    name = "no_discard",
+    srcs = ["no_discard.cc"],
 )
+
+cc_binary(
+    name = "optional",
+    srcs = ["optional.cc"],
+)
+
+cc_binary(
+    name = "memory_resources",
+    srcs = ["memory_resources.cc"],
+)
+

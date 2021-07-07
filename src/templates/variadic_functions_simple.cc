@@ -3,49 +3,51 @@
 #include <string>
 #include <vector>
 //-----------------------------------------------------
-void debug() { std::cout << std::endl; }
+enum LogType { INFO, DEBUG, WARNING };
+// With no arguments
+void MYLOG() { std::cout << std::endl; }
 
-// With a single argument.
+// With a single argument so that we don't print ',' at the end.
 template <typename T>
-void debug(T arg1) {
+void MYLOG(T arg1) {
   std::cout << arg1 << std::endl;
 }
 
-// With a single std::string argument.
-void debug(std::string arg1) { std::cout << arg1 << std::endl; }
-
-// With variable arguments.
+// With variable arguments. Separate with ','.
 template <typename T, typename... Args>
-void debug(T arg1, Args... args) {
+void MYLOG(T arg1, Args... args) {
   std::cout << arg1 << ", ";
-  debug(args...);
+  MYLOG(args...);
 }
 
-// Specialized case with the first argument being std::string.
+// Specialized case with the first argument being LogType.
 template <typename... Args>
-void debug(std::string arg1, Args... args) {
-  if (arg1 == "__start__") {
-    std::cout << "DEBUG: ";
-  } else {
-    std::cout << arg1 << ", ";
+void MYLOG(LogType arg1, Args... args) {
+  switch (arg1) {
+    case LogType::DEBUG:
+      std::cout << "DEBUG:( ";
+      break;
+    case LogType::INFO:
+      std::cout << "INFO:( ";
+      break;
+    case LogType::WARNING:
+      std::cout << "WARNING:( ";
+      break;
   }
-  debug(args...);
+  std::cout << std::string(__FILE__) + std::string(":") +
+                   std::to_string(__LINE__) + std::string(" ): ");
+  MYLOG(args...);
 }
-//-----------------------------------------------------
-template <typename... Args>
-void my_debug(Args... args) {
-  debug(std::string("__start__"), args...);
-}
+
 //-----------------------------------------------------
 int main(int argc, char const *argv[]) {
   int a = 1, b = 2, c = 3;
   std::string str("This is a test");
-  my_debug(a);
-  my_debug(str);
-
-  my_debug(str, a, b, c);
-  my_debug(a, b, c);
-  my_debug(c, b);
-
+  MYLOG(a);
+  MYLOG(LogType::WARNING, a);
+  MYLOG(str);
+  MYLOG(str, a, b, c);
+  MYLOG(LogType::DEBUG, a, b, c);
+  MYLOG(LogType::INFO, a, b, c);
   return 0;
 }

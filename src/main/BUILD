@@ -4,3 +4,10 @@ cc_binary(
     srcs = ["main.cc"],
     deps = ["//src/lib:SolutionLib"],
 )
+
+cc_binary(
+name = "bishop_moves",
+srcs = ["bishop_moves.cc"],
+    deps = ["//src/lib:SolutionLib"],
+
+)
