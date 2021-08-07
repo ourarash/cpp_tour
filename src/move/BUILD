@@ -70,3 +70,13 @@ cc_binary(
     name = "std_forward",
     srcs = ["std_forward.cc"],
 )
+
+cc_binary(
+name = "copy_assignment",
+srcs = ["copy_assignment.cc"],
+)
+
+cc_binary(
+name = "auto_generated_dependency",
+srcs = ["auto_generated_dependency.cc"],
+)

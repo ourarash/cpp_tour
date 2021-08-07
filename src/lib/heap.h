@@ -3,7 +3,7 @@
 #include <vector>
 
 class Heap {
-public:
+ public:
   bool empty() { return data_.empty(); };
   int size() { return data_.size(); }
 
@@ -22,7 +22,10 @@ public:
 
   void TrickleUp(int i);
   void TrickleDown(int i);
-private:
+
+  std::vector<int> ConvertToHeap(const std::vector<int> &input);
+
+//  private:
   std::vector<int> data_;
 };
 

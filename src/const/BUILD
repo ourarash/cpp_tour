@@ -17,4 +17,12 @@ cc_binary(
     deps = ["//src/lib:SolutionLib"],
 )
 
+cc_binary(
+name = "const_pointer",
+srcs = ["const_pointer.cc"],
+)
 
+cc_binary(
+name = "const_functions",
+srcs = ["const_functions.cc"],
+)

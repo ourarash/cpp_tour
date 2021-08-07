@@ -15,7 +15,10 @@ cc_binary(
 cc_binary(
     name = "lambda_stl_main",
     srcs = ["lambda_stl_main.cc"],
-    deps = ["//src/lib:SolutionLib", "//src/lib:utility"],
+    deps = [
+        "//src/lib:SolutionLib",
+        "//src/lib:utility",
+    ],
 )
 
 cc_binary(
@@ -54,7 +57,6 @@ cc_binary(
     deps = ["//src/lib:SolutionLib"],
 )
 
-
 cc_binary(
     name = "map_main",
     srcs = ["map_main.cc"],
@@ -82,12 +84,13 @@ cc_binary(
 cc_binary(
     name = "lambda_event_class",
     srcs = ["lambda_event_class.cc"],
-    deps = ["//src/lib:SolutionLib",
-    "//src/lib:utility",
-],
-    
+    deps = [
+        "//src/lib:SolutionLib",
+        "//src/lib:utility",
+    ],
 )
 
-
-
-
+cc_binary(
+    name = "inline",
+    srcs = ["inline.cc"],
+)

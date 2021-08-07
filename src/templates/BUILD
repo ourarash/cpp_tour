@@ -97,3 +97,38 @@ cc_binary(
 
 
 
+cc_binary(
+name = "pimple_swap_template",
+srcs = ["pimple_swap_template.cc"],
+)
+
+
+cc_binary(
+name = "access_names",
+srcs = ["access_names.cc"],
+)
+
+cc_binary(
+name = "non_member_functions_inside_templates",
+srcs = ["non_member_functions_inside_templates.cc"],
+)
+
+cc_binary(
+name = "traits_effective_cpp",
+srcs = ["traits_effective_cpp.cc"],
+)
+
+cc_binary(
+name = "meta_programming",
+srcs = ["meta_programming.cc"],
+)
+
+cc_binary(
+name = "variadic_with_init_list",
+srcs = ["variadic_with_init_list.cc"],
+)
+
+cc_binary(
+name = "alias_template",
+srcs = ["alias_template.cc"],
+)

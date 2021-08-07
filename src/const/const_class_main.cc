@@ -7,32 +7,50 @@ class Person {
   Person(int ssn) : _age(20), _ssn(ssn) {}
   Person(int ssn, int age) : _age(age), _ssn(ssn) {}
 
-  std::string _first_name;
-  std::string _last_name;
+  std::string first_name_;
+  std::string last_name_;
   int _age;
   const int _ssn;  // const member variable
 
   // It doesn't change any member variables
   int size() const {
-    _first_name = std::string("Ari");
-    return _first_name.size() + _last_name.size() + sizeof(_age);
+    std::cout << "const size" << std::endl;
+    // first_name_ = "Ari";
+    return first_name_.size() + last_name_.size() + sizeof(_age);
+  }
+
+  int size() {
+    std::cout << "non const size" << std::endl;
+    first_name_ = "Ari";
+    return first_name_.size() + last_name_.size() + sizeof(_age);
   }
 };
 
 int main() {
-  Person p(/*_ssn=*/354545454);
-  p._first_name = "Tommy";
-  p._last_name = "Trojan";
+  {
+    const Person r(/*_ssn=*/354545454, /*age=*/21);
+    r.size();
+  }
 
-  // Const object
-  const Person q(/*_ssn=*/354545454);
-  // q._age = 21; // Don't modify const object!
-  std::cout << "q._age: " << q._age << std::endl;
+  {
+    Person r(/*_ssn=*/354545454, /*age=*/21);
+    r.size();
+  }
+  {
+    Person p(/*_ssn=*/354545454);
+    p.first_name_ = "Tommy";
+    p.last_name_ = "Trojan";
 
-  // Initializing
-  const Person r(/*_ssn=*/354545454, /*age=*/21);
-  std::cout << "r._ssn: " << r._ssn << std::endl;
-  std::cout << "r._age: " << r._age << std::endl;
+    // Const object
+    const Person q(/*_ssn=*/354545454);
+    // q._age = 21; // Don't modify const object!
+    std::cout << "q._age: " << q._age << std::endl;
+
+    // Initializing
+    const Person r(/*_ssn=*/354545454, /*age=*/21);
+    std::cout << "r._ssn: " << r._ssn << std::endl;
+    std::cout << "r._age: " << r._age << std::endl;
+  }
 
   return 0;
 }

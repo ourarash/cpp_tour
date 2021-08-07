@@ -111,3 +111,11 @@ void Heap::TrickleDown(int i) {
     TrickleDown(smallest_child_index);
   }
 }
+//-----------------------------------------------------------------------------
+std::vector<int> Heap::ConvertToHeap(const std::vector<int> &input) {
+  data_ = input;
+  for (int i = data_.size() / 2; i >= 0; i--) {
+    TrickleDown(i);
+  }
+  return data_;
+}

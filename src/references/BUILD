@@ -26,3 +26,9 @@ cc_binary(
         "//src/lib:utility",
     ],
 )
+
+
+cc_binary(
+name = "returning_handles",
+srcs = ["returning_handles.cc"],
+)

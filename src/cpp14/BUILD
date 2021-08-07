@@ -24,3 +24,8 @@ cc_binary(
     name = "other",
     srcs = ["other.cc"],   
 )
+
+cc_binary(
+name = "auto",
+srcs = ["auto.cc"],
+)

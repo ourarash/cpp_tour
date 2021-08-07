@@ -16,4 +16,7 @@ cc_binary(
     deps = ["//src/lib:SolutionLib"],
 )
 
-
+cc_binary(
+name = "pass_by_reference_slicing",
+srcs = ["pass_by_reference_slicing.cc"],
+)

@@ -85,4 +85,10 @@ int main() {
   ptr = new Point;
 
   delete ptr;
+
+  {
+    Point a;
+    Point b(a);
+    Point c{a};
+  }
 }

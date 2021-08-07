@@ -10,4 +10,8 @@ cc_binary(
     srcs = ["constexpr.cc"],
     deps = [],
 )
+cc_binary(
+name = "constexpr_class",
+srcs = ["constexpr_class.cc"],
+)
 

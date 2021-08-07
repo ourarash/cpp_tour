@@ -10,14 +10,20 @@ struct X {
     return ::operator new(sz);
   }
   // custom placement delete
-  void operator delete(void* ptr, bool b) {
+  static void operator delete(void* ptr, bool b) {
     std::cout << "custom placement delete called, b = " << b << '\n';
+    ::operator delete(ptr);
+  }
+  // custom placement delete without extra parameter.
+  static void operator delete(void* ptr) {
+    std::cout << "custom placement delete with no extra parameters." << '\n';
     ::operator delete(ptr);
   }
 };
 int main() {
   try {
     X* p1 = new (true) X;
+    delete p1;
   } catch (const std::exception& e) {
     std::cout << "e.what(): " << e.what() << std::endl;
   }

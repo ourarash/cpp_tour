@@ -40,3 +40,13 @@ cc_binary(
         "//src/lib:utility",
     ],
 )
+
+cc_binary(
+name = "brackets",
+srcs = ["brackets.cc"],
+)
+
+cc_binary(
+name = "constructor_implicit_default_deleted",
+srcs = ["constructor_implicit_default_deleted.cc"],
+)

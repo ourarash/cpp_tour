@@ -21,3 +21,8 @@ cc_binary(
     name = "shallow_copy_main",
     srcs = ["shallow_copy_main.cc"],
 )
+
+cc_binary(
+name = "set_new_handler",
+srcs = ["set_new_handler.cc"],
+)
