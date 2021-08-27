@@ -8,7 +8,7 @@ struct Test {
     mValue = 0;
   }
   ~Test() {
-    // std::cout << "Destructor is called." << std::endl;
+    std::cout << "Destructor is called." << std::endl;
   }
 
   // Copy constructor

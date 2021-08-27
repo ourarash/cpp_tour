@@ -1,21 +1,18 @@
 load("@rules_cc//cc:defs.bzl", "cc_binary")
+
 cc_binary(
     name = "main",
     srcs = ["main.cc"],
-
 )
 
 cc_binary(
     name = "string_main",
     srcs = ["string_main.cc"],
-
 )
-
 
 cc_binary(
     name = "test_main",
     srcs = ["test_main.cc"],
-
 )
 
 cc_binary(
@@ -43,12 +40,10 @@ cc_binary(
     srcs = ["test_full_main.cc"],
 )
 
-
 cc_binary(
     name = "rvalue_main",
     srcs = ["rvalue_main.cc"],
 )
-
 
 cc_binary(
     name = "test_main_modified_exam",
@@ -65,18 +60,22 @@ cc_binary(
     srcs = ["copy_elision.cc"],
 )
 
-
 cc_binary(
     name = "std_forward",
     srcs = ["std_forward.cc"],
 )
 
 cc_binary(
-name = "copy_assignment",
-srcs = ["copy_assignment.cc"],
+    name = "copy_assignment",
+    srcs = ["copy_assignment.cc"],
 )
 
 cc_binary(
-name = "auto_generated_dependency",
-srcs = ["auto_generated_dependency.cc"],
+    name = "auto_generated_dependency",
+    srcs = ["auto_generated_dependency.cc"],
+)
+
+cc_binary(
+    name = "perfect_forwarding",
+    srcs = ["perfect_forwarding.cc"],
 )

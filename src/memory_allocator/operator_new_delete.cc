@@ -7,6 +7,7 @@ struct X {
   // custom placement new
   static void* operator new(std::size_t sz, bool b) {
     std::cout << "custom placement new called, b = " << b << '\n';
+    std::cout << "sz: " << sz << std::endl;
     return ::operator new(sz);
   }
   // custom placement delete

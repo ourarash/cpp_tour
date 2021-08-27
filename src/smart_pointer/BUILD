@@ -43,4 +43,13 @@ cc_binary(
     srcs = ["stl_unique_main.cc"],
 )
 
+cc_binary(
+name = "stl_shared_ptr_issues",
+srcs = ["stl_shared_ptr_issues.cc"],
+)
 
+
+cc_binary(
+name = "pimple",
+srcs = ["pimple.cc"],
+)

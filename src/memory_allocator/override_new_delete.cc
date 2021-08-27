@@ -81,7 +81,7 @@ int main(int argc, char const* argv[]) {
   }
 
   {
-    Base* pb = new Base;  // error! the normal form of
+    // Base* pb = new Base;  // error! the normal form of
     // operator new is hidden
   }
   {
@@ -89,7 +89,7 @@ int main(int argc, char const* argv[]) {
     // placement new
   }
   {
-    Derived* pd = new (std::clog) Derived;  // error! Base's placement
+    // Derived* pd = new (std::clog) Derived;  // error! Base's placement
     // new is hidden}
     {
       Derived* pd = new Derived;  // fine, calls Derived's
