@@ -12,6 +12,41 @@ struct MyPerson {
 };
 
 int main() {
+  MyPerson p;
+  p.age = 10;
+  p.name = "Ari";
+
+
+  std::map<int, std::string> t2;
+
+  std::map<std::string, int> turns;
+  std::pair<std::string, int> my_pair{"Tommy", 10};
+
+  std::cout << "my_pair.first: " << my_pair.first << std::endl;
+  std::cout << "my_pair.second: " << my_pair.second << std::endl;
+
+  turns["Ted"] = 2;
+  turns["Ari"] = 1;
+  turns["Beth"] = 3;
+    
+  //   Key   Value
+  // ----- |-------
+  //   Ted |  2
+  //   Ari |  1
+  //   Beth|  3
+
+  std::cout << "turns.size(): " << turns.size() << std::endl;
+
+  if (turns.count("Max") == 1) {
+  }
+
+  for (auto &e : turns) {
+    auto key = e.first;
+    auto value = e.second;
+
+    std::cout << "turns[key]: " << turns[key] << std::endl;
+  }
+
   std::map<std::string, MyPerson> persons;
 
   // persons["Tom"] = MyPerson("Tom", 12, "310-888-8889");

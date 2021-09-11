@@ -11,9 +11,15 @@ void PassByReferenceUsingPointer(int *j) { (*j)++; }
 void PassByReferenceUsingReference(int &j) { j++; }
 
 int main() {
-
   int i = 10;
 
+  int j[100];
+
+  std::vector<int> v;
+
+  for (int i = 0; i < 100000; i++) {
+    v.push_back(10);
+  }
   PassByValue(i);
   std::cout << "i: " << i << std::endl;
 

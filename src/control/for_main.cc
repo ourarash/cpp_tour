@@ -13,10 +13,17 @@ int main() {
   int my_var = 0;
 
   std::vector<int> my_vector;
+
   for (int i = 0; i < 10; i++) {
     my_vector.push_back(i);
+    
   }
   PrintVector(my_vector);
+
+
+  for(int &e: my_vector){
+    std::cout << "e: " << e << std::endl;
+  }
 
   // i, j have to be of the same type!
   my_vector.clear();

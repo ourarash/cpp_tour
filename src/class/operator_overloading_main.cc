@@ -34,7 +34,7 @@ class Point {
   // Prefix overload
   // ++p;
   // Point p2 = ++p1;
-  Point operator++() {
+  Point& operator++() {
     i_++;
     j_++;
     return *this;

@@ -17,4 +17,6 @@ int main() {
   persons.insert("Ted");
   persons.insert("Ted");
 
+  std::cout << "persons.size: " << persons.size() << std::endl;
+
 }

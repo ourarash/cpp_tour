@@ -24,6 +24,8 @@ int main() {
 
   // Do while
   my_vector.clear();
+
+  
   do {
     my_vector.push_back(i);
   } while (i < 10);

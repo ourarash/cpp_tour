@@ -50,3 +50,13 @@ cc_binary(
 name = "constructor_implicit_default_deleted",
 srcs = ["constructor_implicit_default_deleted.cc"],
 )
+
+cc_binary(
+name = "struct",
+srcs = ["struct.cc"],
+)
+
+cc_binary(
+name = "operator_overloading3",
+srcs = ["operator_overloading3.cc"],
+)

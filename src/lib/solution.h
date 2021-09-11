@@ -8,7 +8,7 @@ class Solution {
  public:
   std::string PrintHelloWorld();
 
-  int FindMax(std::vector<int> &inputs) {
+  int FindMax(const std::vector<int> &inputs) {
     if (inputs.empty()) {
       return -1;
     }
@@ -21,6 +21,7 @@ class Solution {
         result = n;
       }
     }
+    // inputs[0] = 1000;
     return result;
   }
 };

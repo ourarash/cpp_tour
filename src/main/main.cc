@@ -14,6 +14,6 @@ int main() {
   max = solution.FindMax(inputs);
   std::cout << "max: " << max << std::endl;
 
-
   return 0;  // End of a line
 }
+

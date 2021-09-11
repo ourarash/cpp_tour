@@ -3,7 +3,7 @@
 #include <vector>
 
 // Global variable
-int global_variable = 6;
+int variable = 6;
 
 class Person {
  public:
@@ -14,16 +14,33 @@ class Person {
 };
 
 void MyFunc() {
+  variable++;
   int a;
   {
     Person p;
-    // Do something with p
+    // Do something with pd
   }
+  // std::cout << "p.name: " << p.name << std::endl;
 
   std::cout << "global_variable: " << global_variable << std::endl;
 }
 
 int main() {
+  int k = 0;
+  {
+    for (int i = 0; i < 1000; i++) {
+      int j = i += 2;
+    }
+
+    if (k == 1) {
+      int x = k;
+    }
+
+    std::cout << "j: " << j << std::endl;
+    std::cout << "i: " << i << std::endl;
+  }
+
+  std::cout << "k: " << k << std::endl;
   // Scope
   {
     {
@@ -34,7 +51,7 @@ int main() {
 
     int a;
     a = 109;
-    // std::cout << "a: " << a << std::endl;
+    std::cout << "a: " << a << std::endl;
 
     {
       Person p;
@@ -52,13 +69,12 @@ int main() {
   // MyFunc();
   // //--------------------------------------------------
   // Inside control blocks
- 
+
   for (int i = 0; i < 10; i++) {
     // scope of the i in for loop is only here
     std::cout << "i: " << i << std::endl;
   }
-  i++;
-  std::cout << "i: " << i << std::endl;
+
   // //--------------------------------------------------
   // // Inside blocks
   // {

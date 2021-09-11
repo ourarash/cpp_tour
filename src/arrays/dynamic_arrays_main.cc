@@ -21,12 +21,6 @@ int main() {
   int *arr = nullptr;
   int size = 1000;
 
-  int x = 0;
-
-  std::cout << "x (gabage): " << x << std::endl;
-
-  std::cout << "Please enter the size: " << std::endl;
-
   // check if arr is not allocated
   // check if arr is pointing to an invalid location.
   if (arr == nullptr) {
@@ -34,7 +28,7 @@ int main() {
   } else {
     std::cout << "arr is allocated." << std::endl;
   }
-
+  std::cout << "Please enter the size: " << std::endl;
   std::cin >> size;
 
   arr = new int[size];

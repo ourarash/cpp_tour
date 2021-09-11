@@ -20,6 +20,8 @@ int main() {
   std::string text = "Hello world!";
   PrintLine(text);
   PrintLine("Second hello world");
+  PrintLine(2);
+  PrintLine('a');
   MyClass c;
   for (int i = 0; i < 5; i++) {
     std::cout << "i: " << i << std::endl;
@@ -27,3 +29,4 @@ int main() {
 
   return 0;
 }
+

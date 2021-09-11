@@ -13,6 +13,7 @@ int main() {
   }
 
   // basic string
+  std::vector<char> my_vector_string;
   std::string first_name = "tommy";
   std::string last_name = "trojan";
   std::string full_name = first_name + " " + last_name;

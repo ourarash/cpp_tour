@@ -13,6 +13,7 @@ int main() {
     n++;
     std::cout << "n: " << n << std::endl;
   }
+
   PrintVector(my_vector);
 
   for (auto &n : my_vector) {

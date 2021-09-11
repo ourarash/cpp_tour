@@ -8,8 +8,20 @@ struct Person {
 };
 
 int main() {
-  
   int i = 10;
+  int &j = i;
+
+
+  int *q;
+
+  // 1000 lines of code here...
+  (*q)++;
+
+  q = &i;
+
+
+  
+  
   int *p = &i;
   std::cout << "i: " << i << std::endl;
   std::cout << "p: " << p << std::endl;
@@ -20,6 +32,8 @@ int main() {
   p++;
   std::cout << "p: " << p << std::endl;
   std::cout << "i: " << i << std::endl;
+
+  // std::cout << "*p: " << *p << std::endl;
 
   std::cout << "------------------------------------------" << std::endl;
   // Using with struct
@@ -33,7 +47,4 @@ int main() {
             << std::endl;
 
   return 0;
-
-
-  Arash, Ari
 }

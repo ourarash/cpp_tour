@@ -2,7 +2,6 @@
 #include <string>
 
 int main() {
-
   int *p = nullptr;
 
   // We conditionally use more memory
@@ -14,6 +13,8 @@ int main() {
 
   if (p != nullptr) {
     delete p;
+
+    *p = 20;
   }
 
   p = new int(10);
