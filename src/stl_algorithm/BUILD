@@ -4,3 +4,9 @@ cc_binary(
     srcs = ["main.cc"],
     deps = ["//src/lib:utility"],
 )
+
+cc_binary(
+name = "simple_algorithms",
+srcs = ["simple_algorithms.cc"],
+deps = ["//src/lib:utility"],
+)

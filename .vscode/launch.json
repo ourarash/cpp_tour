@@ -26,7 +26,7 @@
       "args": [],
      
       // *** You need to change this part for your own system to work ***
-      // Set sourceMap from output of (readlink -n bazel-cpp-template) to ${workspaceFolder}
+      // Set sourceMap from output of (readlink -n bazel-cpp_tour) to ${workspaceFolder}
       "sourceMap": {
         "/private/var/tmp/_bazel_ari/a1f1e074d75504d9b97b8d9dc041d368/execroot/__main__": "${workspaceFolder}/"
       }

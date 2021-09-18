@@ -3,6 +3,7 @@
 using namespace std;
 class Student_shallow {
  public:
+  int* id = nullptr;
   Student_shallow() { id = new int(0); }
   Student_shallow(int);
   ~Student_shallow() {
@@ -10,8 +11,6 @@ class Student_shallow {
     id = nullptr;
     cout << "Delete Student_shallow!" << endl;
   }
-
-  int* id = nullptr;
 };
 
 int main() {

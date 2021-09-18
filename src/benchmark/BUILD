@@ -4,11 +4,10 @@ cc_binary(
     name = "insert_into_collection",
     srcs = ["insert_into_collection.cc"],
     deps = [
-          "//src/lib:utility",
+        "//src/lib:utility",
         "@com_google_benchmark//:benchmark",
     ],
 )
-
 
 cc_binary(
     name = "search_collection",
@@ -19,7 +18,6 @@ cc_binary(
     ],
 )
 
-
 cc_binary(
     name = "push_back_collection",
     srcs = ["push_back_collection.cc"],
@@ -28,7 +26,6 @@ cc_binary(
         "@com_google_benchmark//:benchmark",
     ],
 )
-
 
 cc_binary(
     name = "growing_string",
@@ -39,8 +36,6 @@ cc_binary(
     ],
 )
 
-
-
 cc_binary(
     name = "string_to_int",
     srcs = ["string_to_int.cc"],
@@ -49,7 +44,6 @@ cc_binary(
         "@com_google_benchmark//:benchmark",
     ],
 )
-
 
 cc_binary(
     name = "split_string",
@@ -60,7 +54,6 @@ cc_binary(
     ],
 )
 
-
 cc_binary(
     name = "split_string_no_range",
     srcs = ["split_string_no_range.cc"],
@@ -69,8 +62,6 @@ cc_binary(
         "@com_google_benchmark//:benchmark",
     ],
 )
-
-
 
 cc_binary(
     name = "plus_equal",

@@ -1,8 +1,9 @@
-#include "src/lib/utility.h"
 #include <iostream>
 #include <map>
 #include <string>
 #include <vector>
+
+#include "src/lib/utility.h"
 
 struct MyPerson {
   MyPerson() : name("No Name"), age(0) {}
@@ -12,6 +13,12 @@ struct MyPerson {
 };
 
 int main() {
+  std::map<std::string, int> grades;
+
+  persons["Ari"] = 3;
+  persons["Ted"] = 4;
+  persons["Jessica"] = 3;
+
   std::map<std::string, MyPerson> persons;
 
   persons["Tom"] = MyPerson("Tom", 12);
@@ -33,4 +40,9 @@ int main() {
     std::cout << "key: " << n.first << std::endl;
     std::cout << "value: " << n.second.age << std::endl;
   }
+
+  std::pair<std::string, int> p1("Ari", 3);
+  std::pair<std::string, int> p2("Ted", 4);
+  std::cout << "p1.first: " << p1.first << std::endl;
+  std::cout << "p1.second: " << p1.second << std::endl;
 }

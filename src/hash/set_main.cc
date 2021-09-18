@@ -18,5 +18,7 @@ int main() {
   persons.insert("Ted");
 
   std::cout << "persons.size: " << persons.size() << std::endl;
-
+  for (auto& p : persons) {
+    std::cout << "p: " << p << std::endl;
+  }
 }

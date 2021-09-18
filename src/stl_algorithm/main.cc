@@ -87,6 +87,14 @@ int main() {
     std::cout << "count: " << count << std::endl;
   }
 
+  // Count_if
+
+  {
+    std::vector<int> v = {12, -2, 0, 0, 1, 12, 5, 3, 13, 3, 5};
+    auto count = std::count_if(v.begin(), v.end(), IsOdd);
+    std::cout << "count: " << count << std::endl;
+  }
+
   // Accumulate
   {
     std::vector<int> v = {1, 2, 3, 4, 5, 6};

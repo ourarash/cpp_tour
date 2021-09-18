@@ -43,6 +43,8 @@ class Point {
     std::cout << "DESTRUCTOR." << std::endl;
   }
 
+  void Print() { std::cout << "i_: " << i_ << ", j_: " << j_ << std::endl; }
+
   // Getter or Accessor
   int GetI() const { return i_; };
   int GetJ() const { return j_; };
@@ -63,9 +65,13 @@ std::ostream &operator<<(std::ostream &os, const Point &m) {
 
 void MyFunction(Point param) { std::cout << "param: " << param << std::endl; }
 
+void MyFunctionReference(const Point &param) {
+  std::cout << "param: " << param << std::endl;
+}
+
 int main() {
   Point p1;
-  std::cout << "p1: " << p1 << std::endl;
+  p1.Print();
 
   Point p2(1, 2);
 
@@ -74,12 +80,19 @@ int main() {
   p2.SetI(10);
   p2.SetJ(50);
 
-  std::cout << "p3: " << p3 << std::endl;
+  p3.Print();
 
   MyFunction(p3);
+  MyFunctionReference(p3);
 
-  Point p4;  // Default constructor
-  p4 = p2;   // Assignments (Copy assignment)
+  {
+    Point p4;  // Default constructor
+    p4 = p2;   // Assignments (Copy assignment)
+  }
+
+  {
+    Point p4 = p2;  // Copy constructor
+  }
 
   Point *ptr;
   ptr = new Point;
