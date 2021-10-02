@@ -63,10 +63,14 @@ std::ostream &operator<<(std::ostream &os, const Point &m) {
   return os << "( " << m.GetI() << ", " << m.GetJ() << " )";
 }
 
-void MyFunction(Point param) { std::cout << "param: " << param << std::endl; }
+void MyFunction(Point param) {
+  param.Print();
+  // std::cout << "param: " << param << std::endl;
+}
 
 void MyFunctionReference(const Point &param) {
-  std::cout << "param: " << param << std::endl;
+  std::cout << "Printing values" << std::endl;
+  // std::cout << "param: " << param << std::endl;
 }
 
 int main() {
@@ -76,7 +80,6 @@ int main() {
   Point p2(1, 2);
 
   Point p3 = p2;  // Copy constructor
-
   p2.SetI(10);
   p2.SetJ(50);
 
@@ -86,13 +89,18 @@ int main() {
   MyFunctionReference(p3);
 
   {
-    Point p4;  // Default constructor
+    Point p4;  // Non parameterized constructor
     p4 = p2;   // Assignments (Copy assignment)
   }
 
   {
     Point p4 = p2;  // Copy constructor
   }
+
+  Point *p5 = &p3;
+
+  (*p5).Print();
+  p5->Print();
 
   Point *ptr;
   ptr = new Point;
@@ -101,7 +109,7 @@ int main() {
 
   {
     Point a;
-    Point b(a);
-    Point c{a};
+    Point b(a);  // Point b = a;
+    Point c{a};  // Point b = a;
   }
 }

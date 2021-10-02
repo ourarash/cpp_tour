@@ -26,7 +26,18 @@ int main() {
   l.push_back(8);
   l.push_back(9);
 
-  Print(l);
+  for (auto it = l.begin(); i != l.end(); ++it) {
+    std::cout << "*it: " << *it << std::endl;
+  }
+
+  // Printing item 4:
+  auto it = l.begin();
+  for (int i = 0; i < 4; i++) {
+    ++it;
+  }
+  std::cout << "*it: " << *it << std::endl;
+
+  // Print(l);
 
   auto it = l.begin();
 
@@ -35,9 +46,12 @@ int main() {
 
   std::cout << "data: " << data << std::endl;
 
-  int value = GetIndexValue(l, 5);
+  l.insert(it, 100);
+  Print(l);
 
-  std::cout << "value: " << value << std::endl;
+  // int value = GetIndexValue(l, 5);
+
+  // std::cout << "value: " << value << std::endl;
   // auto it = l.begin();
   // auto it_next = std::next(it, 1);
 

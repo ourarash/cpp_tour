@@ -38,3 +38,21 @@ int main() {
 
   return 0;
 }
+
+// insert 100 after 3
+Before: 1, 2, 3, 4, 5,
+After:  1, 2, 3, 100, 4, 5,
+
+
+// Vector:
+// Insert and delete was O(n)
+// push_pack ---> O(1) (on average)
+
+// List
+// insert 100 after 3
+Before: 1 -> 2 -> 3 -> 4 -> 5
+
+After: 1 -> 2 -> 3           4 -> 5
+                   \-> 100 ->/
+
+

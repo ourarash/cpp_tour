@@ -18,6 +18,21 @@ public:
   void InOrder(TreeNode *start);
   void PreOrder(TreeNode *start);
   void PostOrder(TreeNode *start);
+  TreeNode *Find(TreeNode *start, int val){
+    if(start == nullptr){
+      return nullptr;
+    }
+    if(start->val == val){
+      return start;
+    }
+
+    // Homework: complete the following two lines.
+    Find(start->left, val);
+    Find(start->right, val);
+
+    return nullptr;
+
+  }
   void CreateSampleTree1();
   void CreateSampleTree2();
 

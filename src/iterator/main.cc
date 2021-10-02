@@ -59,6 +59,11 @@ int main() {
         break;
       }
     }
+
+    
+    for (auto it = v.begin(); it != v.end(); ++it) {
+    }
+
     Print(v);
   }
 

@@ -1,9 +1,13 @@
 #include "tree.h"
+
 #include <iostream>
 
 bool Tree::empty() { return root_ == nullptr; }
 
-int Tree::size() { return 0; }
+int Tree::size() {
+  // Incomplete!
+  return 0;
+}
 
 // Inorder (LNR): Left, Node, Right
 void Tree::InOrder(TreeNode *start) {
@@ -16,7 +20,7 @@ void Tree::InOrder(TreeNode *start) {
   InOrder(start->right);
 };
 
-// Preorder (NLR): Node, Left, Right. 
+// Preorder (NLR): Node, Left, Right.
 void Tree::PreOrder(TreeNode *start) {
   if (start == nullptr) {
     return;
@@ -27,6 +31,7 @@ void Tree::PreOrder(TreeNode *start) {
   PreOrder(start->right);
 };
 
+// LRN
 void Tree::PostOrder(TreeNode *start) {
   if (start == nullptr) {
     return;

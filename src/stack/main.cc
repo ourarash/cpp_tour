@@ -3,12 +3,16 @@
 #include <string>
 
 int main() {
+
+  // std::vector v;
+  // std::cout << "v[10]: " << v[10] << std::endl;
+
   // Empty stack
   std::stack<int> s;
 
   int r;
-  r = s.top();  // Seriously?
-  s.pop();      // Don't do this!
+  // r = s.top();  // Seriously?
+  // s.pop();      // Don't do this!
 
   if (!s.empty()) {
     r = s.top();
@@ -22,7 +26,7 @@ int main() {
   {
     std::stack<int> s;
 
-    std::cout << "a.size(): " << s.size() << std::endl;
+    std::cout << "s.size(): " << s.size() << std::endl;
     // int r = s.top();
     // std::cout << "r: " << r << std::endl;
 
