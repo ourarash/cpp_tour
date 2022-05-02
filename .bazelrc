@@ -1,0 +1,34 @@
+# Address sanitizer configuration.
+# ASAN_SYMBOLIZER_PATH=/usr/local/Cellar/llvm/13.0.0_1/bin/llvm-symbolizer
+
+# Address sanitizer config
+# Use with bazel run --config=asan or lsan
+build:asan --strip=never
+build:asan --copt -fsanitize=address
+build:asan --copt -DADDRESS_SANITIZER
+build:asan --copt -O0
+build:asan --copt -g
+build:asan --copt -fno-omit-frame-pointer
+build:asan --linkopt -fsanitize=address
+build:asan --sandbox_debug 
+build:asan --spawn_strategy=standalone
+
+# undefined behavior sanitizer config
+build:ubsan --strip=never
+build:ubsan --copt -fsanitize=undefined
+build:ubsan --copt -DADDRESS_SANITIZER
+build:ubsan --copt -O0
+build:ubsan --copt -g
+build:ubsan --copt -fno-omit-frame-pointer
+build:ubsan --linkopt -fsanitize=undefined
+build:ubsan --sandbox_debug 
+build:ubsan --spawn_strategy=standalone
+
+# Memory sanitizer config
+build:msan --strip=never
+build:msan --copt -fsanitize=memory
+build:msan --copt -O0
+build:msan --copt -g
+build:msan --linkopt -fsanitize=memory
+build:msan --sandbox_debug 
+build:msan --spawn_strategy=standalone
