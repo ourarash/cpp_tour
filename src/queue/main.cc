@@ -17,8 +17,8 @@ int main() {
 
   {
     // compare to stack
-    std::queue<int> q;
-    std::stack<int> s;
+    std::queue<int> q; // Starbucks
+    std::stack<int> s; // Dining hall, Pringles potato chips, Airplane/Bus
     q.push(1);
     q.push(2);
     q.push(3);
@@ -39,20 +39,16 @@ int main() {
   return 0;
 }
 
-// insert 100 after 3
-Before: 1, 2, 3, 4, 5,
-After:  1, 2, 3, 100, 4, 5,
 
+// // Vector:
+// // Insert and delete was O(n)
+// // push_pack ---> O(1) (on average)
 
-// Vector:
-// Insert and delete was O(n)
-// push_pack ---> O(1) (on average)
+// // List
+// // insert 100 after 3
+// Before: 1 -> 2 -> 3 -> 4 -> 5
 
-// List
-// insert 100 after 3
-Before: 1 -> 2 -> 3 -> 4 -> 5
-
-After: 1 -> 2 -> 3           4 -> 5
-                   \-> 100 ->/
+// After: 1 -> 2 -> 3           4 -> 5
+//                    \-> 100 ->/
 
 

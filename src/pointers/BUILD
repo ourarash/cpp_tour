@@ -1,4 +1,5 @@
 load("@rules_cc//cc:defs.bzl", "cc_binary")
+
 cc_binary(
     name = "main",
     srcs = ["main.cc"],
@@ -23,6 +24,16 @@ cc_binary(
 )
 
 cc_binary(
-name = "set_new_handler",
-srcs = ["set_new_handler.cc"],
+    name = "deep_copy_main",
+    srcs = ["deep_copy_main.cc"],
+)
+
+cc_binary(
+    name = "set_new_handler",
+    srcs = ["set_new_handler.cc"],
+)
+
+cc_binary(
+    name = "pointer_misuse",
+    srcs = ["pointer_misuse.cc"],
 )

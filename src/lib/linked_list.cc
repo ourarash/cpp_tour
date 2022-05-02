@@ -105,16 +105,3 @@ int &SinglyLinkedList::operator[](int i) {
   // Dangerous!
   return ith_pointer->val;
 }
-
-ListNode *p = list._head;
-if (p != null) {
-  p = p->next;
-  p->value = 2;
-}
-
-Dangerous : 
-1. p = nullptr 
-2. p not initialized
-
-                       Very common mistakes in your programs or
-                   HW assignments

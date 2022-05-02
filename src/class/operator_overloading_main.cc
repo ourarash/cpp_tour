@@ -7,21 +7,40 @@
 
 // Operator overloading
 class Point {
+ private:
+  int i_;
+  int j_;
+
  public:
   // Constructor
   Point() {
     i_ = 0;
     j_ = 0;
+    std::cout << "Non parameterized constructor" << std::endl;
   }
+
+  ~Point() { std::cout << "Destructor" << std::endl; }
 
   Point(int i, int j) {
     i_ = i;
     j_ = j;
+    std::cout << "Parameterized constructor" << std::endl;
   }
   // Copy constructor
-  Point(const Point &p2) {
-    i_ = p2.GetI();
-    j_ = p2.GetJ();
+  // Point p2 = p1
+  Point(const Point &rhs) {
+    i_ = rhs.GetI();
+    j_ = rhs.GetJ();
+    std::cout << "Copy constructor" << std::endl;
+  }
+
+  // Copy assignment
+  // Point p2;
+  Point &operator=(const Point &rhs) {
+    i_ = rhs.GetI();
+    j_ = rhs.GetJ();
+    std::cout << "Copy assignment" << std::endl;
+    return *this;
   }
 
   Point operator+(const Point &rhs) const {
@@ -32,9 +51,10 @@ class Point {
   }
 
   // Prefix overload
-  // ++p;
+  // ++p; --> "this" points to p
   // Point p2 = ++p1;
-  Point& operator++() {
+  // p++
+  Point &operator++() {
     i_++;
     j_++;
     return *this;
@@ -47,9 +67,8 @@ class Point {
   // 2. Increment p1
   Point operator++(int) {
     Point temp = *this;  // 1.
-    i_++;                // 2.
-    j_++;                // 2.
-    return temp;         // 1.
+    ++*this;             // 2
+    return temp;         // 3.
   }
 
   int GetI() const { return i_; };
@@ -60,10 +79,6 @@ class Point {
   friend Point operator-(const Point &lhs, const Point &rhs);
 
   friend int MyFunction(const Point &p);
-
- private:
-  int i_;
-  int j_;
 };
 
 std::ostream &operator<<(std::ostream &os, const Point &p) {
@@ -89,20 +104,64 @@ Point operator-(const Point &lhs, const Point &rhs) {
 }
 
 int main() {
-  // OPerator overloading
-  Point p1(1, 2);
-  Point p2(10, 20);
-  Point p3 = p1 + p2;
-  Point p4 = p1 - p2;
-  std::cout << "p3: " << p3 << std::endl;
+  
+  {
+    int i = 5;
+    int j = i++;
+    std::cout << "j: " << j << std::endl;
+    std::cout << "i: " << i << std::endl;
+  }
+  {
+    int i = 5;
+    int j = ++i;
+    std::cout << "j: " << j << std::endl;
+    std::cout << "i: " << i << std::endl;
+  }
 
-  ++p1;
-  std::cout << "p1: " << p1 << std::endl;
+  // Operator overloading
+  {
+    Point p1(1, 2);
+    Point p2(10, 20);
+    Point p3 = p1 + p2;
+    std::cout << "p3: " << p3 << std::endl;
+  }
+  {
+    Point p1(1, 2);
+    ++p1;
+    std::cout << "p1: " << p1 << std::endl;
+    p1++;
+    std::cout << "p1: " << p1 << std::endl;
+  }
 
-  p1++;
-  std::cout << "p1: " << p1 << std::endl;
-
+  std::cout << "---------------------------------------------------------------"
+            << std::endl;
+  {
+    Point p1(1, 2);
+    Point p2;
+    p2 = p1;
+    std::cout << "p2: " << p2 << std::endl;
+  }
+  std::cout << "---------------------------------------------------------------"
+            << std::endl;
+  {
+    Point p1(1, 2);
+    ++p1;
+    std::cout << "p1: " << p1 << std::endl;
+  }
+  std::cout << "---------------------------------------------------------------"
+            << std::endl;
+  {
+    Point p1(1, 2);
+    std::cout << "p1: " << p1 << std::endl;
+    p1++;
+    std::cout << "p1: " << p1 << std::endl;
+  }
+  std::cout << "---------------------------------------------------------------"
+            << std::endl;
   // istream
-  std::cin >> p1;
-  std::cout << "p1: " << p1 << std::endl;
+  {
+    Point p1(1, 2);
+    std::cin >> p1;
+    std::cout << "p1: " << p1 << std::endl;
+  }
 }

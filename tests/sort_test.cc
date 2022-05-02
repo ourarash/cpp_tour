@@ -1,9 +1,12 @@
 #include "src/lib/sort/sort.h"
 
+#include <math.h> /* signbit, sqrt */
+
 #include <functional>
 #include <vector>
 
 #include "gtest/gtest.h"
+#include "src/lib/utility.h"
 
 template <class T>
 void TestSort(T sort_func) {
@@ -25,9 +28,9 @@ void TestSort(T sort_func) {
   EXPECT_EQ(expected.size(), in.size());
 
   // Check small vector
-  in = {5, 3, 1, 77, -1};
+  in = {5, 3, 1, 77, 0};
   sort_func(in);
-  expected = {-1, 1, 3, 5, 77};
+  expected = {0, 1, 3, 5, 77};
   EXPECT_EQ(expected, in);
   EXPECT_EQ(expected.size(), in.size());
 
@@ -44,20 +47,32 @@ void TestSort(T sort_func) {
   EXPECT_EQ(expected, in);
   EXPECT_EQ(expected.size(), in.size());
 
-  // With duplicate values
-  in = {-4, 122, -1000, 222, 45,  66,  97,    1,
-        23, 44,  23,    100, 244, 456, -1000, 22};
+  // All equal values
+  in = {1, 1, 1, 1, 1, 1, 1, 1};
   sort_func(in);
-  expected = {-1000, -1000, -4, 1,   22,  23,  23,  44,
-              45,    66,    97, 100, 122, 222, 244, 456};
+  expected = {1, 1, 1, 1, 1, 1, 1, 1};
+  EXPECT_EQ(expected, in);
+  EXPECT_EQ(expected.size(), in.size());
+
+  // With duplicate values
+  in = {4, 122, 1000, 222, 45, 66, 97, 1, 23, 44, 23, 100, 244, 456, 1000, 22};
+  sort_func(in);
+  expected = {1,  4,   22,  23,  23,  44,  45,   66,
+              97, 100, 122, 222, 244, 456, 1000, 1000};
   EXPECT_EQ(expected, in);
   EXPECT_EQ(expected.size(), in.size());
 
   // Random large vector, testing with multiple seeds
+  const int MAX = 5;
+  const int SIZE = 1000;
   for (size_t i = 0; i < 50; i++) {
     std::srand(i * 2);  // use a constant seed to make the test repeatable
-    in.resize(1000);
-    std::generate(in.begin(), in.end(), std::rand);
+    in.resize(SIZE);
+    std::generate(in.begin(), in.end(), []() {
+      int rand = std::rand();
+      return (rand % MAX) * (signbit(rand) ? 1 : 1);
+    });
+
     expected = in;
     std::sort(expected.begin(), expected.end());
     sort_func(in);
@@ -68,8 +83,11 @@ void TestSort(T sort_func) {
   //  large vector reverse sorted
   for (size_t i = 0; i < 50; i++) {
     std::srand(i * 2);  // use a constant seed to make the test repeatable
-    in.resize(1000);
-    std::generate(in.begin(), in.end(), std::rand);
+    in.resize(SIZE);
+    std::generate(in.begin(), in.end(), []() {
+      int rand = std::rand();
+      return (rand % MAX) * (signbit(rand) ? 1 : 1);
+    });
     std::sort(in.begin(), in.end(), std::greater<int>());
     expected = in;
     std::sort(expected.begin(), expected.end());
@@ -81,8 +99,11 @@ void TestSort(T sort_func) {
   // Random larger vector, testing with multiple seeds
   for (size_t i = 0; i < 5; i++) {
     std::srand(i);  // use a constant seed to make the test repeatable
-    in.resize(5000);
-    std::generate(in.begin(), in.end(), std::rand);
+    in.resize(SIZE);
+    std::generate(in.begin(), in.end(), []() {
+      int rand = std::rand();
+      return (rand % MAX) * (signbit(rand) ? 1 : 1);
+    });
     expected = in;
     std::sort(expected.begin(), expected.end());
     sort_func(in);
@@ -93,8 +114,11 @@ void TestSort(T sort_func) {
   //  large vector reverse sorted
   for (size_t i = 0; i < 5; i++) {
     std::srand(i * 2);  // use a constant seed to make the test repeatable
-    in.resize(5000);
-    std::generate(in.begin(), in.end(), std::rand);
+    in.resize(SIZE);
+    std::generate(in.begin(), in.end(), []() {
+      int rand = std::rand();
+      return (rand % MAX) * (signbit(rand) ? 1 : 1);
+    });
     std::sort(in.begin(), in.end(), std::greater<int>());
     expected = in;
     std::sort(expected.begin(), expected.end());
@@ -103,6 +127,10 @@ void TestSort(T sort_func) {
     EXPECT_EQ(expected.size(), in.size());
   }
 }
+TEST(SortTest, CountSort) { TestSort(Sort::CountSort); }
+TEST(SortTest, CountSortWithVector) { TestSort(Sort::CountSortWithVector); }
+
+TEST(SortTest, CountSortWithMap) { TestSort(Sort::CountSortWithMap); }
 
 TEST(SortTest, QuickSort_iterative) { TestSort(Sort::QuickSort_iterative); }
 TEST(SortTest, QuickSort_oneCall) { TestSort(Sort::QuickSort_oneCall); }
@@ -120,4 +148,3 @@ TEST(SortTest, InsertionSort) { TestSort(Sort::InsertionSort); }
 
 TEST(SortTest, IntroSort) { TestSort(Sort::Introsort); }
 TEST(SortTest, IntrosortPar) { TestSort(Sort::IntrosortPar); }
-

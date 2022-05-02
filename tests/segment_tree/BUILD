@@ -4,7 +4,7 @@ cc_test(
     srcs = ["segment_tree_test.cc"],
     deps = [
         "//src/lib/segment_tree:SegmentTreeLib",
-        "@googletest//:gtest_main",
+        "@com_google_googletest//:gtest_main",
                   "//src/lib:utility",
 
     ],

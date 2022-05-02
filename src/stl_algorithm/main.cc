@@ -1,4 +1,5 @@
 #include <iostream>
+#include <list>
 #include <numeric>
 #include <set>
 #include <string>
@@ -30,17 +31,26 @@ bool GreaterThan(int a, int b) { return a > b; }
 int Multiply(int i, int j) { return i * j; }
 int MultiplyBy10(int i) { return i * 10; }
 
+bool IsUnder10(int i) { return i < 10; }
 int main() {
   {
-    std::vector<int> v = {12, -2, 0, 0, 1, 12, 5, 3, 13, 3, 5};
-    auto count = std::count_if(v.begin(), v.end(), IsOdd);
-    std::cout << "count_if: " << count << std::endl;
+    std::list<int> v = {12, -2, 0, 13, 3, 5};
+
+    auto it = std::find(v.begin(), v.end(), 12);
+
+    // It was not found.
+    if (it == v.end()) {
+      std::cout << "Not found!" << std::endl;
+    } else {
+      std::cout << "Found!" << std::endl;
+    }
   }
 
   // Find
   {
     std::vector<int> v = {12, -2, 0, 13, 3, 5};
     auto it2 = v.begin();
+    it2++;
     it2++;
 
     auto it = std::find(it2, v.end(), 12);
@@ -59,6 +69,24 @@ int main() {
     }
   }
 
+  {
+    std::vector<int> v = {12, -2, 0, 0, 1, 12, 5, 3, 13, 3, 5};
+    auto count = std::count_if(v.begin(), v.end(), IsOdd);
+    std::cout << "count_if: " << count << std::endl;
+  }
+
+  {
+    std::vector<int> v = {12, -2, 0, 0, 1, 12, 5, 3, 13, 3, 5};
+    auto count = std::count_if(v.begin(), v.end(), IsEven);
+    std::cout << "count_if: " << count << std::endl;
+  }
+
+  {
+    std::vector<int> v = {12, -2, 0, 0, 1, 12, 5, 3, 13, 3, 5};
+    auto count = std::count_if(v.begin(), v.end(), IsUnder10);
+    std::cout << "count_if: " << count << std::endl;
+  }
+
   // Sort
   {
     std::vector<int> v = {12, -2, 0, 13, 3, 5};
@@ -66,10 +94,19 @@ int main() {
     Print(v);
   }
 
-  // Sort
   {
     std::vector<int> v = {12, -2, 0, 13, 3, 5};
     std::sort(v.begin(), v.end(), GreaterThan);
+    Print(v);
+  }
+
+  // Sort
+  {
+    std::vector<int> v = {12, -2, 0, 13, 3, 5};
+    auto it = v.begin();
+    it++;
+    it++;
+    std::sort(it, v.end(), GreaterThan);
     Print(v);
   }
 
@@ -98,16 +135,16 @@ int main() {
   // Accumulate
   {
     std::vector<int> v = {1, 2, 3, 4, 5, 6};
-    auto sum = std::accumulate(v.begin(), v.end(), 0);
+    auto sum = std::accumulate(v.begin(), v.end(), /*init=*/0);
     std::cout << "sum: " << sum << std::endl;
   }
 
   // Accumulate 2
   {
     std::vector<int> v = {1, 2, 3, 4, 5, 6};
-    auto sum = std::accumulate(v.begin(), v.end(), /*init=*/1,
+    auto product = std::accumulate(v.begin(), v.end(), /*init=*/1,
                                /*binary_op=*/Multiply);
-    std::cout << "mult: " << sum << std::endl;
+    std::cout << "product: " << product << std::endl;
   }
 
   {
@@ -118,12 +155,21 @@ int main() {
 
     std::transform(v.begin(), v.end(), v2.begin(), MultiplyBy10);
 
-    std::transform(v.begin(), v.end(), v.begin(), MultiplyBy10);
-
     Print(v2);
-    Print(v);
   }
 
+  {
+    std::vector<int> inputs = {0, 1, 2, 3, 4, 5, 6, 7, 8};
+    std::vector<int> outputs(inputs.size());
+    Print(outputs);
+    // Increment all of them
+    auto it =
+        std::copy_if(inputs.begin(), inputs.end(), outputs.begin(), IsOdd);
+
+    Print(outputs);
+    outputs.erase(it, outputs.end());
+    Print(outputs);
+  }
   // Add up all odd numbers
   // {
   //   std::vector<int> v = {1, 2, 3, 4, 5, 6};

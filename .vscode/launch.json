@@ -5,14 +5,30 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "clang++ - Build and debug active file",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${fileDirname}/${fileBasenameNoExtension}",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb",
+      "preLaunchTask": "C/C++: clang++ build active file"
+    },
+    {
       "preLaunchTask": "Build Example (Debug)",
       "name": "(lldb) Launch",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/bazel-out/darwin-dbg/bin/${relativeFileDirname}/${fileBasenameNoExtension}",
+      "program": "${workspaceFolder}/bazel-bin/${relativeFileDirname}/${fileBasenameNoExtension}",
       "args": [],
       "stopAtEntry": false,
-      "cwd": "${workspaceFolder}/bazel-out/darwin-dbg/bin/${relativeFileDirname}/${fileBasenameNoExtension}.runfiles/__main__",
+      "cwd": "${workspaceFolder}/bazel-bin/${relativeFileDirname}",
+      "sourceMap": {
+        "bazel-cpp_tour": "${workspaceFolder}"
+      },
       "environment": [],
       "externalConsole": false,
       "MIMode": "lldb"
@@ -22,13 +38,9 @@
       "name": "CodeLLDB",
       "type": "lldb",
       "request": "launch",
-      "program": "${workspaceFolder}/bazel-out/darwin-dbg/bin/${relativeFileDirname}/${fileBasenameNoExtension}",
-      "args": [],
-     
-      // *** You need to change this part for your own system to work ***
-      // Set sourceMap from output of (readlink -n bazel-cpp_tour) to ${workspaceFolder}
+      "program": "${workspaceFolder}/bazel-bin/${relativeFileDirname}/${fileBasenameNoExtension}",
       "sourceMap": {
-        "/private/var/tmp/_bazel_ari/a1f1e074d75504d9b97b8d9dc041d368/execroot/__main__": "${workspaceFolder}/"
+        ".": "${workspaceFolder}"
       }
     },
   ]

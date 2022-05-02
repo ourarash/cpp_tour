@@ -5,11 +5,11 @@
 // namespaces
 #include <iostream>
 
-
 using namespace std;  // Generall, don't do this.
 
 // Global namespace
 int x = 0;
+
 void PrintSomething() { std::cout << "Printing example 0." << std::endl; }
 
 namespace ns1 {
@@ -24,9 +24,13 @@ void PrintSomething() { std::cout << "Printing example 2." << std::endl; }
 
 }  // namespace ns2
 
-
-
 int main() {
+  std::vector<int> v;
+  std::string s;
+
+  int vector;
+  int string;
+
   std::cout << "ns1::x: " << ns1::x << std::endl;
   std::cout << "ns2::x: " << ns2::x << std::endl;
   std::cout << "::x: " << ::x << std::endl;
@@ -34,7 +38,7 @@ int main() {
   // ns1::yStruct.x = 10;
   // ns2::yStruct.x = 11;
 
-  // PrintSomething();
+  ns1::PrintSomething();
   ns2::PrintSomething();
   ::PrintSomething();
 

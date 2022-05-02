@@ -9,7 +9,7 @@ int main() {
     std::priority_queue<int> q;
 
     q.push(5);
-    q.push(15);
+    q.push(150);
     q.push(1);
 
     q.push(42);
@@ -44,7 +44,3 @@ int main() {
   }
   return 0;
 }
-
-void sort(std::vector<int>& inputs) {}
-
-std::vector<int> sort(const std::vector<int>& inputs) {}

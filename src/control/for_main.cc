@@ -1,10 +1,10 @@
-#include "src/lib/utility.h"
 #include <iostream>
 #include <string>
 #include <vector>
 
-int main() {
+#include "src/lib/utility.h"
 
+int main() {
   // break and continue
   // This is a very loooooooong comment line. Why would someone write such a
   // long comment line. If this happens you probably want to wrap it around. The
@@ -16,12 +16,15 @@ int main() {
 
   for (int i = 0; i < 10; i++) {
     my_vector.push_back(i);
-    
   }
   PrintVector(my_vector);
 
+  for (int &e : my_vector) {
+    std::cout << "e: " << e << std::endl;
+  }
 
-  for(int &e: my_vector){
+  int arr[10];
+  for (int &e : arr) {
     std::cout << "e: " << e << std::endl;
   }
 

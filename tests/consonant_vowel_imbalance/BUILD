@@ -4,6 +4,6 @@ cc_test(
     deps = [
         "//src/lib:utility",
         "//src/lib/consonant_vowel_imbalance:ConsonantVowelImbalanceLib",
-        "@googletest//:gtest_main",
+        "@com_google_googletest//:gtest_main",
     ],
 )

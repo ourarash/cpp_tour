@@ -1,10 +1,11 @@
 #include "sort.h"
 // #include <ranges>
-
 #include <algorithm>
 #include <cmath>
 #include <future>
 #include <iostream>
+#include <iterator>
+#include <unordered_map>
 #include <vector>
 
 template <class T>
@@ -26,9 +27,98 @@ int Sort::FindMinIndex(const std::vector<int> &input, int start_index) {
   return min_index;
 }
 
+int Sort::FindMinIndexIterator(const std::vector<int> &input, int start_index) {
+  return std::distance(
+      input.begin(),
+      std::min_element(input.begin() + start_index, input.end()));
+}
+//-----------------------------------------------------------------------------
+// Assuming input has non-negative numbers only.
+void Sort::CountSort(std::vector<int> &input) {
+  if (input.size() == 0 || input.size() == 1) {
+    return;
+  }
+  std::vector<int> out(input.size());
+
+  int max = *std::max_element(input.begin(), input.end());
+
+  std::vector<int> count(max + 1);
+
+  for (auto e : input) {
+    count[e]++;
+  }
+
+  // Create a prefix sum
+  for (int i = 1; i <= max; ++i) {
+    count[i] += count[i - 1];
+  }
+
+  // Create the output.
+  for (int i = input.size() - 1; i >= 0; --i) {
+    out[count[input[i]] - 1] = input[i];
+    --count[input[i]];
+  }
+
+  input = out;
+}
+//-----------------------------------------------------------------------------
+// Can take positive or negative values
+void Sort::CountSortWithMap(std::vector<int> &input) {
+  if (input.size() == 0 || input.size() == 1) {
+    return;
+  }
+
+  int max = *std::max_element(input.begin(), input.end());
+  int min = *std::min_element(input.begin(), input.end());
+
+  std::unordered_map<int, int> counts;
+  for (auto e : input) {
+    counts[e]++;
+  }
+
+  int cur_index = 0;
+  for (int i = min; i <= max; i++) {
+    while (counts.count(i) > 0) {
+      input[cur_index++] = i;
+
+      if (--counts[i] == 0) {
+        counts.erase(i);
+      }
+    }
+  }
+}
+
+//-----------------------------------------------------------------------------
+// Assumes non-negative values.
+void Sort::CountSortWithVector(std::vector<int> &input) {
+  if (input.size() == 0 || input.size() == 1) {
+    return;
+  }
+
+  int max = *std::max_element(input.begin(), input.end());
+
+  // Counting values.
+  std::vector<int> counts(max + 1);
+  for (auto e : input) {
+    counts[e]++;
+  }
+
+  // Inserting each item based on its count.
+  int cur_index = 0;
+  for (int i = 0; i <= max; i++) {
+    while (counts[i]-- > 0) {
+      input[cur_index++] = i;
+    }
+  }
+}
+//-----------------------------------------------------------------------------
 void Sort::SelectionSort(std::vector<int> &input) {
-  for (int i = 0; i < int(input.size() - 1); i++) {
-    int min_index = FindMinIndex(input, i);
+  if (input.size() == 0) {
+    return;
+  }
+  for (int i = 0; i < input.size() - 1; i++) {
+    // Find the index of min value in input[i:n]
+    int min_index = FindMinIndexIterator(input, i);
     Swap(input[i], input[min_index]);
   }
 }
@@ -51,10 +141,13 @@ void Sort::SelectionSort(std::vector<int> &input) {
 // }
 
 void Sort::BubbleSort(std::vector<int> &input) {
+  if (input.size() == 0) {
+    return;
+  }
   bool go;
   do {
     go = false;
-    for (int i = 0; i < int(input.size() - 1); i++) {
+    for (int i = 0; i < input.size() - 1; i++) {
       if (input[i] > input[i + 1]) {
         Swap(input[i], input[i + 1]);
         go = true;
@@ -64,11 +157,12 @@ void Sort::BubbleSort(std::vector<int> &input) {
 }
 
 void Sort::BubbleSortImproved(std::vector<int> &input) {
-  int n = input.size();
-
-  for (int i = 0; i < n - 1; i++) {
+  if (input.size() == 0) {
+    return;
+  }
+  for (int i = 0; i < input.size() - 1; i++) {
     bool swapped = false;
-    for (int j = 0; j < n - 1 - i; j++) {
+    for (int j = 0; j < input.size() - 1 - i; j++) {
       if (input[j] > input[j + 1]) {
         Swap(input[j], input[j + 1]);
         swapped = true;
@@ -81,17 +175,21 @@ void Sort::BubbleSortImproved(std::vector<int> &input) {
 }
 // To heapify a subtree rooted with node i which is
 // an index in arr
-
+// Trickles down and keeps the largest at the root.
 void Sort::Heapify(std::vector<int> &arr, int n, int i) {
   int largest = i;    // Initialize largest as root
   int l = 2 * i + 1;  // left = 2*i + 1
   int r = 2 * i + 2;  // right = 2*i + 2
 
   // If left child is larger than root
-  if (l < n && arr[l] > arr[largest]) largest = l;
+  if (l < n && arr[l] > arr[largest]) {
+    largest = l;
+  }
 
   // If right child is larger than largest so far
-  if (r < n && arr[r] > arr[largest]) largest = r;
+  if (r < n && arr[r] > arr[largest]) {
+    largest = r;
+  }
 
   // If largest is not root
   if (largest != i) {
@@ -106,7 +204,9 @@ void Sort::Heapify(std::vector<int> &arr, int n, int i) {
 void Sort::HeapSort(std::vector<int> &arr) {
   int n = arr.size();
   // Build heap (rearrange array)
-  for (int i = n / 2 - 1; i >= 0; i--) Heapify(arr, n, i);
+  for (int i = n / 2 - 1; i >= 0; i--) {
+    Heapify(arr, n, i);
+  }
 
   // One by one extract an element from heap
   for (int i = n - 1; i > 0; i--) {
@@ -164,7 +264,10 @@ void Sort::MergeSortHelp(std::vector<int> &input, int l, int r) {
 
 // Calls MergeSortHelp with l=0, r=input.size() -1
 void Sort::MergeSort(std::vector<int> &input) {
-  MergeSortHelp(input, 0, int(input.size() - 1));
+  if (input.size() == 0) {
+    return;
+  }
+  MergeSortHelp(input, /*left=*/0, input.size() - 1);
 }
 
 void Sort::MergeSortParHelp(std::vector<int> &input, int l, int r) {
@@ -197,9 +300,9 @@ void Sort::InsertionSortImp(std::vector<int> &arr, int left, int right) {
     int key = arr[i];
     int j = i - 1;
 
-    /* Move elements of arr[0..i-1], that are
-       greater than key, to one position ahead
-       of their current position */
+    // Move elements of arr[0..i-1], that are
+    // greater than key, to one position ahead
+    // of their current position.
     while (j >= left && arr[j] > key) {
       arr[j + 1] = arr[j];
       j = j - 1;

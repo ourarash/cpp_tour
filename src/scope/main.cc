@@ -9,7 +9,8 @@ class Person {
  public:
   Person() { std::cout << "I am the constructor" << std::endl; }
 
-  ~Person() { std::cout << "I am the distructor" << std::endl; }
+  ~Person() { std::cout << "I am the destructor" << std::endl; }
+
   std::string name;
 };
 
@@ -17,27 +18,67 @@ void MyFunc() {
   variable++;
   int a;
   {
-    Person p;
+    Person;
     // Do something with pd
   }
   // std::cout << "p.name: " << p.name << std::endl;
 
-  std::cout << "global_variable: " << global_variable << std::endl;
+  // std::cout << "global_variable: " << global_variable << std::endl;
 }
 
 int main() {
+  {
+    //
+    Person p;
+    p.name = "Ari";
+  }
+
+  {
+    //
+    int a = 10;
+
+    {
+      int a = 20;
+
+      a++;
+
+      std::cout << "a: " << a << std::endl;
+    }
+
+    std::cout << "a: " << a << std::endl;
+
+    {
+      int a = 30;
+      std::cout << "a: " << a << std::endl;
+
+      {
+        int a = 40;
+        std::cout << "a: " << a << std::endl;
+      }
+    }
+
+    std::cout << "a: " << a << std::endl;
+  }
+
+  {
+    float a = 20;
+    std::cout << "a: " << a << std::endl;
+  }
+
   int k = 0;
   {
     for (int i = 0; i < 1000; i++) {
-      int j = i += 2;
+      int j = i + 2;
     }
+
+    // Compile error!
+    // std::cout << "i: " << i << std::endl;
 
     if (k == 1) {
       int x = k;
     }
 
-    std::cout << "j: " << j << std::endl;
-    std::cout << "i: " << i << std::endl;
+    // k = i;
   }
 
   std::cout << "k: " << k << std::endl;

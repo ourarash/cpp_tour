@@ -6,6 +6,8 @@
 #include <string>
 #include <map>
 #include <unordered_set>
+#include <unordered_map>
+
 #include <vector>
 
 #include "src/lib/utility.h"
@@ -48,7 +50,7 @@ class DistMatrixGraph {
   long BellmanFordRecursiveHelper(int s, int i, int v);
 
   int FindMinInDButNotInVisited(std::vector<long> &d,
-                                std::unordered_set<int> &visited);
+                                std::unordered_map<int, bool> &visited);
 
   long FloydWarshallRecursiveHelper(int i, int j, int k);
   std::vector<std::vector<long>> FloydWarshallRecursive();

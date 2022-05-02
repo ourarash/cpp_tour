@@ -92,6 +92,48 @@
     "scoped_allocator": "cpp",
     "typeindex": "cpp",
     "valarray": "cpp",
-    "variant": "cpp"
+    "variant": "cpp",
+    "charconv": "cpp",
+    "compare": "cpp",
+    "csetjmp": "cpp",
+    "coroutine": "cpp",
+    "shared_mutex": "cpp",
+    "span": "cpp",
+    "barrier": "cpp",
+    "*.tcc": "cpp",
+    "concepts": "cpp",
+    "cuchar": "cpp",
+    "source_location": "cpp",
+    "latch": "cpp",
+    "numbers": "cpp",
+    "ranges": "cpp",
+    "semaphore": "cpp",
+    "stop_token": "cpp",
+    "syncstream": "cpp"
+  },
+  "lldb.displayFormat": "auto",
+  "lldb.showDisassembly": "auto",
+  "lldb.dereferencePointers": true,
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": "com_google_googletest.failed",
+        "settings": {
+          "foreground": "#f00"
+        }
+      },
+      {
+        "scope": "com_google_googletest.passed",
+        "settings": {
+          "foreground": "#0f0"
+        }
+      },
+      {
+        "scope": "com_google_googletest.run",
+        "settings": {
+          "foreground": "#0f0"
+        }
+      }
+    ]
   }
 }

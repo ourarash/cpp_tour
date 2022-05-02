@@ -1,7 +1,16 @@
 #include <iostream>
 
-// Returning reference to object vs the object
-struct X {
+class X {
+
+   X(const X& rhs) {
+    value = rhs.value;
+    std::cout << "Copy constructor" << std::endl;
+  }
+  // Copy assignment
+  X& operator=(const X& rhs) {
+    value = rhs.value;
+    return *this;
+  }
   // prefix increment
   X& operator++() {
     value++;

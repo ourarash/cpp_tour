@@ -3,26 +3,14 @@
 #include <string>
 
 int main() {
-
-  // std::vector v;
-  // std::cout << "v[10]: " << v[10] << std::endl;
-
   // Empty stack
   std::stack<int> s;
 
-  int r;
-  // r = s.top();  // Seriously?
-  // s.pop();      // Don't do this!
-
   if (!s.empty()) {
-    r = s.top();
+    int r = s.top();
     s.pop();  // Don't do this!
   }
 
-  // // Do this:
-  // if (!s.empty()) {
-  //   s.pop();
-  // }
   {
     std::stack<int> s;
 
@@ -42,8 +30,7 @@ int main() {
 
   // OMG! There is not begin and end!
   // Can't do this:
-  // for(auto it=s.begin(); it!=s.end(); ++it){
-
+  // for (auto it = s.begin(); it != s.end(); ++it) {
   // }
 
   return 0;

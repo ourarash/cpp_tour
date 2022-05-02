@@ -4,7 +4,6 @@
 #include <string>
 #include <vector>
 
-#include "src/lib/utility.h"
 
 // memo map works like a cache
 std::unordered_map<int, int> memo;

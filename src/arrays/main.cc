@@ -1,6 +1,7 @@
-#include "src/lib/utility.h"
 #include <iostream>
 #include <string>
+
+#include "src/lib/utility.h"
 
 struct Person {
   std::string first_name;
@@ -27,8 +28,13 @@ void InitializeArray3(int *arr, int size) {
 }
 
 int main() {
+ 
 
-  int arr[8];
+  int arr[8];  // Size has to be known at compile time!
+
+  
+  PrintArray(arr, 8);
+
   InitializeArray(arr, 8);
   PrintArray(arr, 8);
 

@@ -132,3 +132,8 @@ cc_binary(
 name = "alias_template",
 srcs = ["alias_template.cc"],
 )
+
+cc_binary(
+name = "meta_programming_container",
+srcs = ["meta_programming_container.cc"],
+)

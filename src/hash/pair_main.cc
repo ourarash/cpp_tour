@@ -3,21 +3,45 @@
 #include <string>
 #include <vector>
 
-#include "src/lib/utility.h"
-
 struct MyPerson {
   MyPerson() : name("No Name"), age(0) {}
-  MyPerson(const std::string &name_p, int age_p) : name(name_p), age(age_p) {}
+  MyPerson(const std::string& name_p, int age_p) : name(name_p), age(age_p) {}
   std::string name;
   int age;
 };
 
 int main() {
+  std::pair<char, int> pair1 = {'A', 4};
+  std::pair<char, int> pair2 = {'B', 3};
+
+  std::cout << "pair1.first: " << pair1.first
+            << ", pair1.second: " << pair1.second << std::endl;
+
+
+  std::pair<std::string, MyPerson> person_pair = {"Ari", MyPerson("Ari", 20)};
+  std::cout << "person_pair.first: " << person_pair.first << std::endl;
+
+  std::cout << "person_pair.second.age: " << person_pair.second.age
+            << std::endl;
+
+
+
+
+
+
   std::map<std::string, int> grades;
 
-  persons["Ari"] = 3;
-  persons["Ted"] = 4;
-  persons["Jessica"] = 3;
+  grades["Ari"] = 3;
+  grades["Ted"] = 4;
+  grades["Jessica"] = 3;
+
+  // vector[2]= 5; ----> O(1) indexing. Finding in vector: O(n)
+
+  // Immutable
+  for (const auto& e : grades) {
+    std::cout << "e.first: " << e.first << std::endl;
+    std::cout << "e.second: " << e.second << std::endl;
+  }
 
   std::map<std::string, MyPerson> persons;
 

@@ -6,16 +6,17 @@
 
 int main() {
   std::vector<int> a;
+
   std::cout << "a.size(): " << a.size() << std::endl;
   PrintVector(a);
-
 
   a.push_back(1);
+
   std::cout << "a.size(): " << a.size() << std::endl;
   PrintVector(a);
 
-
   a.push_back(2);
+
   std::cout << "a.size(): " << a.size() << std::endl;
   PrintVector(a);
 
@@ -48,7 +49,7 @@ int main() {
     }
     PrintVector(v);
 
-    for (auto &n : v) {
+    for (auto& n : v) {
       n *= 10;
     }
 

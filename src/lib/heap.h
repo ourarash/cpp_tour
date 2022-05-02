@@ -25,8 +25,10 @@ class Heap {
 
   std::vector<int> ConvertToHeap(const std::vector<int> &input);
 
-//  private:
+  //  private:
   std::vector<int> data_;
 };
+
+std::vector<int> HeapSort(const std::vector<int> &input);
 
 #endif

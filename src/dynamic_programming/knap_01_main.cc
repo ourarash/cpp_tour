@@ -3,7 +3,6 @@
 #include <unordered_map>
 #include <vector>
 
-#include "src/lib/utility.h"
 
 int knapSack01(std::vector<int> &weights, std::vector<int> &values, int i,
                int w) {
@@ -22,15 +21,12 @@ int knapSack01(std::vector<int> &weights, std::vector<int> &values, int i,
 }
 
 int main() {
-  std::vector<int> values = {60, 100, 120};
-  std::vector<int> weights = {10, 20, 30};
-  int W = 50;
+  std::vector<int> values = {1, 10, 15, 20};
+  std::vector<int> weights = {1, 10, 15, 15};
+  int w = 25;
 
-  // std::vector<int> values = {1, 2, 2, 4, 10};
-  // std::vector<int> weights = {1, 2, 1, 12, 4};
-
-  // int W = 15;
-  int n = knapSack01(weights, values, values.size() - 1, W);
+  
+  int n = knapSack01(weights, values, values.size() - 1, w);
   std::cout << "n: " << n << std::endl;
   return 0;
 }

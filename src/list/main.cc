@@ -13,6 +13,15 @@ int GetIndexValue(const std::list<int> &l, int index) {
   return data;
 }
 
+// Vector
+// 1. Size can be modified.
+// 2. Continuous memory locations -> O(1) access time.
+// 3. In array arr item i is in address (arr + i): arr[i] is really *(arr + i)
+
+// List
+// 1. Similar to vector but not in continuous memory locations.
+// 2. Access time: O(?)
+
 int main() {
   std::list<int> l;
 

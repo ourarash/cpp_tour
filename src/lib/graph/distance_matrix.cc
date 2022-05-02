@@ -6,6 +6,7 @@
 #include <queue>
 #include <set>
 #include <string>
+#include <unordered_map>
 #include <unordered_set>
 #include <vector>
 
@@ -122,13 +123,13 @@ std::vector<std::vector<long>> DistMatrixGraph::FloydWarshallRecursiveMemo() {
 //-----------------------------------------------------
 // Finds the minimum value in d that is not in visited
 int DistMatrixGraph::FindMinInDButNotInVisited(
-    std::vector<long> &d, std::unordered_set<int> &visited) {
+    std::vector<long> &d, std::unordered_map<int, bool> &visited) {
   // Find min
   int u;
   int min = INT_MAX;
 
   for (int i = 0; i < d.size(); i++) {
-    if (find(visited.begin(), visited.end(), i) != visited.end()) {
+    if (visited[i] == true) {
       continue;
     }
     int e = d[i];
@@ -142,20 +143,28 @@ int DistMatrixGraph::FindMinInDButNotInVisited(
 }
 //-----------------------------------------------------
 std::vector<long> DistMatrixGraph::Dijkstra(int source) {
-  std::unordered_set<int> visited;
+  std::unordered_map<int, bool> visited;
+  int visited_size = 0;
   std::vector<long> d(weight_.size());
   for (int i = 0; i < weight_.size(); i++) {
     d[i] = weight_[source][i];
   }
 
-  visited.insert(source);
-  while (visited.size() < weight_.size()) {
+  visited[source] = true;
+  visited_size++;
+
+  while (visited_size < weight_.size()) {
     // Find minimum non visited
     int u = FindMinInDButNotInVisited(d, visited);
-    visited.insert(u);
+
+    visited[u] = true;
+    visited_size++;
+
     // Relax
-    for (int i = 0; i < weight_.size(); i++) {
-      d[i] = std::min(d[i], d[u] + weight_[u][i]);
+    for (int v = 0; v < weight_.size(); v++) {
+      if (weight_[u][v] != INT_MAX && visited[v] == false) {
+        d[v] = std::min(d[v], d[u] + weight_[u][v]);
+      }
     }
   }
   return d;

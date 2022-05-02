@@ -4,6 +4,8 @@
 #include <vector>
 
 int main() {
+  int8_t x = 10;
+  
   std::cout << "Size of int8_t: " << sizeof(int8_t) << " byte" << std::endl;
 
   std::cout << "Size of size_t: " << sizeof(size_t) << " byte" << std::endl;

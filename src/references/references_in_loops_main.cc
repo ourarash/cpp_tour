@@ -22,6 +22,11 @@ int main() {
   }
   PrintVector(my_vector);
 
+  int sum = 0;
+  for (auto &n : my_vector) {
+    sum += n;
+  }
+
   {
     int a = 10;
     int b = 10;

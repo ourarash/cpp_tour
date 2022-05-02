@@ -11,14 +11,22 @@ class Point {
     z_ = new int;
     std::cout << "***NO PARAMETERIZED constructor." << std::endl;
   }
-
-  // PARAMETERIZED Constructor
+  
+  // PARAMETERIZED Constructor Version 1
   Point(int i, int j) {
     std::cout << "**PARAMETERIZED constructor." << std::endl;
     i_ = i;
     j_ = j;
     z_ = new int;
   }
+
+  // PARAMETERIZED Constructor Version 2
+  Point(int i, int j) : i_(i), j_(j) {
+    std::cout << "**PARAMETERIZED constructor." << std::endl;
+    z_ = new int;
+  }
+
+ 
 
   // PARAMETERIZED Constructor
   Point(int i) {

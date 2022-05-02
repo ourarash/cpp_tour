@@ -16,6 +16,33 @@ void InitializeVector(std::vector<int> &input) {
 }
 
 int main() {
+  {
+    int *arr;
+
+    // arr = new int;
+    arr = new int[10];
+    // delete arr; // Don't do this!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // .. 100 lines later
+    // What is the size of arr?
+
+    delete[] arr;
+  }
+
   int constant_size_array[10];
 
   int *arr = nullptr;
@@ -33,6 +60,10 @@ int main() {
 
   arr = new int[size];
 
+  arr[1] = 10;
+
+  size = 0;
+
   if (arr == nullptr) {
     std::cout << "arr is not allocated yet." << std::endl;
   } else {
@@ -44,6 +75,12 @@ int main() {
   // PrintArray(arr, size);
 
   delete[] arr;
+
+  // what's the size of constant_size_array??
+  // constant_size_array.size() doesn't exist!
+
+  size = 10;
+  // What about size of arr?
 
   return 0;
 }

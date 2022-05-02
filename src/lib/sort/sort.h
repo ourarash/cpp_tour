@@ -6,6 +6,12 @@
 class Sort {
  public:
   Sort() {}
+
+  static void CountSortWithVector(std::vector<int> &input);
+  static void CountSortWithMap(std::vector<int> &input);
+
+  static void CountSort(std::vector<int> &input);
+
   static void SelectionSort(std::vector<int> &input);
   static void BubbleSort(std::vector<int> &input);
   static void BubbleSortImproved(std::vector<int> &input);
@@ -21,6 +27,9 @@ class Sort {
   static void HeapSort(std::vector<int> &arr);
 
   static int FindMinIndex(const std::vector<int> &input, int start_index);
+  static int FindMinIndexIterator(const std::vector<int> &input,
+                                  int start_index);
+
   static int GetMinValueAndIncrementItsIndex(std::vector<int> &input,
                                              int &left_index, int &right_index,
                                              const int left_max_index,

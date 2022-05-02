@@ -21,4 +21,7 @@ int main() {
   for (auto& p : persons) {
     std::cout << "p: " << p << std::endl;
   }
+
+  std::cout << "persons.count(\"Ted\"): " << persons.count("Ted") << std::endl;
+  std::cout << "persons.count(\"Ari\"): " << persons.count("Ari") << std::endl;
 }

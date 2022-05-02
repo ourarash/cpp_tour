@@ -4,6 +4,6 @@ cc_test(
     deps = [
         "//src/lib:utility",
         "//src/lib:heap_lib",
-        "@googletest//:gtest_main",
+        "@com_google_googletest//:gtest_main",
     ],
 )

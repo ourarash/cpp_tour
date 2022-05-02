@@ -1,60 +1,63 @@
 #include <exception>
 #include <iostream>
-class Shape {
+class Base {
  public:
   virtual int size() { return 0; };
 };
-class Triangle : public Shape {
+class Derived : public Base {
  public:
   int size() override { return 3; }
 };
 
 int main() {
-  Shape* myShape = new Triangle;  // Derrived
-  Shape* shape = new Shape;       // Base
+  Base* base = new Base;            // Base
+  Base* as_base_ptr = new Derived;  // Derrived
 
-  std::cout << "typeid(*myShape): " << typeid(*myShape).name() << std::endl;
-  std::cout << "typeid(*shape): " << typeid(*shape).name() << std::endl;
+  std::cout << "typeid(*base): " << typeid(*base).name() << std::endl;
+  std::cout << "typeid(*as_base_ptr): " << typeid(*as_base_ptr).name()
+            << std::endl;
 
-  Triangle* myTriangle = dynamic_cast<Triangle*>(myShape);
+  Derived* derived_ptr = dynamic_cast<Derived*>(as_base_ptr);
 
-  // dynamic_cast returns 0 if not a triangle
-  if (myTriangle) {
-    std::cout << "Yes, it's a triangle!" << std::endl;
-    std::cout << "myTriangle->size(): " << myTriangle->size() << std::endl;
+  // dynamic_cast returns 0 if not a derived
+  if (derived_ptr) {
+    std::cout << "Yes, it's a derived!" << std::endl;
+    std::cout << "derived_ptr->size(): " << derived_ptr->size() << std::endl;
   }
 
-  Triangle* not_triangle = dynamic_cast<Triangle*>(shape);
+  Derived* not_derived_ptr = dynamic_cast<Derived*>(base);
 
-  if (not_triangle) {
-    std::cout << "Yes, it's a triangle!" << std::endl;
-    std::cout << "not_triangle->size(): " << not_triangle->size() << std::endl;
+  if (not_derived_ptr) {
+    std::cout << "Yes, it's a derived!" << std::endl;
+    std::cout << "not_derived_ptr->size(): " << not_derived_ptr->size()
+              << std::endl;
   } else {
-    std::cout << "Not a triangle" << std::endl;
+    std::cout << "Not a derived" << std::endl;
   }
 
-  if (typeid(*myShape) == typeid(*shape)) {
+  if (typeid(*as_base_ptr) == typeid(*base)) {
     std::cout << "The types are the same." << std::endl;
   } else {
     std::cout << "The types are the different." << std::endl;
   }
 
-  std::cout << "typeid(*myShape): " << typeid(*myShape).name() << std::endl;
-  std::cout << "typeid(*shape): " << typeid(*shape).name() << std::endl;
+  std::cout << "typeid(*as_base_ptr): " << typeid(*as_base_ptr).name()
+            << std::endl;
+  std::cout << "typeid(*base): " << typeid(*base).name() << std::endl;
 
   // Static cast compiles, but gives you incorrect resutls.
   {
-    Shape* myShape = new Triangle;  // Derrived
-    Shape* shape = new Shape;       // Base
+    Base* as_base_ptr = new Derived;  // Derrived
+    Base* base = new Base;            // Base
 
-    std::cout << "myShape->size(): " << myShape->size() << std::endl;
+    std::cout << "as_base_ptr->size(): " << as_base_ptr->size() << std::endl;
 
-    Triangle* myTriangle = static_cast<Triangle*>(myShape);
-    std::cout << "myTriangle->size(): " << myTriangle->size() << std::endl;
+    Derived* derived_ptr = static_cast<Derived*>(as_base_ptr);
+    std::cout << "derived_ptr->size(): " << derived_ptr->size() << std::endl;
 
-    Triangle* not_triangle = static_cast<Triangle*>(shape);
-    std::cout << "not_triangle->size(): " << not_triangle->size() <<
-    std::endl;
+    Derived* not_derived_ptr = static_cast<Derived*>(base);
+    std::cout << "not_derived_ptr->size(): " << not_derived_ptr->size()
+              << std::endl;
   }
   return 0;
 }

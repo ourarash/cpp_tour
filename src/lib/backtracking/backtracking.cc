@@ -1,5 +1,6 @@
 #include "backtracking.h"
 
+#include <algorithm>
 #include <iostream>
 #include <set>
 #include <string>
@@ -119,6 +120,45 @@ void Backtracking::Permute_aux(std::vector<int> &nums,
   }
 }
 //-----------------------------------------------------
+// Permute
+std::vector<std::vector<int>> Backtracking::Permute_recursive(
+    std::vector<int> &nums) {
+  std::vector<std::vector<int>> result;
+  if (nums.size() == 1) {
+    result.push_back(nums);
+    return result;
+  }
+
+  for (int i = 0; i < nums.size(); i++) {
+    std::vector<int> next_nums = CopyAllElementsButIth(nums, i);
+
+    auto next_result = Permute_recursive(next_nums);
+
+    for (auto &e : next_result) {
+      // Inefficient way of concatenating an element to the beginning of a
+      // sequence.
+      e.insert(e.begin(), nums[i]);
+      result.push_back(e);
+    }
+  }
+
+  return result;
+}
+
+// Copy all elements except the i'th one from nums into a new vector
+std::vector<int> Backtracking::CopyAllElementsButIth(std::vector<int> &nums,
+                                                     int i) {
+  std::vector<int> result;
+  for (int j = 0; j < nums.size(); j++) {
+    if (i != j) {
+      result.push_back(nums[j]);
+    }
+  }
+  return result;
+}
+
+//-----------------------------------------------------
+
 std::vector<std::vector<int>> Backtracking::PermuteII(std::vector<int> &nums) {
   std::vector<std::vector<int>> result;
   std::sort(nums.begin(), nums.end());
@@ -138,11 +178,11 @@ void Backtracking::PermuteII_aux(std::vector<int> &nums,
   }
 
   for (int i = 0; i < nums.size(); i++) {
-    // Avoid duplicates
     if (used[i]) {
       continue;
     }
 
+    // Avoid duplicates
     if (i > 0 && nums[i] == nums[i - 1] && !used[i - 1]) {
       continue;
     }
@@ -155,6 +195,56 @@ void Backtracking::PermuteII_aux(std::vector<int> &nums,
     curResult.pop_back();
     used[i] = false;
   }
+}
+//-----------------------------------------------------------------------------
+std::set<std::vector<int>> Backtracking::PermuteII_recursive(
+    std::vector<int> &nums) {
+  std::set<std::vector<int>> result;
+  if (nums.size() == 1) {
+    result.insert(nums);
+    return result;
+  }
+
+  for (int i = 0; i < nums.size(); i++) {
+    std::vector<int> next_nums = CopyAllElementsButIth(nums, i);
+    auto next_result = Permute_recursive(next_nums);
+
+    for (auto &e : next_result) {
+      e.insert(e.begin(), nums[i]);
+      result.insert(e);
+    }
+  }
+
+  return result;
+}
+//-----------------------------------------------------------------------------
+std::vector<std::vector<int>> Backtracking::PermuteII_recursive_optimized(
+    std::vector<int> &nums) {
+  std::vector<std::vector<int>> result;
+  if (nums.size() == 1) {
+    result.push_back(nums);
+    return result;
+  }
+
+  // Sort so that duplicates are next to each other
+  std::sort(nums.begin(), nums.end());
+
+  for (int i = 0; i < nums.size(); i++) {
+    // Avoid duplicates
+    if (i > 0 && nums[i] == nums[i - 1]) {
+      continue;
+    }
+    std::vector<int> next_nums = CopyAllElementsButIth(nums, i);
+
+    auto next_result = PermuteII_recursive_optimized(next_nums);
+
+    for (auto &e : next_result) {
+      e.insert(e.begin(), nums[i]);
+      result.push_back(e);
+    }
+  }
+
+  return result;
 }
 //-----------------------------------------------------
 std::vector<std::string> Backtracking::WordBreak(
@@ -366,6 +456,8 @@ void Backtracking::SolveNQueen_aux(
   }
 }
 //-----------------------------------------------------
+
+//-----------------------------------------------------
 std::vector<std::vector<int>> Backtracking::CombinationSum2(
     std::vector<int> &nums, int target) {
   std::set<std::vector<int>> result;
@@ -405,6 +497,59 @@ void Backtracking::CombinationSum2_aux(std::vector<int> &nums, int target,
   }
 }
 //-----------------------------------------------------
+int Backtracking::TSPWithGas(std::vector<std::vector<int>> &weights,
+                             std::vector<int> &gas, int start) {
+  std::vector<int> cur_path = {start};
+  std::vector<int> min_path;
+  int min_cost = INT_MAX;
+  int cur_gas = gas[start];
+
+  TSPWithGas_aux(weights, gas, start, start, cur_path, /*cur_cost=*/0, cur_gas,
+                 min_cost, min_path);
+  std::cout << "min_path:" << std::endl;
+  Print(min_path);
+  std::cout << "min_cost: " << min_cost << std::endl;
+  return min_cost;
+}
+
+void Backtracking::TSPWithGas_aux(std::vector<std::vector<int>> &weights,
+                                  std::vector<int> &gas, int start,
+                                  int cur_node, std::vector<int> &cur_path,
+                                  int cur_cost, int cur_gas, int &min_cost,
+                                  std::vector<int> &min_path) {
+  if (cur_cost >= min_cost) {
+    return;
+  }
+
+  // If we are at a leaf and we have enough gas, return cur_cost + the cost of
+  // leaf to start.
+  if (cur_path.size() == weights.size()) {
+    auto result = cur_cost + weights[cur_node][start];
+    if (result < min_cost && cur_gas >= weights[cur_node][start]) {
+      min_cost = result;
+      min_path = cur_path;
+    }
+    return;
+  }
+
+  // Else, return the min of TSP among all children of cur_node
+  for (int i = 0; i < weights.size(); i++) {
+    if (
+        // Reject nodes seen so far.
+        std::find(cur_path.begin(), cur_path.end(), i) == cur_path.end()
+        // Reject nodes to which we don't have enough gas.
+        && cur_gas >= weights[cur_node][i]) {
+      cur_path.push_back(i);
+
+      TSPWithGas_aux(
+          weights, gas, start, i, cur_path, cur_cost + weights[cur_node][i],
+          cur_gas - weights[cur_node][i] + gas[i], min_cost, min_path);
+
+      cur_path.pop_back();
+    }
+  }
+}
+//-----------------------------------------------------------------------------
 int Backtracking::UniquePaths(int m, int n) {
   return Backtracking::UniquePaths_aux(m - 1, n - 1);
 }

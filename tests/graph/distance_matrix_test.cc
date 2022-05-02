@@ -142,12 +142,12 @@ TEST(FloydWarshallRecursive, FloydWarshallRecursive1) {
     {
       DistMatrixGraph g(distances);
       std::vector<std::vector<long>> actual = g.FloydWarshallRecursive();
-      std::vector<std::vector<long>> expected = {
-          {0, 45, 20, 35},  // 0
-          {40, 0, 30, 10},  // 1
-          {20, 30, 0, 30},  // 2
-          {35, 10, 30, 0}   // 3
-      };
+        std::vector<std::vector<long>> expected = {
+            {0, 45, 20, 35},  // 0
+            {40, 0, 30, 10},  // 1
+            {20, 30, 0, 30},  // 2
+            {35, 10, 30, 0}   // 3
+        };
       EXPECT_EQ(expected, actual);
     }
     {
@@ -242,5 +242,31 @@ TEST(FloydWarshallRecursive, FloydWarshallRecursive3) {
     std::cout << "duration_no_memo: " << duration_no_memo.count() << std::endl;
     std::cout << "duration_memo: " << duration_memo.count() << std::endl;
     EXPECT_LE(duration_memo.count(), duration_no_memo.count());
+  }
+}
+
+//-----------------------------------------------------------------------------
+TEST(Dijkstra, Dijkstra1) {
+  std::vector<std::vector<int>> distances{
+      {0, 1000, 20, 35},  // 0
+      {40, 0, 30, 10},    // 1
+      {20, 30, 0, 30},    // 2
+      {35, 10, 30, 0},    // 3
+  };
+
+  {
+    DistMatrixGraph g(distances);
+    auto actual = g.Dijkstra(0);
+    std::vector<long> expected = {0, 45, 20, 35};
+
+    EXPECT_EQ(expected, actual);
+  }
+
+  {
+    DistMatrixGraph g(distances);
+    auto actual = g.Dijkstra(1);
+    std::vector<long> expected = {0, 45, 20, 35};
+
+    EXPECT_EQ(expected, actual);
   }
 }

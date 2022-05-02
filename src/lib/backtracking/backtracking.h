@@ -1,8 +1,8 @@
 #include <iostream>
+#include <set>
 #include <string>
 #include <unordered_map>
 #include <vector>
-#include <set>
 
 #include "src/lib/utility.h"
 
@@ -30,12 +30,22 @@ class Backtracking {
                           std::vector<std::vector<int>> &result,
                           std::vector<int> &curResult);
 
+  static std::vector<std::vector<int>> Permute_recursive(
+      std::vector<int> &nums);
+
+  // Helper function.
+  static std::vector<int> CopyAllElementsButIth(std::vector<int> &nums, int i);
+
   // Permutations II
   static std::vector<std::vector<int>> PermuteII(std::vector<int> &nums);
   static void PermuteII_aux(std::vector<int> &nums,
                             std::vector<std::vector<int>> &result,
                             std::vector<int> &curResult,
                             std::vector<bool> &used);
+
+  static std::set<std::vector<int>> PermuteII_recursive(std::vector<int> &nums);
+  static std::vector<std::vector<int>> PermuteII_recursive_optimized(
+      std::vector<int> &nums);
 
   // Word break II
   static std::vector<std::string> WordBreak(std::string &s,
@@ -54,8 +64,8 @@ class Backtracking {
   static std::vector<std::string> WordBreak_sol2(std::string &s,
                                                  std::vector<std::string> &dic);
   static std::vector<std::string> WordBreak_sol2_aux_memo(
-      std::string &s, std::vector<std::string> &dic,
-      std::string &curResult, std::vector<std::string> &result,
+      std::string &s, std::vector<std::string> &dic, std::string &curResult,
+      std::vector<std::string> &result,
       std::unordered_map<std::string, std::vector<std::string>> &memo);
 
   // Eight queen
@@ -69,11 +79,21 @@ class Backtracking {
 
   // Combination sum
   static std::vector<std::vector<int>> CombinationSum2(std::vector<int> &nums,
-                                                      int target);
+                                                       int target);
   static void CombinationSum2_aux(std::vector<int> &nums, int target,
-                                 std::set<std::vector<int>> &result,
-                                 int curSum, std::vector<int> &curResult,
-                                 int index);
+                                  std::set<std::vector<int>> &result,
+                                  int curSum, std::vector<int> &curResult,
+                                  int index);
+
+  // TSP
+  static int TSPWithGas(std::vector<std::vector<int>> &weights,
+                        std::vector<int> &gas, int start);
+  static void TSPWithGas_aux(std::vector<std::vector<int>> &weights,
+                             std::vector<int> &gas, int start, int cur_node,
+                             std::vector<int> &cur_path, int cur_cost,
+                             int cur_gas, int &min_cost,
+                             std::vector<int> &min_path);
+
   // Unique paths
   static int UniquePaths(int m, int n);
   static int UniquePaths_aux(int m, int n);

@@ -7,7 +7,7 @@ cc_test(
         "//src/lib:SolutionLib",
         "//src/lib:vector_union_lib",
         "//src/lib/sort:SortLib",
-        "@googletest//:gtest_main",
+        "@com_google_googletest//:gtest_main",
     ],
 )
 
@@ -15,32 +15,38 @@ cc_test(
     name = "vector_union_test",
     deps = [
         "//src/lib:SolutionLib",
-        "@googletest//:gtest_main",
+        "@com_google_googletest//:gtest_main",
     ],
 )
 
 cc_test(
     name = "sort_test",
+    srcs = ["sort_test.cc"],
     deps = [
+        "//src/lib:utility",
         "//src/lib/sort:SortLib",
-        "@googletest//:gtest_main",
+        "@com_google_googletest//:gtest_main",
     ],
 )
 
 cc_test(
     name = "solution_test",
+    srcs = ["solution_test.cc"],
+
     deps = [
         "//src/lib:SolutionLib",
-        "@googletest//:gtest_main",
+        "//src/lib:utility",
+        "@com_google_googletest//:gtest_main",
     ],
 )
+
 
 cc_test(
     name = "backtracking_test",
     srcs = ["backtracking_test.cc"],
     deps = [
         "//src/lib/backtracking:BacktrackingLib",
-        "@googletest//:gtest_main",
+        "@com_google_googletest//:gtest_main",
     ],
 )
 
@@ -49,6 +55,6 @@ cc_test(
     srcs = ["search_test.cc"],
     deps = [
         "//src/lib/search:SearchLib",
-        "@googletest//:gtest_main",
+        "@com_google_googletest//:gtest_main",
     ],
 )

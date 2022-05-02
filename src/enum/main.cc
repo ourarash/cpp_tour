@@ -9,8 +9,8 @@ int main() {
   int color = 0;   // Red
   int color2 = 1;  // Green
 
-  // A: 0, B:1, C: 2, ...
-  int x = 1;
+  // Letter grade: A: 4, B: 3, C: 2, D: 1 ...
+  int x = 1; // --> color green or grade?
 
   // Enum type in C:
   enum ColorPallet1 { Red, Green, Blue };
@@ -29,6 +29,8 @@ int main() {
   // Assignment
   ColorPalletClass1 col1 = ColorPalletClass1::Red;
   ColorPalletClass2 col2 = ColorPalletClass2::Red;
+
+  // col1 = 0 ; // Compile error
 
   Grade myGrade = Grade::A;
   myGrade = ColorPalletClass1::Red;

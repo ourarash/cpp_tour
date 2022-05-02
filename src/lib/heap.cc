@@ -91,6 +91,17 @@ void Heap::TrickleUp(int i) {
   }
 }
 
+// Recursive implementation
+// void Heap::TrickleUp(int i) {
+//   // Fix the min heap property if it is violated
+//   if (i <= 0 || GetParent(i) <= data_[i]) {
+//     return;
+//   }
+
+//   Swap(data_[i], data_[GetParentIndex(i)]);
+//   TrickleUp(GetParentIndex(i));
+// }
+
 //-----------------------------------------------------
 void Heap::pop() {
   data_[0] = data_.back();
@@ -99,18 +110,32 @@ void Heap::pop() {
 }
 //-----------------------------------------------------
 void Heap::TrickleDown(int i) {
-  // If it's leaf node
-  if (GetLeftIndex(i) > data_.size() && GetRightIndex(i) > data_.size()) {
-    return;
-  }
-
-  int smallest_child_index = GetSmallestChildIndex(i);
-
-  if (data_[i] > data_[smallest_child_index]) {
-    Swap(data_[i], data_[smallest_child_index]);
-    TrickleDown(smallest_child_index);
+  // while it's not the leaf node
+  while (GetLeftIndex(i) < data_.size() || GetRightIndex(i) < data_.size()) {
+    int smallest_child_index = GetSmallestChildIndex(i);
+    if (data_[i] > data_[smallest_child_index]) {
+      Swap(data_[i], data_[smallest_child_index]);
+      i = smallest_child_index;
+      std::cout << "i: " << i << std::endl;
+    } else {
+      break;
+    }
   }
 }
+// Recursive implementation
+// void Heap::TrickleDown(int i) {
+//   // If it's leaf node
+//   if (GetLeftIndex(i) > data_.size() && GetRightIndex(i) > data_.size()) {
+//     return;
+//   }
+
+//   int smallest_child_index = GetSmallestChildIndex(i);
+
+//   if (data_[i] > data_[smallest_child_index]) {
+//     Swap(data_[i], data_[smallest_child_index]);
+//     TrickleDown(smallest_child_index);
+//   }
+// }
 //-----------------------------------------------------------------------------
 std::vector<int> Heap::ConvertToHeap(const std::vector<int> &input) {
   data_ = input;
@@ -118,4 +143,16 @@ std::vector<int> Heap::ConvertToHeap(const std::vector<int> &input) {
     TrickleDown(i);
   }
   return data_;
+}
+
+std::vector<int> HeapSort(const std::vector<int> &input) {
+  std::vector<int> result;
+  auto input_copy = input;
+  Heap h;
+  h.ConvertToHeap(input_copy);
+  while (!h.empty()) {
+    result.push_back(h.top());
+    h.pop();
+  }
+  return result;
 }
