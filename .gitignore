@@ -5,3 +5,6 @@
 /bazel-testlogs
 /bazel-template
 /bazel-*
+/exams
+/questions
+.DS_Store

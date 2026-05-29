@@ -1,29 +1,4 @@
-#ifndef TEMPLATE_SOLUTION_H
-#define TEMPLATE_SOLUTION_H
-
-#include <string>
-#include <vector>
-
-class Solution {
- public:
-  std::string PrintHelloWorld();
-
-  int FindMax(const std::vector<int> &inputs) {
-    if (inputs.empty()) {
-      return -1;
-    }
-
-    int result = INT32_MIN;
-
-    // Range based loop
-    for (auto n : inputs) {
-      if (n > result) {
-        result = n;
-      }
-    }
-    // inputs[0] = 1000;
-    return result;
-  }
-};
-
-#endif
+// Back-compat shim: solution.h was moved to src/problems/solution/. This
+// forwarding header keeps the legacy include path working until consumer
+// files migrate to the new location.
+#include "src/problems/solution/solution.h"

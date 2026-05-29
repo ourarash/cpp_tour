@@ -1,0 +1,11 @@
+"""A tour of C++ constructs using Bazel."""
+
+module(
+    name = "cpp_tour",
+    version = "0.0.0",
+)
+
+bazel_dep(name = "rules_cc", version = "0.2.18")
+bazel_dep(name = "googletest", version = "1.17.0", repo_name = "com_google_googletest")
+bazel_dep(name = "google_benchmark", version = "1.9.5", repo_name = "com_google_benchmark")
+bazel_dep(name = "abseil-cpp", version = "20250814.1", repo_name = "com_google_absl")

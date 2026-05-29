@@ -1,3 +1,11 @@
+# Re-enable autoloading of cc_* rules so external modules (e.g. googletest)
+# whose BUILD files don't load() them keep working under Bazel 9.
+common --incompatible_autoload_externally=+cc_library,+cc_binary,+cc_test,+cc_proto_library
+
+# Bump macOS deployment target so std::filesystem (introduced in macOS 10.15)
+# and other recent stdlib features link cleanly.
+build --macos_minimum_os=10.15
+
 # Address sanitizer configuration.
 # ASAN_SYMBOLIZER_PATH=/usr/local/Cellar/llvm/13.0.0_1/bin/llvm-symbolizer
 
