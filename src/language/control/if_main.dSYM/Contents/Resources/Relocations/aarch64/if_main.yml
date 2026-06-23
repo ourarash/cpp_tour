@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/ari/github/cpp_tour/src/language/control/if_main'
+relocations:     []
+...
