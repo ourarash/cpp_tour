@@ -6,6 +6,8 @@
 
 int main() {
   std::string s = "Hello world";
+
+  // Range based loop.
   for (auto c : s) {
     std::cout << "c: " << c << std::endl;
     s.push_back('!');

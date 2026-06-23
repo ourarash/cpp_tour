@@ -31,24 +31,25 @@ int main() {
 
   // Enum Class in C++
   // Declaration
-  enum class ColorPalletClass1 { Red, Green, Blue };
-  enum class ColorPalletClass2 { Yellow, Orange, Red };
+  enum class TrafficLight { Red, Green, Blue };
+  enum class WallColor { Yellow, Orange, Red };
   enum class Grade { A, B, C, D, E, F };
 
   // Assignment
-  ColorPalletClass1 col1 = ColorPalletClass1::Red;
-  ColorPalletClass2 col2 = ColorPalletClass2::Red;
+  TrafficLight col1 = TrafficLight::Red;
+  WallColor col2 = WallColor::Red;
 
+  // col1 = col2;
   // col1 = 0 ; // Compile error
 
   Grade myGrade = Grade::A;
-  myGrade = ColorPalletClass1::Red;
+  myGrade = TrafficLight::Red;
 
-  // col2 = ColorPalletClass1::Red;
+  // col2 = TrafficLight::Red;
 
-  if (col1 == ColorPalletClass1::Red) {
+  if (col1 == TrafficLight::Red) {
     std::cout << "RED" << std::endl;
-  } else if (col1 == ColorPalletClass1::Green) {
+  } else if (col1 == TrafficLight::Green) {
     std::cout << "Green" << std::endl;
   }
 
@@ -56,7 +57,7 @@ int main() {
 
   return 0;
 
-  // ColorPalletClass1 option;
+  // TrafficLight option;
   // if (option == Red) {
   // } else if (option == Brown) {
   // }
