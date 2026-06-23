@@ -5,7 +5,7 @@
 
 struct MyPerson {
   MyPerson() : name("No Name"), age(0), phone_number("000-00-0000") {}
-  MyPerson(const std::string &name_p, int age_p) : name(name_p), age(age_p) {}
+  MyPerson(const std::string& name_p, int age_p) : name(name_p), age(age_p) {}
   std::string name;
   int age;
   std::string phone_number;
@@ -15,9 +15,6 @@ int main() {
   MyPerson p;
   p.age = 10;
   p.name = "Ari";
-
-
-  std::map<int, std::string> t2;
 
   std::map<std::string, int> turns;
   std::pair<std::string, int> my_pair{"Tommy", 10};
@@ -30,23 +27,22 @@ int main() {
   turns["Beth"] = 3;
   turns["Beth"] = 2;
 
-    
   //   Key   Value
   // ----- |-------
   //   Ted |  2
   //   Ari |  1
-  //   Beth|  3
+  //   Beth|  2
 
   std::cout << "turns.size(): " << turns.size() << std::endl;
 
   if (turns.count("Max") == 1) {
   }
 
-  for (auto &e : turns) {
+  for (auto& e : turns) {
     auto key = e.first;
     auto value = e.second;
-
-    std::cout << "turns[key]: " << turns[key] << std::endl;
+    std::cout << "key: " << key << std::endl;
+    std::cout << "value: " << value << std::endl;
   }
 
   std::map<std::string, MyPerson> persons;
