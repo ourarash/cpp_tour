@@ -1,7 +1,4 @@
-#include "src/lib/utility.h"
 #include <iostream>
-#include <string>
-#include <vector>
 
 class Point {
 public:

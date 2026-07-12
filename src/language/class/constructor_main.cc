@@ -24,7 +24,8 @@ class Point {
 #endif
 
   // PARAMETERIZED Constructor Version 2: member-initializer list — preferred.
-  Point(int i, int j) : i_(i), j_(j) {
+  Point(int i, int j) : i_(i), j_(j) 
+  {
     std::cout << "**PARAMETERIZED constructor." << std::endl;
     z_ = new int;
   }
@@ -123,6 +124,6 @@ int main() {
   {
     Point a;
     Point b(a);  // Point b = a;
-    Point c{a};  // Point b = a;
+    Point c{a};  // Point c = a;
   }
 }
